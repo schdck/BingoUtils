@@ -1,0 +1,66 @@
+﻿<Controls:MetroWindow x:Class="BingUtils.UI.QuestionsSorter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:BingUtils.UI.QuestionsSorter"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="600" MinWidth="800" Height="600" Width="800"
+        DataContext="{StaticResource ViewModel_MainWindow}">
+    
+    <Grid Margin="5">
+            <Grid Height="40" VerticalAlignment="Top">
+                <Grid.Resources>
+                    <Style TargetType="Controls:NumericUpDown">
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="HideUpDownButtons" Value="True" />
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="17"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="17"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="2.2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Controls:NumericUpDown Controls:TextBoxHelper.Watermark="Qtd. de cartelas" ToolTip="Quantidade de cartelas" Grid.Column="0" Minimum="0" Value="{Binding CartelasCount, Mode=OneWayToSource}" />
+                <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5" Content="x" Grid.Column="1" FontSize="15" />
+
+                <Controls:NumericUpDown x:Name="NumericQuestionsCount" Controls:TextBoxHelper.Watermark="Qtd. de questões" ToolTip="Quantidade de questões" Grid.Column="2" Minimum="0" Value="{Binding QuestionsCount, Mode=OneWayToSource}" />
+                <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5" Content="x" Grid.Column="3" FontSize="15" />
+
+                <Controls:NumericUpDown Controls:TextBoxHelper.Watermark="Questões por cartela" ToolTip="Quantidade de questões" Grid.Column="4" Minimum="0" Maximum="{Binding Value, ElementName=NumericQuestionsCount}" Value="{Binding QuestionsPerCartelaCount, Mode=OneWayToSource}"/>
+                <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5" Content="-" Grid.Column="5" FontSize="15" />
+
+                <Controls:NumericUpDown Controls:TextBoxHelper.Watermark="Máxima semelhança" ToolTip="Quantidade de questões" Grid.Column="6" Minimum="60" Maximum="95" StringFormat="{}{0}%" Value="{Binding MaxSemelhanca, Mode=OneWayToSource}" HideUpDownButtons="False" />
+                <Button Style="{StaticResource MetroFlatButton}" Content="Gerar" Grid.Column="7" Margin="5" VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" Command="{Binding GenerateCommand}" />
+            </Grid>
+            <DataGrid
+                  Margin="5,40,5,5"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserSortColumns="False"
+                  IsEnabled="{Binding HasGeneratedGrid}"
+                  ItemsSource="{Binding CartelasList}"
+                  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id da Cartela" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Qtd. de questões" />
+                    <DataGridTemplateColumn Header="Maior semelhança" />
+                    <DataGridTextColumn Header="Questões" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+</Controls:MetroWindow>
