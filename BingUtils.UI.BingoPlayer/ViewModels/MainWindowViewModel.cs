@@ -1,4 +1,5 @@
 ﻿using BingoUtils.Domain.Entities;
+using BingoUtils.Helpers;
 using BingUtils.UI.BingoPlayer.Resources;
 using MahApps.Metro.Controls;
 using PropertyChanged;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace BingUtils.UI.BingoPlayer.ViewModels
 {
@@ -38,6 +40,10 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
             {
                 return QuestionsResources.Questions;
             }
+            private set
+            {
+                QuestionsResources.Questions = value;
+            }
         }
 
         public bool HasPrevious { get; private set; }
@@ -66,6 +72,10 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
             GameComponentsVisibility = Visibility.Visible;
             StartGameComponentsVisibility = Visibility.Collapsed;
 
+            Questions = Questions.OrderBy(x => new Random().Next()).ToArray();
+
+            new Random().Shuffle(Questions);
+
             CurrentQuestion = -1;
             NextQuestion();
         }
@@ -84,10 +94,8 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
                 PreviousQuestionTitle = String.Empty;
                 HasPrevious = false;
             }
-
             HasNext = CurrentQuestion + 1 < Questions.Length;
             QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Length;
-
         }
 
         void NextQuestion()
