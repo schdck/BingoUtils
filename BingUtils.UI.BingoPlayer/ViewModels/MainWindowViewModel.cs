@@ -51,6 +51,35 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
         
         public int CurrentQuestion { get; private set; }
 
+        private int _DisciplinaSelectedIndex;
+        public int DisciplinaSelectedIndex 
+        { 
+            get
+            {
+                return _DisciplinaSelectedIndex;
+            }
+            set
+            {
+                if(value != DisciplinaSelectedIndex)
+                {
+                    _DisciplinaSelectedIndex = value;
+
+                    if (value < QuestionsResources.AvaliableConteudosPerDisciplina.Count)
+                    {
+                        AvaliableConteudos = QuestionsResources.AvaliableConteudosPerDisciplina[DisciplinaSelectedIndex];
+                    }
+                    else
+                    {
+                        AvaliableConteudos = new string[] { };
+                    }
+                }
+            }
+        }
+        public int ConteudoSelectedIndex { get; set; }
+
+        public string[] AvaliableDisciplinas { get; private set; }
+        public string[] AvaliableConteudos { get; private set; }
+
         public MainWindowViewModel()
         {
             GameComponentsVisibility = Visibility.Collapsed;
@@ -59,6 +88,8 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
             PreviousQuestionCommand = new SimpleDelegateCommand((x) => PreviousQuestion());
             NextQuestionCommand = new SimpleDelegateCommand((x) => NextQuestion());
 
+            AvaliableDisciplinas = QuestionsResources.AvaliableDisciplinas;
+            AvaliableConteudos = QuestionsResources.AvaliableConteudosPerDisciplina[0];
         }
 
         void StartNewGame()

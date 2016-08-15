@@ -8,6 +8,18 @@ namespace BingUtils.UI.BingoPlayer.Resources
 {
     public abstract class QuestionsResources
     {
+        public static readonly string[] AvaliableDisciplinas = new string[]
+        {
+            "História",
+        };
+
+        public static readonly List<string[]> AvaliableConteudosPerDisciplina = new List<string[]>
+        {
+            new string[] {
+                "Brasil pós-independência"
+            },
+        };
+
         public static string[] Questions =
         {
             "Lei nº 3353 de 13 de maio de 1888 que declarava extinta a escravidão no Brasil.",

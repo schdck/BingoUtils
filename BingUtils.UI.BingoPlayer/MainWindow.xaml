@@ -44,13 +44,26 @@
                     <TextBlock TextAlignment="Center" Text="Clique no botão abaixo para iniciar um novo jogo" FontFamily="Segoe UI Semibold"  />
                 </Viewbox>
 
-                <Button Style="{StaticResource MetroFlatButton}" Visibility="{Binding StartGameComponentsVisibility}" Command="{Binding StartGameCommand}" Content="Iniciar novo jogo" Width="200" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Grid.Column="0" Margin="10, 0" ItemsSource="{Binding AvaliableDisciplinas}" SelectedIndex="{Binding DisciplinaSelectedIndex}"/>
+                    <ComboBox Grid.Column="1" Margin="10, 0" ItemsSource="{Binding AvaliableConteudos}" SelectedIndex="{Binding ConteudoSelectedIndex}"/>
+                    <Button Style="{StaticResource MetroFlatButton}" Visibility="{Binding StartGameComponentsVisibility}" Command="{Binding StartGameCommand}" Content="Iniciar novo jogo" Margin="10, 0" Grid.Column="2" />
+                </Grid>
+
+
+
+                
             </StackPanel>
 
             <Grid VerticalAlignment="Bottom" Grid.Row="2">
-                <Button Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de quesões" Width="250" />
+                <Button IsEnabled="False" Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de quesões" Width="250" />
 
-                <Button Margin="10" HorizontalAlignment="Right" Content="Mais informações sobre o programa" Width="250"/>
+                <Button IsEnabled="False" Margin="10" HorizontalAlignment="Right" Content="Mais informações sobre o programa" Width="250"/>
             </Grid>
         </Grid>
 

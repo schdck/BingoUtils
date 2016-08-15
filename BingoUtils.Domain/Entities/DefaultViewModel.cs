@@ -11,7 +11,8 @@ namespace BingoUtils.Domain.Entities
 
         protected void NotifyPropertyChanged([CallerMemberName] string property = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+            if(PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
