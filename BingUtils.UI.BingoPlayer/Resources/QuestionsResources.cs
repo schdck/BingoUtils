@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BingUtils.UI.BingoPlayer.Resources
+﻿namespace BingUtils.UI.BingoPlayer.Resources
 {
     public abstract class QuestionsResources
     {
-        public static string[] Questions =
+        private static string[] questions =
         {
             "Lei nº 3353 de 13 de maio de 1888 que declarava extinta a escravidão no Brasil.",
             "Ato simbólico do momento em que o príncipe regente D. Pedro declarava o Brasil independente de Portugal.",
@@ -71,5 +65,18 @@ namespace BingUtils.UI.BingoPlayer.Resources
             "Capital que começou a ser construída em 1956 após o então presidente Juscelino Kubitschek sancionar a lei nº 2.874. O então presidente e o grupo de profissionais escolhidos por ele tentou desenvolver um modelo de cidade utópica, onde se pretendia eliminar as classes sociais.",
             "Organização política de âmbito nacional liderada pelo PCB e fundada oficialmente em 12 de março de 1935, da qual Prestes foi eleito presidente de honra, tornou-se uma ampla frente da qual participaram socialistas, comunistas, católicos e democratas.",
         };
+
+        public static string[] Questions
+        {
+            get
+            {
+                return questions;
+            }
+
+            set
+            {
+                questions = value;
+            }
+        }
     }
 }

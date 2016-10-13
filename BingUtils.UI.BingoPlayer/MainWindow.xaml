@@ -47,8 +47,8 @@
                 <Button Style="{StaticResource MetroFlatButton}" Visibility="{Binding StartGameComponentsVisibility}" Command="{Binding StartGameCommand}" Content="Iniciar novo jogo" Width="200" />
             </StackPanel>
 
-            <Grid VerticalAlignment="Bottom" Grid.Row="2">
-                <Button Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de quesões" Width="250" />
+            <Grid VerticalAlignment="Bottom" Grid.Row="2" Visibility="Hidden">
+                <Button Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de questões" Width="250" />
                 <Button Margin="10" HorizontalAlignment="Right" Content="Mais informações sobre o programa" Width="250"/>
             </Grid>
         </Grid>

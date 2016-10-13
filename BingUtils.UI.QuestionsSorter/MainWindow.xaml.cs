@@ -21,7 +21,7 @@ namespace BingUtils.UI.QuestionsSorter
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        static MainWindow Instance;
+        public static MainWindow Instance { get; private set; }
 
         public MainWindow()
         {
