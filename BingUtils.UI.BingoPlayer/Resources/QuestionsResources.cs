@@ -1,8 +1,26 @@
-﻿namespace BingUtils.UI.BingoPlayer.Resources
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BingUtils.UI.BingoPlayer.Resources
 {
     public abstract class QuestionsResources
     {
-        private static string[] questions =
+        public static readonly string[] AvaliableDisciplinas = new string[]
+        {
+            "História",
+        };
+
+        public static readonly List<string[]> AvaliableConteudosPerDisciplina = new List<string[]>
+        {
+            new string[] {
+                "Brasil pós-independência"
+            },
+        };
+
+        public static string[] Questions =
         {
             "Lei nº 3353 de 13 de maio de 1888 que declarava extinta a escravidão no Brasil.",
             "Ato simbólico do momento em que o príncipe regente D. Pedro declarava o Brasil independente de Portugal.",
@@ -61,22 +79,9 @@
             "Ação conjunta dos seis países do Cone Sul (Brasil, Argentina, Chile, Bolívia, Paraguai e Uruguai) criada na década de 70 com o objetivo de coordenar a repressão a opositores das ditaduras instauradas nestes países.",
             "Plano econômico lançado em 1986 que visava o controle da inflação durante o período do governo Sarney.",
             "Ano em que foi promulgada a sétima e mais recente constituição brasileira, conhecida como “Constituição Cidadã”, e marco entre o regime militar e a democracia.",
-            "É conhecido como o golpe mais forte do regime militar. Foi editado em 1968 pelo então Ministro da Justiça Luís Antônio da Gama e Silva, e concedia ao Presidente da Repúplica, entre outras coisas, o poder de cassar mandatos, suspender direitos políticos de qualquer pessoa e decretar recesso do Congresso e assumir suas funções legislativas provisoriamente.",
+            "É conhecido como o golpe mais forte do regime militar. Foi editado em 1968 pelo então Ministro da Justiça Luís Antônio da Gama e Silva, e concedia ao Presidente da Repúplica, entre outras coisas, o poder de assar mandatos, suspender direitos políticos de qualquer pessoa e decretar recesso do Congresso e assumir suas funções legislativas provisoriamente.",
             "Capital que começou a ser construída em 1956 após o então presidente Juscelino Kubitschek sancionar a lei nº 2.874. O então presidente e o grupo de profissionais escolhidos por ele tentou desenvolver um modelo de cidade utópica, onde se pretendia eliminar as classes sociais.",
             "Organização política de âmbito nacional liderada pelo PCB e fundada oficialmente em 12 de março de 1935, da qual Prestes foi eleito presidente de honra, tornou-se uma ampla frente da qual participaram socialistas, comunistas, católicos e democratas.",
         };
-
-        public static string[] Questions
-        {
-            get
-            {
-                return questions;
-            }
-
-            set
-            {
-                questions = value;
-            }
-        }
     }
 }

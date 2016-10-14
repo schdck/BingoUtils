@@ -22,7 +22,10 @@ namespace BingoUtils.Domain.Entities
 
         public void Execute(object parameter)
         {
-            Command?.Invoke(parameter);
+            if(Command != null)
+            {
+                Command.Invoke(parameter);
+            }
         }
     }
 }
