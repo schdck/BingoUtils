@@ -1,5 +1,6 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
+using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingUtils.UI.BingoPlayer.Resources;
 using MahApps.Metro.Controls;
 using PropertyChanged;
@@ -16,9 +17,6 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
     public class MainWindowViewModel : DefaultViewModel
     {
         public List<Question> QuestionsList { get; private set; }
-
-        public Visibility GameComponentsVisibility { get; private set; }
-        public Visibility StartGameComponentsVisibility { get; private set; }
 
         public string CurrentQuestionTitle { get; private set; }
         public string PreviousQuestionTitle { get; private set; }
@@ -51,58 +49,46 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
 
         public TransitionType AnimationToBeUsed { get; private set; }
 
-        public SimpleDelegateCommand StartGameCommand { get; private set; }
         public SimpleDelegateCommand PreviousQuestionCommand { get; private set; }
         public SimpleDelegateCommand NextQuestionCommand { get; private set; }
-        
+        public SimpleDelegateCommand PlayQuestionTitleCommand { get; private set; }
+        public SimpleDelegateCommand StopQuestionTitleCommand { get; private set; }
+
+        public Visibility PlayQuestionTitleButtonVisibility { get; private set; }
+        public Visibility StopQuestionTitleCommandVisibility { get; private set; }
+
         public int CurrentQuestion { get; private set; }
-
-        private int _DisciplinaSelectedIndex;
-        public int DisciplinaSelectedIndex 
-        { 
-            get
-            {
-                return _DisciplinaSelectedIndex;
-            }
-            set
-            {
-                if(value != DisciplinaSelectedIndex)
-                {
-                    _DisciplinaSelectedIndex = value;
-
-                    if (value < QuestionsResources.AvaliableConteudosPerDisciplina.Count)
-                    {
-                        AvaliableConteudos = QuestionsResources.AvaliableConteudosPerDisciplina[DisciplinaSelectedIndex];
-                    }
-                    else
-                    {
-                        AvaliableConteudos = new string[] { };
-                    }
-                }
-            }
-        }
-        public int ConteudoSelectedIndex { get; set; }
-
-        public string[] AvaliableDisciplinas { get; private set; }
-        public string[] AvaliableConteudos { get; private set; }
 
         public MainWindowViewModel()
         {
-            GameComponentsVisibility = Visibility.Collapsed;
+            PlayQuestionTitleButtonVisibility = Visibility.Visible;
+            StopQuestionTitleCommandVisibility = Visibility.Hidden;
 
-            StartGameCommand = new SimpleDelegateCommand((x) => StartNewGame());
             PreviousQuestionCommand = new SimpleDelegateCommand((x) => PreviousQuestion());
             NextQuestionCommand = new SimpleDelegateCommand((x) => NextQuestion());
 
-            AvaliableDisciplinas = QuestionsResources.AvaliableDisciplinas;
-            AvaliableConteudos = QuestionsResources.AvaliableConteudosPerDisciplina[0];
+            PlayQuestionTitleCommand = new SimpleDelegateCommand((x) =>
+            {
+                PlayQuestionTitleButtonVisibility = Visibility.Hidden;
+                StopQuestionTitleCommandVisibility = Visibility.Visible;
+                
+                AudioPlayer.PlaySpeech(CurrentQuestionTitle);
+                MessageBox.Show(CurrentQuestionTitle);
+            });
+
+            StopQuestionTitleCommand = new SimpleDelegateCommand((x) =>
+            {
+                PlayQuestionTitleButtonVisibility = Visibility.Visible;
+                StopQuestionTitleCommandVisibility = Visibility.Hidden;
+
+                AudioPlayer.StopSpeach();
+            });
+
+            StartNewGame();
         }
 
         void StartNewGame()
         {
-            GameComponentsVisibility = Visibility.Visible;
-            StartGameComponentsVisibility = Visibility.Collapsed;
-
             Questions = Questions.OrderBy(x => new Random().Next()).ToArray();
 
             new Random().Shuffle(Questions);
@@ -113,6 +99,8 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
 
         void PreviousQuestion()
         {
+            StopQuestionTitleCommand.Execute(null);
+
             CurrentQuestionTitle = Questions[--CurrentQuestion];
 
             if(CurrentQuestion - 1 >= 0)
@@ -122,7 +110,7 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
             }
             else
             {
-                PreviousQuestionTitle = String.Empty;
+                PreviousQuestionTitle = string.Empty;
                 HasPrevious = false;
             }
             HasNext = CurrentQuestion + 1 < Questions.Length;
@@ -131,6 +119,8 @@ namespace BingUtils.UI.BingoPlayer.ViewModels
 
         void NextQuestion()
         {
+            StopQuestionTitleCommand.Execute(null);
+
             PreviousQuestionTitle = CurrentQuestionTitle;
             CurrentQuestionTitle = Questions[++CurrentQuestion];
 

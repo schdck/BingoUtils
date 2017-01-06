@@ -1,6 +1,4 @@
-﻿using BingoUtils.Helpers.BingoUtils.Helpers;
-using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BingUtils.UI.BingoPlayer
+namespace BingoUtils.UI.StartApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-
-            AudioPlayer.PlaySpeech("");
         }
     }
 }

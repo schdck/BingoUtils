@@ -29,117 +29,90 @@
         </DataTemplate>
     </Controls:MetroWindow.TitleTemplate>
 
-    <Grid>
-        <Grid Visibility="{Binding StartGameComponentsVisibility}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <Grid MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Window}}">
+        <Button Visibility="{Binding PlayQuestionTitleButtonVisibility}" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding PlayQuestionTitleCommand}">
+            <Rectangle Width="12" Height="12" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_sound_2}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+
+        <Button Visibility="{Binding StopQuestionTitleCommandVisibility}" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding StopQuestionTitleCommand}">
+            <Rectangle Width="8" Height="8" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_control_stop}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="40">
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-
-            <Image Source="/Resources/logo-ifrs-farroupilha.png" VerticalAlignment="Top" Margin="50,20,50,0" />
-
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="30">
-                <Viewbox Margin="0,30">
-                    <TextBlock TextAlignment="Center" Text="Clique no botão abaixo para iniciar um novo jogo" FontFamily="Segoe UI Semibold"  />
-                </Viewbox>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox Grid.Column="0" Margin="10, 0" ItemsSource="{Binding AvaliableDisciplinas}" SelectedIndex="{Binding DisciplinaSelectedIndex}"/>
-                    <ComboBox Grid.Column="1" Margin="10, 0" ItemsSource="{Binding AvaliableConteudos}" SelectedIndex="{Binding ConteudoSelectedIndex}"/>
-                    <Button Style="{StaticResource MetroFlatButton}" Visibility="{Binding StartGameComponentsVisibility}" Command="{Binding StartGameCommand}" Content="Iniciar novo jogo" Margin="10, 0" Grid.Column="2" />
-                </Grid>
-
-
-
-                
-            </StackPanel>
-
-            <Grid VerticalAlignment="Bottom" Grid.Row="2">
-                <Button IsEnabled="False" Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de quesões" Width="250" />
-
-                <Button IsEnabled="False" Margin="10" HorizontalAlignment="Right" Content="Mais informações sobre o programa" Width="250"/>
-            </Grid>
+            <Button Grid.Row="1" IsEnabled="{Binding HasNext}" Command="{Binding NextQuestionCommand}">
+                <Rectangle Height="50" VerticalAlignment="Stretch" Width="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_navigate_next}"  />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
         </Grid>
 
-        <Grid Visibility="{Binding GameComponentsVisibility}" MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Window}}">
-            <Grid VerticalAlignment="Bottom" Visibility="{Binding StartGameComponentsVisibility}">
-                <Button Margin="10" HorizontalAlignment="Left" Content="Auxiliar para distribuição de quesões" Width="250" />
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="1" IsEnabled="{Binding HasPrevious}" Command="{Binding PreviousQuestionCommand}">
+                <Rectangle Height="50" VerticalAlignment="Stretch" Width="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_navigate_previous}"  />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </Grid>
 
-                <Button Margin="10" HorizontalAlignment="Right" Content="Mais informações sobre o programa" Width="250"/>
-            </Grid>
-            <Grid HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="40">
+        <Label Visibility="{Binding GameComponentsVisibility}" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding QuestionProgress}" ContentStringFormat="QUESTÃO {0}" FontSize="32" FontFamily="Segoe UI Light" />
+
+        <Grid Margin="100,60,100,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Row="1" IsEnabled="{Binding HasNext}" Visibility="{Binding GameComponentsVisibility}" Command="{Binding NextQuestionCommand}">
-                    <Rectangle Height="50" VerticalAlignment="Stretch" Width="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_navigate_next}"  />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-            </Grid>
-
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="40">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Row="1" IsEnabled="{Binding HasPrevious}" Visibility="{Binding GameComponentsVisibility}" Command="{Binding PreviousQuestionCommand}">
-                    <Rectangle Height="50" VerticalAlignment="Stretch" Width="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_navigate_previous}"  />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-            </Grid>
-
-            <Label Visibility="{Binding GameComponentsVisibility}" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding QuestionProgress}" ContentStringFormat="QUESTÃO {0}" FontSize="32" FontFamily="Segoe UI Light" />
-
-            <Grid Margin="100,60,100,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="4*" />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="4*" />
-                    </Grid.RowDefinitions>
+                <Viewbox  Grid.Row="0">
+                    <TextBlock TextAlignment="Center" Text="QUESTÃO ATUAL" FontFamily="Segoe UI Light" HorizontalAlignment="Stretch" MinWidth="300" />
+                </Viewbox>
 
-                    <Viewbox  Grid.Row="0">
-                        <TextBlock TextAlignment="Center" Text="QUESTÃO ATUAL" FontFamily="Segoe UI Light" HorizontalAlignment="Stretch" MinWidth="300" />
-                    </Viewbox>
+                <Viewbox Grid.Row="1" Margin="5,0,5,10" VerticalAlignment="Top">
+                    <TextBlock TextAlignment="Center" Text="{Binding CurrentQuestionTitle}" HorizontalAlignment="Stretch" MaxWidth="200" FontFamily="Segoe UI Semibold" TextWrapping="Wrap"  />
+                </Viewbox>
+            </Grid>
 
-                    <Viewbox Grid.Row="1" Margin="5,0,5,10" VerticalAlignment="Top">
-                        <TextBlock TextAlignment="Center" Text="{Binding CurrentQuestionTitle}" HorizontalAlignment="Stretch" MaxWidth="200" FontFamily="Segoe UI Semibold" TextWrapping="Wrap"  />
-                    </Viewbox>
-                </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="4*" />
+                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="4*" />
-                    </Grid.RowDefinitions>
+                <Viewbox  Grid.Row="0">
+                    <TextBlock TextAlignment="Center" Text="QUESTÃO ANTERIOR" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
+                </Viewbox>
 
-                    <Viewbox  Grid.Row="0">
-                        <TextBlock TextAlignment="Center" Text="QUESTÃO ANTERIOR" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
-                    </Viewbox>
-
-                    <Viewbox Grid.Row="1" Margin="5,0,5,10" VerticalAlignment="Top">
-                        <TextBlock TextAlignment="Center" Text="{Binding PreviousQuestionTitle}" FontFamily="Segoe UI Semilight" Width="250" TextWrapping="Wrap" Foreground="Gray" />
-                    </Viewbox>
-                </Grid>
+                <Viewbox Grid.Row="1" Margin="5,0,5,10" VerticalAlignment="Top">
+                    <TextBlock TextAlignment="Center" Text="{Binding PreviousQuestionTitle}" FontFamily="Segoe UI Semilight" Width="250" TextWrapping="Wrap" Foreground="Gray" />
+                </Viewbox>
             </Grid>
         </Grid>
     </Grid>
