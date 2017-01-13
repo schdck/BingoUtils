@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace BingUtils.UI.QuestionsSorter.ValueConverters
+namespace BingoUtils.UI.QuestionsSorter.ValueConverters
 {
     public class PercentageToBrushConverter : IValueConverter
     {

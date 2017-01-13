@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace BingUtils.UI.BingoPlayer
+namespace BingoUtils.UI.BingoPlayer
 {
     /// <summary>
     /// Interaction logic for App.xaml

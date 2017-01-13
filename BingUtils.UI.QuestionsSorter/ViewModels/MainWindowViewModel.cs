@@ -1,13 +1,13 @@
 ﻿using BingoUtils.Domain.Entities;
-using BingUtils.UI.QuestionsSorter.UI_Helpers;
-using BingUtils.UI.QuestionsSorter.ValueConverters;
+using BingoUtils.UI.QuestionsSorter.UI_Helpers;
+using BingoUtils.UI.QuestionsSorter.ValueConverters;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace BingUtils.UI.QuestionsSorter.ViewModels
+namespace BingoUtils.UI.QuestionsSorter.ViewModels
 {
     public class MainWindowViewModel : DefaultViewModel
     {

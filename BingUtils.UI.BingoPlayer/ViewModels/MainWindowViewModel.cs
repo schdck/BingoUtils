@@ -1,133 +1,54 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
 using BingoUtils.Helpers.BingoUtils.Helpers;
-using BingUtils.UI.BingoPlayer.Resources;
+using BingoUtils.UI.BingoPlayer.Pages;
+using BingoUtils.UI.BingoPlayer.Resources;
 using MahApps.Metro.Controls;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace BingUtils.UI.BingoPlayer.ViewModels
+namespace BingoUtils.UI.BingoPlayer.ViewModels
 {
+    [ImplementPropertyChanged]
     public class MainWindowViewModel : DefaultViewModel
     {
-        public List<Question> QuestionsList { get; private set; }
+        public ObservableCollection<MetroTabItem> TabControlItems { get; private set; }
 
-        public string CurrentQuestionTitle { get; private set; }
-        public string PreviousQuestionTitle { get; private set; }
-        public string QuestionProgress { get; private set; }
-
-        [DoNotNotify]
-        public int QuestionsCount
-        {
-            get
-            {
-                return QuestionsResources.Questions.Length;
-            }
-        }
-
-        [DoNotNotify]
-        public string[] Questions
-        {
-            get
-            {
-                return QuestionsResources.Questions;
-            }
-            private set
-            {
-                QuestionsResources.Questions = value;
-            }
-        }
-
-        public bool HasPrevious { get; private set; }
-        public bool HasNext { get; private set; }
-
-        public TransitionType AnimationToBeUsed { get; private set; }
-
-        public SimpleDelegateCommand PreviousQuestionCommand { get; private set; }
-        public SimpleDelegateCommand NextQuestionCommand { get; private set; }
-        public SimpleDelegateCommand PlayQuestionTitleCommand { get; private set; }
-        public SimpleDelegateCommand StopQuestionTitleCommand { get; private set; }
-
-        public Visibility PlayQuestionTitleButtonVisibility { get; private set; }
-        public Visibility StopQuestionTitleCommandVisibility { get; private set; }
-
-        public int CurrentQuestion { get; private set; }
+        public MainMenu MainMenu { get; private set; }
+        public List<Game> Games { get; private set; }
 
         public MainWindowViewModel()
         {
-            PlayQuestionTitleButtonVisibility = Visibility.Visible;
-            StopQuestionTitleCommandVisibility = Visibility.Hidden;
+            TabControlItems = new ObservableCollection<MetroTabItem>();
+            Games = new List<Game>();
 
-            PreviousQuestionCommand = new SimpleDelegateCommand((x) => PreviousQuestion());
-            NextQuestionCommand = new SimpleDelegateCommand((x) => NextQuestion());
+            MainMenu = new MainMenu();
+            Games.Add(new Game());
 
-            PlayQuestionTitleCommand = new SimpleDelegateCommand((x) =>
+            AddTabControlItem("Menu", MainMenu);
+            AddTabControlItem("Game1", Games[0]);
+            AddTabControlItem("New game", new StartNewGame());
+        }
+
+        private void AddTabControlItem(string header, Page content)
+        {
+            TabControlItems.Add(new MetroTabItem()
             {
-                PlayQuestionTitleButtonVisibility = Visibility.Hidden;
-                StopQuestionTitleCommandVisibility = Visibility.Visible;
-                
-                AudioPlayer.PlaySpeech(CurrentQuestionTitle);
-                MessageBox.Show(CurrentQuestionTitle);
+                Header = header,
+                Content = new Frame()
+                {
+                    Content = content
+                }
             });
 
-            StopQuestionTitleCommand = new SimpleDelegateCommand((x) =>
-            {
-                PlayQuestionTitleButtonVisibility = Visibility.Visible;
-                StopQuestionTitleCommandVisibility = Visibility.Hidden;
-
-                AudioPlayer.StopSpeach();
-            });
-
-            StartNewGame();
-        }
-
-        void StartNewGame()
-        {
-            Questions = Questions.OrderBy(x => new Random().Next()).ToArray();
-
-            new Random().Shuffle(Questions);
-
-            CurrentQuestion = -1;
-            NextQuestion();
-        }
-
-        void PreviousQuestion()
-        {
-            StopQuestionTitleCommand.Execute(null);
-
-            CurrentQuestionTitle = Questions[--CurrentQuestion];
-
-            if(CurrentQuestion - 1 >= 0)
-            {
-                PreviousQuestionTitle = Questions[CurrentQuestion - 1];
-                HasPrevious = true;
-            }
-            else
-            {
-                PreviousQuestionTitle = string.Empty;
-                HasPrevious = false;
-            }
-            HasNext = CurrentQuestion + 1 < Questions.Length;
-            QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Length;
-        }
-
-        void NextQuestion()
-        {
-            StopQuestionTitleCommand.Execute(null);
-
-            PreviousQuestionTitle = CurrentQuestionTitle;
-            CurrentQuestionTitle = Questions[++CurrentQuestion];
-
-            HasNext = CurrentQuestion + 1 < Questions.Length;
-            HasPrevious = CurrentQuestion > 0;
-
-            QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Length;
         }
     }
 }

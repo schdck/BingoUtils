@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BingUtils.UI.BingoPlayer
+namespace BingoUtils.UI.BingoPlayer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

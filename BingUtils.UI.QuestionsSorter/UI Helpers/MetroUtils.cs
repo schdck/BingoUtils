@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BingUtils.UI.QuestionsSorter.UI_Helpers
+namespace BingoUtils.UI.QuestionsSorter.UI_Helpers
 {
 
     public static class MetroUtils

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingUtils.UI.BingoPlayer.Resources
+namespace BingoUtils.UI.BingoPlayer.Resources
 {
     public abstract class QuestionsResources
     {

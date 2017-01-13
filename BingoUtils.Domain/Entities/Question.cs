@@ -6,30 +6,15 @@ using System.Threading.Tasks;
 
 namespace BingoUtils.Domain.Entities
 {
-    public class Question : IComparable<Question>
+    public class Question
     {
-        public int Id { get; set; }
-        public string QuestionTitle { get; set; }
-        public string Answer { get; set; }
+        public string Title { get; private set; }
+        public string Answer { get; private set; }
 
-        public Question(int Id)
+        public Question(string title, string answer)
         {
-            this.Id = Id;
-        }
-
-        public int CompareTo(Question other)
-        {
-            return Id.CompareTo(other.Id);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return Id.ToString();
+            Title = title;
+            Answer = answer;
         }
     }
 }

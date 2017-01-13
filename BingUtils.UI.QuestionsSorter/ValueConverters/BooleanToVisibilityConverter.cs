@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace BingUtils.UI.QuestionsSorter.ValueConverters
+namespace BingoUtils.UI.QuestionsSorter.ValueConverters
 {
     public class BooleanToVisibilityConverter : IValueConverter
     {

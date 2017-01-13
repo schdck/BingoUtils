@@ -1,8 +1,8 @@
-﻿<Application x:Class="BingUtils.UI.QuestionsSorter.App"
+﻿<Application x:Class="BingoUtils.UI.QuestionsSorter.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BingUtils.UI.QuestionsSorter"
-             xmlns:viewmodels="clr-namespace:BingUtils.UI.QuestionsSorter.ViewModels"
+             xmlns:local="clr-namespace:BingoUtils.UI.QuestionsSorter"
+             xmlns:viewmodels="clr-namespace:BingoUtils.UI.QuestionsSorter.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

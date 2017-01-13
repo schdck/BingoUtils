@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BingoUtils.UI.QuestionsSorter
+namespace BingoUtils.UI.BingoPlayer.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainMenu : Page
     {
-        public static MainWindow Instance { get; private set; }
-
-        public MainWindow()
+        public MainMenu()
         {
-            Instance = this;
             InitializeComponent();
         }
     }
