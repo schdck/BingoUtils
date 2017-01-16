@@ -43,9 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Cartela.cs" />
-    <Compile Include="Entities\DefaultViewModel.cs" />
     <Compile Include="Entities\Question.cs" />
-    <Compile Include="Entities\SimpleDelegateCommand.cs" />
+    <Compile Include="Enums\Activity.cs" />
     <Compile Include="Event Args\StartNewGameEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

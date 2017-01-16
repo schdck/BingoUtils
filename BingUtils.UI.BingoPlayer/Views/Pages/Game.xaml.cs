@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BingoUtils.UI.BingoPlayer.Pages
+namespace BingoUtils.UI.BingoPlayer.Views.Pages
 {
     /// <summary>
     /// Interaction logic for Game.xaml

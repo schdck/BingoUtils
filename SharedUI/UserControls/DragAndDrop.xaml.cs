@@ -1,52 +1,59 @@
-﻿using BingoUtils.UI.SharedUI.HelpersUI;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using PropertyChanged;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace BingoUtils.UI.SharedUI.UserControls
+namespace BingoUtils.UI.Shared.UserControls
 {
     /// <summary>
     /// Interaction logic for DragAndDrop.xaml
     /// </summary>
-    [ImplementPropertyChanged]
+    /// ]
     public partial class DragAndDrop : UserControl
     {
         public static readonly DependencyProperty FilePathProperty =
             DependencyProperty.Register("FilePath", typeof(string), typeof(DragAndDrop), new UIPropertyMetadata());
 
-        /*
-        public static readonly DependencyProperty AllowMultipleFilesProperty =
-            DependencyProperty.Register("AllowMultipleFiles", typeof(bool), typeof(DragAndDrop), new UIPropertyMetadata());
-
-        public bool AllowMultipleFiles
-        {
-            get { return (bool)GetValue(AllowMultipleFilesProperty); }
-            set { SetValue(AllowMultipleFilesProperty, value); }
-        }
-        */
+        public static readonly DependencyProperty FileNameProperty =
+            DependencyProperty.Register("FileName", typeof(string), typeof(DragAndDrop), new UIPropertyMetadata());
 
         public string FilePath
         {
-            get { return (string)GetValue(FilePathProperty); }
-            set { SetValue(FilePathProperty, value); }
+            get
+            {
+                return (string)GetValue(FilePathProperty);
+            }
+            set
+            {
+                SetValue(FilePathProperty, value);
+            }
         }
 
-        public string FileName { get; set; }
+        public string FileName
+        {
+            get
+            {
+                return (string)GetValue(FileNameProperty);
+            }
+            set
+            {
+                SetValue(FileNameProperty, value);
+            }
+        }
 
         public DragAndDrop()
         {
-            DataContext = this;
-
             InitializeComponent();
 
             SetFileUnselected();
         }
 
+        #region Events
         private void Grid_Container_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -55,7 +62,7 @@ namespace BingoUtils.UI.SharedUI.UserControls
 
                 if (files.Length > 1)
                 {
-                    DisplayMessage.DisplayError("Por favor selecione apenas um arquivo");
+                    //DisplayMessage.DisplayError("Por favor selecione apenas um arquivo");
                     return;
                 }
 
@@ -86,23 +93,24 @@ namespace BingoUtils.UI.SharedUI.UserControls
                 SetFileSelected(dialog.FileName);
             }
         }
+        #endregion
 
         private void SetFileSelected(string file)
         {
             if(!ValidateFile(file))
             {
-                DisplayMessage.DisplayError("Este arquivo não é válido");
+                //DisplayMessage.DisplayError("Este arquivo não é válido");
                 return;
             }
 
             FilePath = file;
             FileName = Path.GetFileName(file);
-            Border_Container.Child = (StackPanel) Resources["StackPanel_FileSelected"];
+            FileContainer.Content = (StackPanel) Resources["StackPanel_FileSelected"];
         }
 
         private void SetFileUnselected()
         {
-            Border_Container.Child = (StackPanel) Resources["StackPanel_NoFileSelected"];
+            FileContainer.Content = (StackPanel) Resources["StackPanel_NoFileSelected"];
         }
 
         private bool ValidateFile(string file)

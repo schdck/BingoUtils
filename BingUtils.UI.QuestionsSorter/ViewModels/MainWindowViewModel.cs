@@ -9,9 +9,9 @@ using System.Windows.Threading;
 
 namespace BingoUtils.UI.QuestionsSorter.ViewModels
 {
-    public class MainWindowViewModel : DefaultViewModel
+    public class MainWindowViewModel
     {
-        public SimpleDelegateCommand GenerateCommand { get; private set; }
+        //public RelayCommand GenerateCommand { get; private set; }
 
         private Random RandomGenerator;
         private bool _HasGeneratedGrid;
@@ -25,7 +25,6 @@ namespace BingoUtils.UI.QuestionsSorter.ViewModels
             private set
             {
                 _HasGeneratedGrid = value;
-                NotifyPropertyChanged();
             }
         }
         public double? CartelasCount { get; set; }
@@ -38,7 +37,7 @@ namespace BingoUtils.UI.QuestionsSorter.ViewModels
         public MainWindowViewModel()
         {
             CartelasList = new ObservableCollection<object>();
-            GenerateCommand = new SimpleDelegateCommand((x) => GenerateGrid());
+            //GenerateCommand = new RelayCommand((x) => GenerateGrid());
             RandomGenerator = new Random();
         }
 

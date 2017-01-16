@@ -140,6 +140,10 @@
       <Project>{aafb7cc2-9525-43f5-8712-36724548ef4c}</Project>
       <Name>BingoUtils.UI.QuestionsSorter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedUI\BingoUtils.UI.SharedUI.csproj">
+      <Project>{387f68e6-9d2d-4043-8cac-c03bf904f49e}</Project>
+      <Name>BingoUtils.UI.SharedUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\logo-ifrs-farroupilha.png" />

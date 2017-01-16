@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BingoUtils.UI.SharedUI.Properties {
+namespace BingoUtils.UI.Shared.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
