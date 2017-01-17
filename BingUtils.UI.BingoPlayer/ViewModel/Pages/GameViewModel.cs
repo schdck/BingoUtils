@@ -18,24 +18,59 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
     public class GameViewModel : ViewModelBase
     {
-        private List<Question> _Questions;
-        private string _CurrentQuestionTitle;
-        private string _PreviousQuestionTitle;
-        private string _QuestionProgress;
         private bool _HasPrevious;
         private bool _HasNext;
 
-        public List<Question> Questions
+        private int _CurrentQuestion;
+
+        private string _CurrentQuestionTitle;
+        private string _PreviousQuestionTitle;
+        private string _QuestionProgress;
+
+        private List<Question> _Questions;
+
+        public bool HasPrevious
         {
             get
             {
-                return _Questions;
+                return _HasPrevious;
             }
             private set
             {
-                Set(ref _Questions, value);
+                Set(ref _HasPrevious, value);
             }
         }
+        public bool HasNext
+        {
+            get
+            {
+                return _HasNext;
+            }
+            private set
+            {
+                Set(ref _HasNext, value);
+            }
+        }
+
+        public int QuestionsCount
+        {
+            get
+            {
+                return Questions.Count;
+            }
+        }
+        public int CurrentQuestion
+        {
+            get
+            {
+                return _CurrentQuestion;
+            }
+            set
+            {
+                Set(ref _CurrentQuestion, value);
+            }
+        }
+
         public string CurrentQuestionTitle
         {
             get
@@ -69,34 +104,16 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _QuestionProgress, value);
             }
         }
-        public int QuestionsCount
-        {
-            get
-            {
-                return Questions.Count;
-            }
-        }
 
-        public bool HasPrevious
+        public List<Question> Questions
         {
             get
             {
-                return _HasPrevious;
+                return _Questions;
             }
             private set
             {
-                Set(ref _HasPrevious, value);
-            }
-        }
-        public bool HasNext
-        {
-            get
-            {
-                return _HasNext;
-            }
-            private set
-            {
-                Set(ref _HasNext, value);
+                Set(ref _Questions, value);
             }
         }
 
@@ -106,11 +123,10 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public ICommand NextQuestionCommand { get; private set; }
         public ICommand PlayQuestionTitleCommand { get; private set; }
         public ICommand StopQuestionTitleCommand { get; private set; }
+        public ICommand ShowAnswersCommand { get; private set; }
 
         public Visibility PlayQuestionTitleButtonVisibility { get; private set; }
         public Visibility StopQuestionTitleCommandVisibility { get; private set; }
-
-        public int CurrentQuestion { get; private set; }
 
         public GameViewModel()
         {
@@ -125,6 +141,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private void InitializeCommands()
         {
             PreviousQuestionCommand = new RelayCommand(PreviousQuestion);
+
             NextQuestionCommand = new RelayCommand(NextQuestion);
 
             PlayQuestionTitleCommand = new RelayCommand(() =>
@@ -142,30 +159,22 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
                 AudioPlayer.StopSpeach();
             });
-        }
 
-        private void GetGameData(StartNewGameMessage startNewGameMessage)
-        {
-            if(startNewGameMessage.Target == this)
+            ShowAnswersCommand = new RelayCommand(() =>
             {
-                Questions = startNewGameMessage.QuestionList;
-                StartNewGame();
-            }
+
+            });
         }
 
-        void StartNewGame()
+        private void StartNewGame()
         {
-            Questions = Questions.OrderBy(x => new Random().Next()).ToList();
-
-            //new Random().Shuffle(Questions);
-
             AudioPlayer.AddSpeakCompletedHandler(() => StopQuestionTitleCommand.Execute(null));
 
             CurrentQuestion = -1;
             NextQuestion();
         }
 
-        void PreviousQuestion()
+        private void PreviousQuestion()
         {
             StopQuestionTitleCommand.Execute(null);
 
@@ -185,7 +194,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Count;
         }
 
-        void NextQuestion()
+        private void NextQuestion()
         {
             StopQuestionTitleCommand.Execute(null);
 
@@ -196,6 +205,15 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             HasPrevious = CurrentQuestion > 0;
 
             QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Count;
+        }
+
+        private void GetGameData(StartNewGameMessage startNewGameMessage)
+        {
+            if (startNewGameMessage.Target == this)
+            {
+                Questions = startNewGameMessage.QuestionList.OrderBy(x => new Random().Next()).ToList();
+                StartNewGame();
+            }
         }
     }
 }

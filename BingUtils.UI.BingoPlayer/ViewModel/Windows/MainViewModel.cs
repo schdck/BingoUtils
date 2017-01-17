@@ -16,18 +16,30 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
     {
         private int LaunchedGames;
         private int _TabControlSelectedIndex;
-        private ObservableCollection<MetroTabItem> _TabControlItems;
+        private ObservableCollection<MetroTabItem> _TabControlItemsBingo;
+        private ObservableCollection<MetroTabItem> _TabControlItemsAnswer;
         private List<Game> _Games;
 
-        public ObservableCollection<MetroTabItem> TabControlItems
+        public ObservableCollection<MetroTabItem> TabControlItemsBingo
         {
             get
             {
-                return _TabControlItems;
+                return _TabControlItemsBingo;
             }
             private set
             {
-                Set(ref _TabControlItems, value);
+                Set(ref _TabControlItemsBingo, value);
+            }
+        }
+        public ObservableCollection<MetroTabItem> TabControlItemsAnswer
+        {
+            get
+            {
+                return _TabControlItemsAnswer;
+            }
+            private set
+            {
+                Set(ref _TabControlItemsAnswer, value);
             }
         }
         public List<Game> Games
@@ -55,52 +67,34 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
         public MainViewModel()
         {
-            TabControlItems = new ObservableCollection<MetroTabItem>();
+            TabControlItemsBingo = new ObservableCollection<MetroTabItem>();
+            TabControlItemsAnswer = new ObservableCollection<MetroTabItem>();
+
             Games = new List<Game>();
 
-            AddTabControlItem("Menu", new MainMenu());
+            AddBingoTabControlItem("Menu", new MainMenu());
 
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
-            MessengerInstance.Register<StartNewGameMessage>(this, StartNewGame);
+            MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
         }
 
-        private void AddTabControlItem(object header, object content, int index = -1)
+        private void LaunchNewGame()
         {
-            if(index < 0)
+            if(TabControlItemsBingo.Count > 1 && (TabControlItemsBingo[1].Content as Frame).Content is NewGame)
             {
-                TabControlItems.Add(new MetroTabItem()
-                {
-                    Header = header,
-                    CloseButtonEnabled = false,
-                    Content = new Frame()
-                    {
-                        Content = content
-                    }
-                });
+                // Então uma guia de novo jogo já foi criada
             }
             else
             {
-                TabControlItems.Insert(index, new MetroTabItem()
-                {
-                    Header = header,
-                    CloseButtonEnabled = false,
-                    Content = new Frame()
-                    {
-                        Content = content
-                    }
-                });
+                AddBingoTabControlItem("Novo jogo", new NewGame(), 1);
             }
-        }
-
-        private void StartNewGame(StartNewGameMessage startNewGameMessage)
-        {
-            AddTabControlItem(string.Format("Jogo #{0}", ++LaunchedGames), startNewGameMessage.GamePage);
-            TabControlSelectedIndex = TabControlItems.Count - 1;
+            
+            TabControlSelectedIndex = 1;
         }
 
         private void LaunchActivity(LaunchActivityMessage activityMessage)
         {
-            switch(activityMessage.Activity)
+            switch (activityMessage.Activity)
             {
                 case Activity.ActivityNewGame:
                     LaunchNewGame();
@@ -120,18 +114,61 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             }
         }
 
-        private void LaunchNewGame()
+        private void AddBingoTabControlItem(object header, object content, int index = 0)
         {
-            if(TabControlItems.Count > 1 && (TabControlItems[1].Content as Frame).Content is NewGame)
+            TabControlItemsBingo.Insert(index, new MetroTabItem()
             {
-                // Então uma guia de novo jogo já foi criada
-            }
-            else
+                Header = header,
+                CloseButtonEnabled = false,
+                Content = new Frame()
+                {
+                    Content = content
+                }
+            });
+
+            TabControlItemsAnswer.Insert(index, new MetroTabItem()
             {
-                AddTabControlItem("Novo jogo", new NewGame(), 1);
-            }
-            
-            TabControlSelectedIndex = 1;
+                Header = header,
+                CloseButtonEnabled = false,
+                Content = new Frame()
+                {
+                    Content = new TextBlock()
+                    {
+                        Text = "Use a janela principal para alterar esta página.",
+                        IsEnabled = false,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                        FontSize = 16
+                    },
+                }
+            });
+        }
+
+        private void AddGame(StartNewGameMessage startNewGameMessage)
+        {
+            var header = string.Format("Jogo #{0}", ++LaunchedGames);
+
+            TabControlItemsBingo.Add(new MetroTabItem()
+            {
+                Header = header,
+                CloseButtonEnabled = false,
+                Content = new Frame()
+                {
+                    Content = startNewGameMessage.GamePage
+                }
+            });
+
+            TabControlItemsAnswer.Add(new MetroTabItem()
+            {
+                Header = header,
+                CloseButtonEnabled = false,
+                Content = new Frame()
+                {
+                    Content = startNewGameMessage.GameAnswersPage
+                }
+            });
+
+            TabControlSelectedIndex = TabControlItemsBingo.Count - 1;
         }
     }
 }

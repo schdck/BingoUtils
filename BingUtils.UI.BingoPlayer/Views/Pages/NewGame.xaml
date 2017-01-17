@@ -11,22 +11,40 @@
       d:DesignHeight="510" d:DesignWidth="770"
       DataContext="{Binding NewGame, Source={StaticResource Locator}}">
 
-    <Grid >
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter=""/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-            <Viewbox>
-                <Label>Começar um novo jogo</Label>
-            </Viewbox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-            <Grid VerticalAlignment="Stretch" Grid.Row="1" Background="{Binding DefaultContainerBackground}">
-                <ContentControl Margin="50,10" Template="{StaticResource DottedContainer}">
+        <Viewbox Grid.Row="0">
+            <Label>Começar um novo jogo</Label>
+        </Viewbox>
+
+        <Grid Grid.Row="1" Opacity="{Binding DefaultContainerBackground}" Background="Transparent" Margin="-10,0,-10,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter="Default"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <Label>A partir de um modelo</Label>
+                </Viewbox>
+                <ContentControl Margin="50,0" Template="{StaticResource DottedContainer}" Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -40,43 +58,43 @@
 
                         <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="1">
                             <TextBlock TextAlignment="Center" Margin="2">Selecione a disciplina do jogo</TextBlock>
-                            <ComboBox ItemsSource="{Binding AvaliableSubjects}" SelectedIndex="{Binding SelectedIndexSubject, Mode=OneWay}" />
+                            <ComboBox ItemsSource="{Binding AvaliableSubjects}" SelectedIndex="{Binding SelectedIndexSubject}" IsSynchronizedWithCurrentItem="True" />
                         </StackPanel>
 
                         <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="3">
                             <TextBlock TextAlignment="Center" Margin="2">Selecione o assunto do jogo</TextBlock>
-                            <ComboBox ItemsSource="{Binding AvaliableMatters}" SelectedIndex="{Binding SelectedIndexMatter, Mode=OneWay}" />
+                            <ComboBox ItemsSource="{Binding AvaliableMatters}" SelectedIndex="{Binding SelectedIndexMatter}" IsSynchronizedWithCurrentItem="True" />
                         </StackPanel>
 
                         <Grid Grid.Column="5" VerticalAlignment="Center" Height="46">
                             <Button  Content="{iconPacks:PackIconFontAwesome Kind=Refresh}" Padding="0" Margin="0,20,0,0" Command="{Binding RefreshAvaliableBingos}" Background="Transparent" />
                         </Grid>
-                        
                     </Grid>
                 </ContentControl>
             </Grid>
 
-            <Grid Grid.Row="2" Margin="50,0" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Rectangle Grid.Column="0" Height="2" Fill="Black" />
-                <TextBlock Grid.Column="1" TextAlignment="Center" Padding="0">OU</TextBlock>
-                <Rectangle Grid.Column="2" Height="2" Fill="Black" />
-
-            </Grid>
-
-            <Grid Grid.Row="3" Background="{Binding FileContainerBackground}">
-                <UserControls:DragAndDrop FilePath="{Binding SelectedFilePath, Mode=TwoWay}" Margin="50,10" />
-            </Grid>
-
-            <StackPanel Grid.Row="4" VerticalAlignment="Bottom">
-                <TextBlock TextAlignment="Center" Text="{Binding IsSelectingFrom}" Margin="5" />
-                <Button VerticalAlignment="Bottom" IsEnabled="{Binding HasSelectedValidOption}" Command="{Binding StartNewgameCommand}">Começar novo jogo!</Button>
-            </StackPanel>
         </Grid>
+
+        <Grid Grid.Row="2" Opacity="{Binding FileContainerBackground}" Background="Transparent" Margin="-10,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter="File"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <Label>A partir de um arquivo</Label>
+                </Viewbox>
+                <UserControls:DragAndDrop FilePath="{Binding SelectedFilePath, Mode=TwoWay}" Margin="50,0" Grid.Row="1" />
+            </Grid>
+
+        </Grid>
+
+        <Button Grid.Row="4" Margin="40,20,40,0" IsEnabled="{Binding HasSelectedValidOption}" Command="{Binding StartNewgameCommand}" Content="{Binding IsSelectingFrom}" />
     </Grid>
 </Page>

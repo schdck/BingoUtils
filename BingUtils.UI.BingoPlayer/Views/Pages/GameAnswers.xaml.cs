@@ -1,5 +1,4 @@
 ﻿using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
-using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +17,11 @@ using System.Windows.Shapes;
 namespace BingoUtils.UI.BingoPlayer.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for Game.xaml
+    /// Interaction logic for GameAnswers.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class GameAnswers : Page
     {
-        public Game(GameViewModel dataContext)
+        public GameAnswers(GameViewModel dataContext)
         {
             DataContext = dataContext;
             InitializeComponent();

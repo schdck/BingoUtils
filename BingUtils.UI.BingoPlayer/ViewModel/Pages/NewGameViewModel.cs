@@ -1,10 +1,12 @@
 ﻿using BingoUtils.Domain.Entities;
+using BingoUtils.Helpers;
 using BingoUtils.Helpers.Event_Args;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,12 +23,18 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private readonly string GamesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos");
 
         private bool _HasSelectedOption;
+
         private int _SelectedIndexSubject;
         private int _SelectedIndexMatter;
+
         private string _IsSelectingFrom;
         private string _FilePath;
-        private Brush _DefaultContainerBackground;
-        private Brush _FileContainerBackground;
+
+        private double _DefaultContainerBackground;
+        private double _FileContainerBackground;
+
+        private IEnumerable<string> _AvaliableSubjects;
+        private IEnumerable<string> _AvaliableMatters;
 
         public ICommand StartNewgameCommand { get; private set; }
         public ICommand SetActiveChoice { get; private set; }
@@ -43,6 +51,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _HasSelectedOption, value);
             }
         }
+
         public int SelectedIndexSubject
         {
             get
@@ -52,10 +61,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             set
             {
                 Set(ref _SelectedIndexSubject, value);
+                AvaliableMatters = GetAvaliableMatters();
                 ChangeActiveChoice("Default");
             }
         }
-        public int SelectedndexMatter
+        public int SelectedIndexMatter
         {
             get
             {
@@ -67,6 +77,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 ChangeActiveChoice("Default");
             }
         }
+
         public string IsSelectingFrom
 
         {
@@ -91,29 +102,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 ChangeActiveChoice("File");
             }
         }
-        public string[] AvaliableSubjects
-        {
-            get
-            {
-                return GetAvaliableSubjects();
-            }
-            set
-            {
-                RaisePropertyChanged();
-            }
-        }
-        public string[] AvaliableMatters
-        {
-            get
-            {
-                return GetAvaliableMatters();
-            }
-            set
-            {
-                RaisePropertyChanged();
-            }
-        }
-        public Brush DefaultContainerBackground
+
+        public double DefaultContainerBackground
         {
             get
             {
@@ -124,7 +114,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _DefaultContainerBackground, value);
             }
         }
-        public Brush FileContainerBackground
+        public double FileContainerBackground
         {
             get
             {
@@ -136,25 +126,75 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
         }
 
+        public IEnumerable<string> AvaliableSubjects
+        {
+            get
+            {
+                return _AvaliableSubjects;
+            }
+            set
+            {
+                Set(ref _AvaliableSubjects, value);
+                AvaliableMatters = GetAvaliableMatters();
+            }
+        }
+        public IEnumerable<string> AvaliableMatters
+        {
+            get
+            {
+                return _AvaliableMatters;
+            }
+            set
+            {
+                Set(ref _AvaliableMatters, value);
+            }
+        }
+
         public NewGameViewModel()
         {
+            DefaultContainerBackground = 1;
+            FileContainerBackground = 1;
+
             StartNewgameCommand = new RelayCommand(() =>
             {
-                var newGame = new Game();
+                var viewModel = SimpleIoc.Default.GetInstance<GameViewModel>(Guid.NewGuid().ToString());
+                var newGame = new Game(viewModel);
+                var newGameAnswers = new GameAnswers(viewModel);
                 var questionList = new List<Question>();
 
-                if(!File.Exists(SelectedFilePath))
+                string path;
+
+                if(_FileContainerBackground == 1) // Carregar jogo do arquivo do usuário
+                {
+                    path = SelectedFilePath;
+
+                    CopyFileIfNew(SelectedFilePath);
+                }
+                else // Carregar jogo da ComboBox
+                {
+                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.csv", AvaliableMatters.ElementAt(SelectedIndexMatter)));
+                }
+
+
+                if (!File.Exists(path))
                 {
                     throw (new Exception("Erro ao abrir arquivo"));
                 }
 
-                using (StreamReader reader = new StreamReader(SelectedFilePath))
+                using (StreamReader reader = new StreamReader(path))
                 {
                     try
                     {
-                        while (!reader.EndOfStream)
+                        string line = reader.ReadLine(); // Pular a linha de cabeçalho
+
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            string[] values = reader.ReadLine().Split(';');
+                            string[] values = line.Split(';');
+
+                            if(string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrWhiteSpace(values[1]))
+                            {
+                                break;
+                            }
 
                             questionList.Add(new Question(values[0], values[1]));
                         }
@@ -165,40 +205,18 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     }
                 }
 
-                MessengerInstance.Send(new StartNewGameMessage(newGame.DataContext as GameViewModel, newGame, questionList));
+                MessengerInstance.Send(new StartNewGameMessage(viewModel, newGame, newGameAnswers, questionList));
             });
             RefreshAvaliableBingos = new RelayCommand(() =>
             {
-                AvaliableSubjects = null;
-                AvaliableMatters = null;
+                AvaliableSubjects = GetAvaliableSubjects();
             });
 
-
+            AvaliableSubjects = GetAvaliableSubjects();
             SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
         }
 
-        private void ChangeActiveChoice(string choice)
-        {
-            if (choice == "Default")
-            {
-                //HasSelectedValidOption = !string.IsNullOrEmpty(SelectedIndexSubject) && !string.IsNullOrEmpty(SelectedndexMatter);
-
-                DefaultContainerBackground = Brushes.LightGreen;
-                FileContainerBackground = Brushes.Transparent;
-
-                IsSelectingFrom = "Você está iniciando um novo jogo a partir dos modelos já definidos";
-            }
-            else
-            {
-                HasSelectedValidOption = File.Exists(SelectedFilePath);
-
-                IsSelectingFrom = "Você está iniciando um novo jogo a partir de um arquivo";
-                DefaultContainerBackground = Brushes.Transparent;
-                FileContainerBackground = Brushes.LightGreen;
-            }
-        }
-
-        private string[] GetAvaliableSubjects()
+        private IEnumerable<string> GetAvaliableSubjects()
         {
             if(!Directory.Exists(GamesDirectory))
             {
@@ -209,15 +227,82 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             foreach(string dir in Directory.GetDirectories(GamesDirectory))
             {
-                folders.Add(Path.GetDirectoryName(dir));
+                folders.Add(new DirectoryInfo(dir).Name);
             }
 
-            return folders.ToArray();
+            return folders;
         }
 
-        private string[] GetAvaliableMatters()
+        private IEnumerable<string> GetAvaliableMatters()
         {
-            return new string[] { "oi", "tchau" };
+            var files = Directory.GetFiles(
+                            Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
+                                .Where((x) => (Path.GetExtension(x) == ".csv"));
+
+            List<string> fileNamesWithoutExtension = new List<string>();
+
+            foreach(string s in files)
+            {
+                fileNamesWithoutExtension.Add(Path.GetFileNameWithoutExtension(s));
+            }
+
+            return fileNamesWithoutExtension;
+        }
+
+        private void CopyFileIfNew(string selectedFilePath)
+        {
+            string[] gameInfo;
+
+            using (StreamReader reader = new StreamReader(selectedFilePath))
+            {
+                gameInfo = reader.ReadLine().Split(';'); // Linha de cabeçalho
+            }
+
+            string newFileFolder = Path.Combine(GamesDirectory, gameInfo[0]);
+            string newFilePath = Path.Combine(newFileFolder, string.Format("{0}.csv", gameInfo[1]));
+
+            if(!Directory.Exists(newFileFolder))
+            {
+                Directory.CreateDirectory(newFileFolder);
+            }
+
+            if (File.Exists(newFilePath))
+            {
+                if (FileHelper.FileCompare(selectedFilePath, newFilePath))
+                {
+                    return;
+                }
+                newFilePath += "(2)";
+            }
+            File.Copy(selectedFilePath, newFilePath);
+        }
+
+        private void ChangeActiveChoice(string choice)
+        {
+            if (choice == "Default")
+            {
+                HasSelectedValidOption = SelectedIndexSubject >= 0 && AvaliableSubjects.FirstOrDefault() != null && SelectedIndexMatter >= 0 && AvaliableMatters.FirstOrDefault() != null;
+
+                DefaultContainerBackground = 1.0;
+                FileContainerBackground = 0.5;
+
+                IsSelectingFrom = "Iniciar novo jogo a partir dos modelos";
+            }
+            else if (choice == "File")
+            {
+                HasSelectedValidOption = File.Exists(SelectedFilePath);
+
+                IsSelectingFrom = "Iniciar novo jogo a partir do arquivo";
+                DefaultContainerBackground = 0.5;
+                FileContainerBackground = 1.0;
+            }
+            else
+            {
+                HasSelectedValidOption = false;
+                DefaultContainerBackground = 1.0;
+                FileContainerBackground = 1.0;
+                IsSelectingFrom = "Iniciar novo jogo";
+            }
         }
     }
 }

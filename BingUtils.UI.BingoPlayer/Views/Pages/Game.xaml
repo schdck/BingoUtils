@@ -7,8 +7,7 @@
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       Title="Game" MinWidth="770" MinHeight="510"
-      d:DesignWidth="770" d:DesignHeight="510"
-      DataContext="{Binding Game, Source={StaticResource Locator}}">
+      d:DesignWidth="770" d:DesignHeight="510">
 
     <Grid>
         <Grid.ColumnDefinitions>

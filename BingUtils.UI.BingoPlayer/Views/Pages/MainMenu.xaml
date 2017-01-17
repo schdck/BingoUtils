@@ -35,11 +35,14 @@
                 <Label>Que comecem os jogos! - Bingo</Label>
             </Viewbox>
 
-            <Button Grid.Row="2" Command="{Binding LaunchStartNewGameCommand}">Começar novo jogo</Button>
+            <Border Grid.Row="2" CornerRadius="15">
+                <Button  Command="{Binding LaunchStartNewGameCommand}">Começar novo jogo</Button>
+            </Border>
+            
 
-            <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}">Criar novo jogo</Button>
+            <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}" IsEnabled="False">Criar novo jogo</Button>
 
-            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}">Distribuir questões</Button>
+            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" IsEnabled="False">Distribuir questões</Button>
 
             <Button Grid.Row="5" Command="{Binding LauncheHelpCommand}">Ajuda</Button>
 

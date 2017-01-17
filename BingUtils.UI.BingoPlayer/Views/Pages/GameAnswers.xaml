@@ -1,0 +1,19 @@
+﻿<Page x:Class="BingoUtils.UI.BingoPlayer.Views.Pages.GameAnswers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
+      mc:Ignorable="d" 
+      Title="GameAnswers" MinWidth="770" MinHeight="510"
+      d:DesignWidth="770" d:DesignHeight="510">
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Questions}" SelectedIndex="{Binding CurrentQuestion, Mode=OneWay}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Questão" Width="*" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Resposta" Width="*" Binding="{Binding Answer}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
