@@ -43,6 +43,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<DistributorViewModel>();
             SimpleIoc.Default.Register<GameViewModel>();
             SimpleIoc.Default.Register<NewGameViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
@@ -78,6 +79,14 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MenuViewModel>();
+            }
+        }
+
+        public DistributorViewModel Distributor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DistributorViewModel>();
             }
         }
 

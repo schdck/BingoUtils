@@ -4,12 +4,97 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       MinWidth="770" MinHeight="510"
       d:DesignWidth="770" d:DesignHeight="510"
-      Title="Distributor">
+      Title="Distributor" DataContext="{Binding Distributor, Source={StaticResource Locator}}">
 
+    <Page.Resources>
+        <TextBlock x:Key="Status_Waiting" FontSize="24">Status: Aguardando confirmação do usuário</TextBlock>
+
+        <StackPanel x:Key="Status_Generating" Orientation="Horizontal">
+            <Controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" Width="20" Height="20" Margin="10,0"/>
+            <TextBlock>Status: Gerando cartelas</TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Key="Status_Success" Orientation="Horizontal">
+            <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="Check" Width="20" Height="20" Margin="10,0" Foreground="{DynamicResource AccentColorBrush}" />
+            <TextBlock>Sucesso!</TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Key="Status_Error" Orientation="Horizontal">
+            <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="Exclamation" Width="20" Height="20" Margin="10,0" Foreground="Tomato" />
+            <TextBlock>Falha ao gerar cartelas</TextBlock>
+        </StackPanel>
+    </Page.Resources>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".8*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1.1*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Viewbox>
+            <Label>Auxiliar para distribuição de questões</Label>
+        </Viewbox>
+
+        <StackPanel Grid.Row="1">
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Controls:NumericUpDown Grid.Column="0" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de questões" Value="{Binding AmountOfQuestions}" />
+                <Controls:NumericUpDown Grid.Column="2" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de cartelas" Value="{Binding AmountOfCards}" />
+                <Controls:NumericUpDown Grid.Column="4" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de questões por cartela" Value="{Binding AmountOfQuestionsPerCard}" />
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" Margin="0,20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"  Text="{Binding Value, ElementName=sliderPercent, StringFormat='{}Máxima semelhança: {0}%', UpdateSourceTrigger=PropertyChanged}"
+                                                            Foreground="{Binding ElementName=sliderPercent, Path=Value, Converter={StaticResource ProgressForegroundConverter}}">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="270" />
+                        </TextBlock.LayoutTransform>
+
+                    </TextBlock>
+                    <Slider x:Name="sliderPercent" Maximum="100" TickFrequency="5" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Orientation="Vertical" Value="{Binding MaxSemelhanca}" Foreground="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Value, Converter={StaticResource ProgressForegroundConverter}}"/>
+                </StackPanel>
+
+                <TextBlock TextWrapping="Wrap" TextAlignment="Justify" MaxWidth="300" Margin="60,0,0,0">
+                    A máxima semelhança é uma porcentagem que indica o quão parecida uma cartela pode ser à outra. Quanto mais próximo de zero, mais diferentes elas precisarão ser. Observe que nem sempre é possível atender a este critério, então procure ser razoável na escolha deste valor. Recomenda-se um valor próximo de 70%.<LineBreak /><LineBreak />Caso o programa não consiga calcular usando a porcentagem escolhida dentro de um período de tempo, você será questionado se deseja continuar tentando ou alterar os valores de entrada.
+                </TextBlock>
+            </Grid>
+
+            <RichTextBox Background="Transparent" BorderThickness="0" Width="483">
+                <FlowDocument>
+                    <Paragraph TextAlignment="Center" FontSize="20" Margin="0">Atenção</Paragraph>
+                    <Paragraph TextAlignment="Justify" FontSize="12" Margin="0">
+                        Esta operação pode demorar algum tempo se a quantidade de cartelas, questões e as questões por cartela forem muito altas e/ou a máxima semelhança for muito baixa.
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <CheckBox x:Name="checkUnderstand" HorizontalAlignment="Center" Margin="5">Eu entendi e desejo continuar</CheckBox>
+            <Button Content="Iniciar processo de distribuição" IsEnabled="{Binding IsChecked, ElementName=checkUnderstand}" Margin="0,5" />
+        </StackPanel>
+
+        <Controls:TransitioningContentControl Grid.Row="2" Margin="0,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{Binding CurrentStatusElement}">
+            <Controls:TransitioningContentControl.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="24" />
+                </Style>
+            </Controls:TransitioningContentControl.Resources>
+        </Controls:TransitioningContentControl>
     </Grid>
 </Page>

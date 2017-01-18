@@ -42,7 +42,7 @@
 
             <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}" IsEnabled="False">Criar novo jogo</Button>
 
-            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" IsEnabled="False">Distribuir questões</Button>
+            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}">Distribuir questões</Button>
 
             <Button Grid.Row="5" Command="{Binding LaunchHelpCommand}">Ajuda</Button>
 

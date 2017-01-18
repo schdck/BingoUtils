@@ -111,6 +111,14 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
         private void AddBingoTabControlItem(object header, object content, bool canClose, int index = 0)
         {
+            int indexExistent = GetIndexWhereHeaderIs(header);
+
+            if (indexExistent > 0)
+            {
+                TabControlSelectedIndex = indexExistent;
+                return;
+            }
+
             var itemBingo = new MetroTabItem()
             {
                 Header = header,
@@ -157,6 +165,14 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
         private void AddBingoTabControlItem(object header, object content, bool canClose)
         {
+            int indexExistent= GetIndexWhereHeaderIs(header);
+
+            if(indexExistent > 0)
+            {
+                TabControlSelectedIndex = indexExistent;
+                return;
+            }
+
             var itemBingo = new MetroTabItem()
             {
                 Header = header,
@@ -237,6 +253,18 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             TabControlItemsBingo.Add(itemBingo);
             TabControlItemsAnswer.Add(itemAnswers);
             TabControlSelectedIndex = TabControlItemsBingo.Count - 1;
+        }
+
+        private int GetIndexWhereHeaderIs(object header)
+        {
+            for(int i = 0; i < TabControlItemsBingo.Count; i++)
+            {
+                if(Equals(TabControlItemsBingo[i].Header, header))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }

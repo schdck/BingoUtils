@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\SliderForegroundConverter.cs" />
     <Compile Include="UserControls\DragAndDrop.xaml.cs">
       <DependentUpon>DragAndDrop.xaml</DependentUpon>
     </Compile>
