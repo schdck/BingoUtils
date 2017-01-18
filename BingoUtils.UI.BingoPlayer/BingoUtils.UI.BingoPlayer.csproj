@@ -111,8 +111,14 @@
     <Compile Include="ViewModel\Pages\GameViewModel.cs" />
     <Compile Include="ViewModel\Pages\MenuViewModel.cs" />
     <Compile Include="ViewModel\Pages\NewGameViewModel.cs" />
-    <Compile Include="ViewModel\Windows\MainViewModel.cs" />
+    <Compile Include="ViewModel\Windows\WindowSharedViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\Pages\Distributor.xaml.cs">
+      <DependentUpon>Distributor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DistributorResult.xaml.cs">
+      <DependentUpon>DistributorResult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -148,6 +154,14 @@
     <Page Include="0 - Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\Distributor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DistributorResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Game.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +239,10 @@
     <ProjectReference Include="..\BingoUtils.Helpers\BingoUtils.Helpers.csproj">
       <Project>{365fe43f-816e-4f34-a331-d04b7c433326}</Project>
       <Name>BingoUtils.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BingoUtils.UI.Shared\BingoUtils.UI.Shared.csproj">
+      <Project>{387f68e6-9d2d-4043-8cac-c03bf904f49e}</Project>
+      <Name>BingoUtils.UI.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

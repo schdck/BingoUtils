@@ -46,14 +46,14 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel
             SimpleIoc.Default.Register<GameViewModel>();
             SimpleIoc.Default.Register<NewGameViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<WindowSharedViewModel>();
         }
 
-        public MainViewModel Main
+        public WindowSharedViewModel Main
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<WindowSharedViewModel>();
             }
         }
 

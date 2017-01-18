@@ -9,7 +9,7 @@ using BingoUtils.Domain.Enums;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
-    public class MainViewModel : BaseViewModel
+    public class WindowSharedViewModel : BaseViewModel
     {
         private int LaunchedGames;
         private int _TabControlSelectedIndex;
@@ -62,7 +62,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             }
         }
 
-        public MainViewModel()
+        public WindowSharedViewModel()
         {
             TabControlItemsBingo = new ObservableCollection<MetroTabItem>();
             TabControlItemsAnswer = new ObservableCollection<MetroTabItem>();
@@ -98,7 +98,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
                     break;
                 case Activity.ActivityDistributor:
-
+                    AddBingoTabControlItem("Distribuidor", new Distributor(), true);
                     break;
                 case Activity.ActivityHelp:
                     AddBingoTabControlItem("Ajuda", new Help(), true);
