@@ -1,8 +1,6 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
-using BingoUtils.Helpers.Event_Args;
 using BingoUtils.UI.BingoPlayer.Messages;
-using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -12,9 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
@@ -181,7 +177,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     throw (new Exception("Erro ao abrir arquivo"));
                 }
 
-                using (StreamReader reader = new StreamReader(path))
+                using (StreamReader reader = new StreamReader(path, Encoding.GetEncoding("WINDOWS-1252")))
                 {
                     try
                     {
@@ -191,7 +187,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                         {
                             string[] values = line.Split(';');
 
-                            if(string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrWhiteSpace(values[1]))
+                            if (string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrWhiteSpace(values[1]))
                             {
                                 break;
                             }

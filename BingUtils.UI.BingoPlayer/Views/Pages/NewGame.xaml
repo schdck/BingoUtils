@@ -9,7 +9,7 @@
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="510" d:DesignWidth="770"
-      DataContext="{Binding NewGame, Source={StaticResource Locator}}">
+      DataContext="{Binding NewGame, Source={StaticResource Locator}}" >
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

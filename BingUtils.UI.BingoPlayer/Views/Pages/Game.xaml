@@ -35,8 +35,6 @@
         </Grid>
 
         <Grid Grid.Column="1">
-            <Button ToolTip="Conferir respostas que saíram até o momento" Content="{iconPacks:PackIconModern Kind=ClipboardPaperCheck}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5" Command="{Binding PlayQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
-
             <Button ToolTip="Reproduzir enunciado da questão" Content="{iconPacks:PackIconOcticons Kind=Unmute}" Visibility="{Binding PlayQuestionTitleButtonVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding PlayQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
 
             <Button ToolTip="Parar reprodução do enunciado da questão" Content="{iconPacks:PackIconOcticons Kind=Mute}" Visibility="{Binding StopQuestionTitleCommandVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding StopQuestionTitleCommand}" />

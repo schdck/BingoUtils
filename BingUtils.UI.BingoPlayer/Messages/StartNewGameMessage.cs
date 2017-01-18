@@ -1,11 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BingoUtils.UI.BingoPlayer.Messages
 {

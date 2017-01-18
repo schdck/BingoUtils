@@ -1,16 +1,12 @@
 ﻿using BingoUtils.Domain.Entities;
-using BingoUtils.Helpers;
 using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
-using BingoUtils.UI.BingoPlayer.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -123,7 +119,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public ICommand NextQuestionCommand { get; private set; }
         public ICommand PlayQuestionTitleCommand { get; private set; }
         public ICommand StopQuestionTitleCommand { get; private set; }
-        public ICommand ShowAnswersCommand { get; private set; }
 
         public Visibility PlayQuestionTitleButtonVisibility { get; private set; }
         public Visibility StopQuestionTitleCommandVisibility { get; private set; }
@@ -158,11 +153,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 StopQuestionTitleCommandVisibility = Visibility.Hidden;
 
                 AudioPlayer.StopSpeach();
-            });
-
-            ShowAnswersCommand = new RelayCommand(() =>
-            {
-
             });
         }
 

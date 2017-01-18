@@ -1,13 +1,7 @@
-﻿using BingoUtils.Domain.Entities;
-using BingoUtils.Domain.Enums;
+﻿using BingoUtils.Domain.Enums;
 using BingoUtils.UI.BingoPlayer.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages

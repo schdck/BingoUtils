@@ -119,11 +119,17 @@
     <Compile Include="Views\Pages\GameAnswers.xaml.cs">
       <DependentUpon>GameAnswers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\NewGame.xaml.cs">
       <DependentUpon>NewGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\AnswerWindow.xaml.cs">
       <DependentUpon>AnswerWindow.xaml</DependentUpon>
@@ -151,11 +157,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\NewGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,10 +225,6 @@
     <ProjectReference Include="..\BingoUtils.Helpers\BingoUtils.Helpers.csproj">
       <Project>{365fe43f-816e-4f34-a331-d04b7c433326}</Project>
       <Name>BingoUtils.Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BingoUtils.Repositories\BingoUtils.Repositories.csproj">
-      <Project>{e3fd8003-4482-426e-b768-dcb22977fa69}</Project>
-      <Name>BingoUtils.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharedUI\BingoUtils.UI.Shared.csproj">
       <Project>{387f68e6-9d2d-4043-8cac-c03bf904f49e}</Project>

@@ -3,11 +3,11 @@
 namespace BingoUtils.UI.BingoPlayer.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for NewGame.xaml
+    /// Interaction logic for Help.xaml
     /// </summary>
-    public partial class NewGame : Page
+    public partial class Help : Page
     {
-        public NewGame()
+        public Help()
         {
             InitializeComponent();
         }

@@ -143,10 +143,6 @@
       <Project>{365fe43f-816e-4f34-a331-d04b7c433326}</Project>
       <Name>BingoUtils.Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BingoUtils.Repositories\BingoUtils.Repositories.csproj">
-      <Project>{e3fd8003-4482-426e-b768-dcb22977fa69}</Project>
-      <Name>BingoUtils.Repositories</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />

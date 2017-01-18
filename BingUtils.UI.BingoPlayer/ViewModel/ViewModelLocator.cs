@@ -14,7 +14,6 @@
 
 using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.BingoPlayer.ViewModel.Windows;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 

@@ -44,7 +44,7 @@
 
             <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" IsEnabled="False">Distribuir questões</Button>
 
-            <Button Grid.Row="5" Command="{Binding LauncheHelpCommand}">Ajuda</Button>
+            <Button Grid.Row="5" Command="{Binding LaunchHelpCommand}">Ajuda</Button>
 
             <Button Grid.Row="6" Command="{Binding LaunchAboutCommand}">Sobre o programa</Button>
         </Grid>

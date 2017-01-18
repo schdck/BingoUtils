@@ -1,0 +1,76 @@
+﻿<Page x:Class="BingoUtils.UI.BingoPlayer.Views.Pages.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
+      mc:Ignorable="d" 
+      Title="About" MinWidth="770" MinHeight="510"
+      d:DesignWidth="770" d:DesignHeight="510">
+
+    <DockPanel LastChildFill="True">
+        <DockPanel.Resources>
+            <Style TargetType="RichTextBox">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+        </DockPanel.Resources>
+
+        <RichTextBox DockPanel.Dock="Top" Margin="25,0" IsReadOnly="True">
+            <FlowDocument>
+                <Paragraph FontSize="36" TextAlignment="Center" Margin="0,15">Sobre este programa</Paragraph>
+
+                <Paragraph TextAlignment="Justify" FontStyle="Italic">
+                    Este programa foi desenvolvido por Maurício Vielmo Schmaedeck (github.com/mvschmaedeck) 
+                    para o projeto "Que comecem os jogos! Possibilidades didático metodológicas para o ensino
+                    de História", realizado sob a orientação da Professora Doutora Daniela de Campos pelo 
+                    Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul - Campus Farroupilha
+                </Paragraph>
+
+                <Paragraph Margin="0,30,0,15" TextAlignment="Justify" FontStyle="Italic">
+                    Este programa foi desenvolvido utilizando Windows Presentation Foundation (WPF), presente no 
+                    .NET Framework a partir da versão 3.0. Seu código fonte está disponível em github.com/mvschmaedeck1/BingoUtils
+                </Paragraph>
+
+                <Paragraph FontSize="28" TextAlignment="Center" Margin="0,15">Licença</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Border BorderThickness="1" BorderBrush="Gray" Margin="25,10">
+            <ScrollViewer>
+                <RichTextBox Margin="10" IsReadOnly="True">
+                    <FlowDocument>
+                        <Paragraph TextAlignment="Justify" FontStyle="Italic">
+                            Este programa está sob uma licença MIT, também conhecida como licença X ou licença X11. Isto garante
+                            a qualquer portador deste software e sua documentação o direito de lidar com eles sem restrição, 
+                            incluindo sem limitação os direitos de usar, copiar, modificar, mesclar, publicar, distribuir e/ou 
+                            vender cópias do software. Todas as cópias deste software deverão conter a licença abaixo.
+                        </Paragraph>
+                        <Paragraph FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5">The MIT License (MIT)</Paragraph>
+                        <Paragraph TextAlignment="Center" Margin="0" FontStyle="Italic">Copyright (c) 2017 Maurício Vielmo Schmaedeck</Paragraph>
+                        <Paragraph TextAlignment="Justify" Margin="25,15">
+                            Permission is hereby granted, free of charge, to any person obtaining a copy of
+                        this software and associated documentation files (the "Software"), to deal in
+                        the Software without restriction, including without limitation the rights to
+                        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+                        the Software, and to permit persons to whom the Software is furnished to do so,
+                        subject to the following conditions:
+                        </Paragraph>
+                        <Paragraph TextAlignment="Justify" Margin="25,10">
+                            The above copyright notice and this permission notice shall be included in all
+                        copies or substantial portions of the Software.
+                        </Paragraph>
+                        <Paragraph TextAlignment="Justify" Margin="25,10">
+                            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+                        FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+                        COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+                        IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+                        CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</Page>

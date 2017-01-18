@@ -1,0 +1,41 @@
+﻿<Page x:Class="BingoUtils.UI.BingoPlayer.Views.Pages.Help"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
+      mc:Ignorable="d" 
+      MinWidth="770" MinHeight="510"
+      d:DesignWidth="770" d:DesignHeight="510"
+      Title="Help">
+
+    <Page.Resources>
+        <Style TargetType="RichTextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <RichTextBox DockPanel.Dock="Top" IsReadOnly="True">
+            <FlowDocument>
+                <Paragraph FontSize="36" TextAlignment="Center" Margin="0,15">Ajuda/FAQ</Paragraph>
+
+                <Paragraph FontSize="18" TextAlignment="Left" Margin="0,15,10,0">1. Como faço para criar meu próprio jogo?</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="50,5,10,0">Você pode criar seu programa de duas maneiras:</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="100,5,10,0" FontWeight="Bold">- Usando o Microsoft Excel ou semelhante</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Justify" Margin="150,5,10,0">Basta criar uma tabela contendo duas colunas. A primeira linha deve conter a disciplina do jogo na primeira coluna e o assunto do jogo na segunda. As linhas seguintes devem conter a pergunta na primeira coluna e sua respectiva resposta na segunda.</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Justify" Margin="150,5,10,0" FontWeight="Bold">Na hora de salvar o arquivo, salve-o no formato CSV (separado por vírgulas)</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="100,5,10,0" FontWeight="Bold">- Usando o próprio aplicativo</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Justify" Margin="150,5,10,0">Vá ate o menu e selecione a opção "Criar novo jogo", na aba que irá se abrir preencha os campos e, quando acabar, pressione o botão para salvar.</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="50,5,10,0">Para instruções de como abrir o jogo que acabou de criar consulte o próximo item.</Paragraph>
+
+                <Paragraph FontSize="18" TextAlignment="Left" Margin="0,15,10,0">2. Como faço para importar um jogo?</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="50,5,10,0">Para importar um jogo, navegue até o menu e selecione o botão "Começar novo jogo". Na próxima aba, selecione o botão de upload (botão com uma seta para baixo na parte inferior da página. Encontre o arquivo do jogo e abra-o.</Paragraph>
+
+                <Paragraph FontSize="18" TextAlignment="Left" Margin="0,15,10,0">3. Para que serve o botão "Distribuidor de questões"?</Paragraph>
+                <Paragraph FontSize="14" TextAlignment="Left" Margin="50,5,10,0">O botão levará para o auxiliar de distribuição de questões, quando o mesmo estiver disponível. Este auxiliar servirá para distribuir as questões em cartelas de forma que nenhuma delas fique muito parecida com as demais de forma automática.</Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </ScrollViewer>
+</Page>

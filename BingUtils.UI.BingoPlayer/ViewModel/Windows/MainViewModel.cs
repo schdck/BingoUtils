@@ -4,9 +4,6 @@ using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System;
-using GalaSoft.MvvmLight.Command;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.Domain.Enums;
 
@@ -72,7 +69,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             Games = new List<Game>();
 
-            AddBingoTabControlItem("Menu", new MainMenu());
+            AddBingoTabControlItem("Menu", new MainMenu(), false);
 
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
@@ -82,14 +79,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
         {
             if(TabControlItemsBingo.Count > 1 && (TabControlItemsBingo[1].Content as Frame).Content is NewGame)
             {
-                // Então uma guia de novo jogo já foi criada
+                TabControlSelectedIndex = 1;
             }
             else
             {
-                AddBingoTabControlItem("Novo jogo", new NewGame(), 1);
-            }
-            
-            TabControlSelectedIndex = 1;
+                AddBingoTabControlItem("Novo jogo", new NewGame(), true, 1);
+            }            
         }
 
         private void LaunchActivity(LaunchActivityMessage activityMessage)
@@ -106,68 +101,141 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
                     break;
                 case Activity.ActivityHelp:
-
+                    AddBingoTabControlItem("Ajuda", new Help(), true);
                     break;
                 case Activity.ActivityAbout:
-
+                    AddBingoTabControlItem("Sobre", new About(), true);
                     break;
             }
         }
 
-        private void AddBingoTabControlItem(object header, object content, int index = 0)
+        private void AddBingoTabControlItem(object header, object content, bool canClose, int index = 0)
         {
-            TabControlItemsBingo.Insert(index, new MetroTabItem()
+            var itemBingo = new MetroTabItem()
             {
                 Header = header,
-                CloseButtonEnabled = false,
+                CloseButtonEnabled = canClose,
                 Content = new Frame()
                 {
                     Content = content
                 }
-            });
+            };
 
-            TabControlItemsAnswer.Insert(index, new MetroTabItem()
+            var itemAnswers = new MetroTabItem()
             {
                 Header = header,
-                CloseButtonEnabled = false,
+                CloseButtonEnabled = canClose,
                 Content = new Frame()
                 {
                     Content = new TextBlock()
                     {
-                        Text = "Use a janela principal para alterar esta página.",
+                        Text = "Use a janela principal para visualizar esta página.",
                         IsEnabled = false,
                         VerticalAlignment = System.Windows.VerticalAlignment.Center,
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                         FontSize = 16
                     },
                 }
-            });
+            };
+
+            if (canClose)
+            {
+                var command = new SimpleDelegateCommand(() =>
+                {
+                    TabControlItemsBingo.Remove(itemBingo);
+                    TabControlItemsAnswer.Remove(itemAnswers);
+                });
+
+                itemBingo.CloseTabCommand = command;
+                itemAnswers.CloseTabCommand = command;
+            }
+
+            TabControlItemsBingo.Insert(index, itemBingo);
+            TabControlItemsAnswer.Insert(index, itemAnswers);
+            TabControlSelectedIndex = index;
+        }
+
+        private void AddBingoTabControlItem(object header, object content, bool canClose)
+        {
+            var itemBingo = new MetroTabItem()
+            {
+                Header = header,
+                CloseButtonEnabled = canClose,
+                Content = new Frame()
+                {
+                    Content = content
+                }
+            };
+
+            var itemAnswers = new MetroTabItem()
+            {
+                Header = header,
+                CloseButtonEnabled = canClose,
+                Content = new Frame()
+                {
+                    Content = new TextBlock()
+                    {
+                        Text = "Use a janela principal para visualizar esta página.",
+                        IsEnabled = false,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                        FontSize = 16
+                    },
+                }
+            };
+
+            if (canClose)
+            {
+                var command = new SimpleDelegateCommand(() =>
+                {
+                    TabControlItemsBingo.Remove(itemBingo);
+                    TabControlItemsAnswer.Remove(itemAnswers);
+                });
+
+                itemBingo.CloseTabCommand = command;
+                itemAnswers.CloseTabCommand = command;
+            }
+
+            TabControlItemsBingo.Add(itemBingo);
+            TabControlItemsAnswer.Add(itemAnswers);
+            TabControlSelectedIndex = TabControlItemsBingo.Count - 1;
         }
 
         private void AddGame(StartNewGameMessage startNewGameMessage)
         {
             var header = string.Format("Jogo #{0}", ++LaunchedGames);
 
-            TabControlItemsBingo.Add(new MetroTabItem()
+            var itemBingo = new MetroTabItem()
             {
                 Header = header,
-                CloseButtonEnabled = false,
+                CloseButtonEnabled = true,
                 Content = new Frame()
                 {
                     Content = startNewGameMessage.GamePage
                 }
-            });
+            };
 
-            TabControlItemsAnswer.Add(new MetroTabItem()
+            var itemAnswers = new MetroTabItem()
             {
                 Header = header,
-                CloseButtonEnabled = false,
+                CloseButtonEnabled = true,
                 Content = new Frame()
                 {
                     Content = startNewGameMessage.GameAnswersPage
                 }
+            };
+
+            var command = new SimpleDelegateCommand(() =>
+            {
+                TabControlItemsBingo.Remove(itemBingo);
+                TabControlItemsAnswer.Remove(itemAnswers);
             });
 
+            itemBingo.CloseTabCommand = command;
+            itemAnswers.CloseTabCommand = command;
+
+            TabControlItemsBingo.Add(itemBingo);
+            TabControlItemsAnswer.Add(itemAnswers);
             TabControlSelectedIndex = TabControlItemsBingo.Count - 1;
         }
     }
