@@ -226,10 +226,6 @@
       <Project>{365fe43f-816e-4f34-a331-d04b7c433326}</Project>
       <Name>BingoUtils.Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharedUI\BingoUtils.UI.Shared.csproj">
-      <Project>{387f68e6-9d2d-4043-8cac-c03bf904f49e}</Project>
-      <Name>BingoUtils.UI.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />

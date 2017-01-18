@@ -17,12 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.Helpers", "Bingo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.UI.BingoPlayer", "BingUtils.UI.BingoPlayer\BingoUtils.UI.BingoPlayer.csproj", "{C6C712F5-21C0-4F10-ACC9-C2D2009CDC04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.UI.Shared", "SharedUI\BingoUtils.UI.Shared.csproj", "{387F68E6-9D2D-4043-8CAC-C03BF904F49E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_License", "_License", "{E83AC5A5-9275-4CED-B424-1C44B6BC90E6}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.txt = LICENSE.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.UI.Shared", "BingoUtils.UI.Shared\BingoUtils.UI.Shared.csproj", "{387F68E6-9D2D-4043-8CAC-C03BF904F49E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
