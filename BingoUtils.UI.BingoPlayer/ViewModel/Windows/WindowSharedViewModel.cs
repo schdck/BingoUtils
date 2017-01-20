@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.Domain.Enums;
+using System;
+using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -73,6 +75,15 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
+            MessengerInstance.Register<LaunchFinishedDistributionMessage>(this, ShowDistributionCompleteTab);
+        }
+
+        private void ShowDistributionCompleteTab(LaunchFinishedDistributionMessage message)
+        {
+            var viewModel = new DistributorResultViewModel(message.Cartelas, message.MaxSemelhanca);
+            var page = new DistributorResult(viewModel);
+
+            AddBingoTabControlItem("Resultado", page, true);
         }
 
         private void LaunchNewGame()

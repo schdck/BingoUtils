@@ -106,14 +106,14 @@
     </ApplicationDefinition>
     <Compile Include="0 - Resources\QuestionsResources.cs" />
     <Compile Include="Messages\LaunchActivityMessage.cs" />
+    <Compile Include="Messages\LaunchFinishedDistributionMessage.cs" />
     <Compile Include="Messages\StartNewGameMessage.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Pages\DistributorResultViewModel.cs" />
     <Compile Include="ViewModel\Pages\DistributorViewModel.cs" />
     <Compile Include="ViewModel\Pages\GameViewModel.cs" />
     <Compile Include="ViewModel\Pages\MenuViewModel.cs" />
     <Compile Include="ViewModel\Pages\NewGameViewModel.cs" />
-    <Compile Include="ViewModel\States\CheckViewModel.cs" />
-    <Compile Include="ViewModel\States\ExclamationViewModel.cs" />
     <Compile Include="ViewModel\Windows\WindowSharedViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\Pages\Distributor.xaml.cs">

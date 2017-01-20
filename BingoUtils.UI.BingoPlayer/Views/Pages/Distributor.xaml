@@ -13,6 +13,15 @@
       Title="Distributor" DataContext="{Binding Distributor, Source={StaticResource Locator}}">
 
     <Page.Resources>
+        <Style TargetType="Controls:NumericUpDown">
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="HasDecimals" Value="False" />
+        </Style>
+        
+        <StackPanel x:Key="Status_Waiting" Orientation="Horizontal">
+            <TextBlock Text="{Binding ErrorText}" Foreground="Tomato" />
+        </StackPanel>
+        
         <StackPanel x:Key="Status_Generating" Orientation="Horizontal">
             <Controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" Width="20" Height="20" Margin="10,0"/>
             <TextBlock>Status: Gerando cartelas</TextBlock>
@@ -51,9 +60,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Controls:NumericUpDown Grid.Column="0" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de questões" Value="{Binding AmountOfQuestions}" />
-                <Controls:NumericUpDown Grid.Column="2" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de cartelas" Value="{Binding AmountOfCards}" />
-                <Controls:NumericUpDown Grid.Column="4" HasDecimals="False" Controls:TextBoxHelper.Watermark="# de questões por cartela" Value="{Binding AmountOfQuestionsPerCard}" />
+                <Controls:NumericUpDown Grid.Column="0" Controls:TextBoxHelper.Watermark="# de questões" Value="{Binding AmountOfQuestions}" x:Name="numericQuestions" />
+                <Controls:NumericUpDown Grid.Column="2" Controls:TextBoxHelper.Watermark="# de cartelas" Value="{Binding AmountOfCards}" />
+                <Controls:NumericUpDown Grid.Column="4" Controls:TextBoxHelper.Watermark="# de questões por cartela" Value="{Binding AmountOfQuestionsPerCard}" />
             </Grid>
 
             <Grid HorizontalAlignment="Center" Margin="0,20">
@@ -87,6 +96,9 @@
             <Controls:TransitioningContentControl.Style>
                 <Style TargetType="Controls:TransitioningContentControl">
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=CurrentDistributorStatus}" Value="{x:Static enums:DistributorState.Waiting}">
+                            <Setter Property="Content" Value="{StaticResource Status_Waiting}" />
+                        </DataTrigger>
                         <DataTrigger Binding="{Binding Path=CurrentDistributorStatus}" Value="{x:Static enums:DistributorState.Working}">
                             <Setter Property="Content" Value="{StaticResource Status_Generating}" />
                         </DataTrigger>

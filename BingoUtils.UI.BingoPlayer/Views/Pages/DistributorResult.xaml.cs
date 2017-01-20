@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace BingoUtils.UI.BingoPlayer.Views.Pages
     /// </summary>
     public partial class DistributorResult : Page
     {
-        public DistributorResult()
+        public DistributorResult(DistributorResultViewModel viewModel)
         {
+            DataContext = viewModel;
+
             InitializeComponent();
         }
     }

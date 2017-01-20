@@ -9,7 +9,12 @@
       d:DesignWidth="770" d:DesignHeight="510"
       Title="DistributorResult">
 
-    <Grid>
-        
-    </Grid>
+    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding QuestionList}" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="# da cartela" Binding="{Binding Id}" />
+            <DataGridTextColumn Header="Máxima semelhança" Binding="{Binding MaxSemelhanca}" />
+            <DataGridTextColumn Header="Máx. semelhança com a cartela" Binding="{Binding MaxSemelhancaCom}" />
+            <DataGridTextColumn Header="# das questões" Binding="{Binding Questions}" Width="*" />
+        </DataGrid.Columns>
+    </DataGrid>
 </Page>
