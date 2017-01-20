@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="BingoUtils.UI.Shared.UserControls.DragAndDrop"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BingoUtils.UI.Shared.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             x:Name="MyPage">
+
+    <UserControl.Resources>
+        <StackPanel x:Key="StackPanel_NoFileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Opacity=".6" Source="pack://application:,,,/BingoUtils.UI.Shared;component/Resources/img/drop.png" Width="98" Height="98" />
+
+            <Label>Arraste o arquivo do jogo ou clique aqui para selecioná-lo</Label>
+        </StackPanel>
+
+        <StackPanel x:Key="StackPanel_FileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Opacity=".6" Source="pack://application:,,,/BingoUtils.UI.Shared;component/Resources/img/file.png" Width="98" Height="98" />
+
+            <TextBlock Margin="0,5" Text="{Binding FileName, ElementName=MyPage}" />
+        </StackPanel>
+    </UserControl.Resources>
+
+    <Grid x:Name="Grid_Container" Background="DarkGray" 
+          AllowDrop="True" Drop="Grid_Container_Drop" 
+          DragEnter="Grid_Container_AnyEnter" DragLeave="Grid_Container_AnyLeave"
+          MouseLeftButtonDown="Grid_Container_MouseLeftButtonDown"
+          MouseEnter="Grid_Container_AnyEnter" MouseLeave="Grid_Container_AnyLeave">
+        <ContentControl Template="{StaticResource DottedContainer}" x:Name="FileContainer" />
+    </Grid>
+</UserControl>

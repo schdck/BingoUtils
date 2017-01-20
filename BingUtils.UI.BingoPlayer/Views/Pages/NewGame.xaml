@@ -1,0 +1,88 @@
+﻿<Page x:Class="BingoUtils.UI.BingoPlayer.Views.Pages.NewGame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:UserControls="clr-namespace:BingoUtils.UI.Shared.UserControls;assembly=BingoUtils.UI.Shared"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+      d:DesignHeight="510" d:DesignWidth="770"
+      >
+
+    <Grid >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox>
+                <Label>Começar um novo jogo</Label>
+            </Viewbox>
+
+            <Grid VerticalAlignment="Stretch" Grid.Row="1" Background="{Binding DefaultContainerBackground}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter="Default"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <ContentControl Margin="50,10" Template="{StaticResource DottedContainer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="1">
+                            <TextBlock TextAlignment="Center" Margin="2">Selecione a disciplina do jogo</TextBlock>
+                            <ComboBox ItemsSource="{Binding AvaliableSubjects}" SelectedIndex="{Binding SelectedIndexSubject}" IsSynchronizedWithCurrentItem="True" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="3">
+                            <TextBlock TextAlignment="Center" Margin="2">Selecione o assunto do jogo</TextBlock>
+                            <ComboBox ItemsSource="{Binding AvaliableMatters}" SelectedIndex="{Binding SelectedIndexMatter}" IsSynchronizedWithCurrentItem="True" />
+                        </StackPanel>
+
+                        <Grid Grid.Column="5" VerticalAlignment="Center" Height="46">
+                            <Button  Content="{iconPacks:PackIconFontAwesome Kind=Refresh}" Padding="0" Margin="0,20,0,0" Command="{Binding RefreshAvaliableBingos}" Background="Transparent" />
+                        </Grid>
+                        
+                    </Grid>
+                </ContentControl>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="50,0" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.Column="0" Height="2" Fill="Black" />
+                <TextBlock Grid.Column="1" TextAlignment="Center" Padding="0">OU</TextBlock>
+                <Rectangle Grid.Column="2" Height="2" Fill="Black" />
+
+            </Grid>
+
+            <Grid Grid.Row="3" Background="{Binding FileContainerBackground}">
+                <UserControls:DragAndDrop FilePath="{Binding SelectedFilePath, Mode=TwoWay}" Margin="50,10" />
+            </Grid>
+
+            <StackPanel Grid.Row="4" VerticalAlignment="Bottom">
+                <TextBlock TextAlignment="Center" Text="{Binding IsSelectingFrom}" Margin="5" />
+                <Button VerticalAlignment="Bottom" IsEnabled="{Binding HasSelectedValidOption}" Command="{Binding StartNewgameCommand}">Começar novo jogo!</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

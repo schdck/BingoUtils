@@ -1,9 +1,14 @@
-﻿using System;
+﻿using BingoUtils.Domain.Enums;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
@@ -13,7 +18,10 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private double? _AmoutOfQuestions;
         private double? _AmoutOfCards;
         private double? _AmoutOfQuestionsPerCard;
-        private UIElement _CurrentStatusElement;
+
+        private DistributorState _CurrentDistributorStatus;
+
+        private BackgroundWorker _WorkerToDistribute;
 
         public double MaxSemelhanca
         {
@@ -63,21 +71,70 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
         }
 
-        public UIElement CurrentStatusElement
+        public DistributorState CurrentDistributorStatus
         {
             get
             {
-                return _CurrentStatusElement;
+                return _CurrentDistributorStatus;
             }
-            private set
+            set
             {
-                Set(ref _CurrentStatusElement, value);
+                Set(ref _CurrentDistributorStatus, value);
             }
         }
 
+        public ICommand DistributeQuestionsCommand { get; private set; }
+
         public DistributorViewModel()
         {
-            CurrentStatusElement = ["Status_Error"] as UIElement;
+            _WorkerToDistribute = new BackgroundWorker();
+
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
+        {
+            DistributeQuestionsCommand = new RelayCommand(DistributeQuestions);
+        }
+
+        private void DistributeQuestions()
+        {
+            switch (ValidateInputs())
+            {
+                case 0:
+
+                    return;
+                case 1:
+
+                    return;
+                case 2:
+
+                    return;
+                case 3:
+
+                    return;
+            }
+
+            bool succeeded = false;
+
+            _WorkerToDistribute.DoWork += (s, e) =>
+            {
+                System.Threading.Thread.Sleep(5000);
+            };
+
+            _WorkerToDistribute.RunWorkerCompleted += (s, e) =>
+            {
+                CurrentDistributorStatus = succeeded ? DistributorState.Success : DistributorState.Error;
+            };
+
+            CurrentDistributorStatus = DistributorState.Working;
+
+            _WorkerToDistribute.RunWorkerAsync();
+        }
+
+        private int ValidateInputs()
+        {
+            return 5;
         }
     }
-} // Resources["StackPanel_FileSelected"];
+}
