@@ -82,7 +82,7 @@
                 </TextBlock>
             </Grid>
 
-            <RichTextBox Background="Transparent" BorderThickness="0" Width="483">
+            <RichTextBox Background="Transparent" BorderThickness="0" Width="483" IsReadOnly="True">
                 <FlowDocument>
                     <Paragraph TextAlignment="Center" FontSize="20" Margin="0">Atenção</Paragraph>
                     <Paragraph TextAlignment="Justify" FontSize="12" Margin="0">

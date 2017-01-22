@@ -158,6 +158,10 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             _WorkerToDistribute.RunWorkerAsync();
         }
 
+        /* This method needs improvements
+         * TODO
+         * - Implement a logic to distribute the questions using all of them and using them in a similar amount of times
+        */
         private bool DistributeQuestions(out Cartela[] cartelas)
         {
             Random r = new Random();

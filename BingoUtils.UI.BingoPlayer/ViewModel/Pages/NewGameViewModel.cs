@@ -231,6 +231,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
         private IEnumerable<string> GetAvaliableMatters()
         {
+            if (AvaliableSubjects.FirstOrDefault() == null)
+                return null;
+
             var files = Directory.GetFiles(
                             Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
                                 .Where((x) => (Path.GetExtension(x) == ".csv"));
