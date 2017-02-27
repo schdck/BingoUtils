@@ -223,21 +223,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             {
                 Directory.CreateDirectory(GamesDirectory);
 
-                foreach(string s in ResourceMapper.ResourceFiles)
-                {
-                    var resourceName = @"BingoUtils.UI.BingoPlayer.Resources." + s;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    
-                    using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            string result = reader.ReadToEnd();
-
-                            // Write new file on GameDirectory
-                        }
-                    }
-                }
+                CreateDefaultGamesFiles();
             }
 
             var folders = new List<string>();
@@ -250,6 +236,37 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             return folders;
         }
 
+        private void CreateDefaultGamesFiles()
+        {
+            foreach (string s in ResourceMapper.ResourceFiles)
+            {
+                var resourceName = @"BingoUtils.UI.BingoPlayer.Resources." + s;
+                var assembly = Assembly.GetExecutingAssembly();
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1252)))
+                    {
+                        string result = reader.ReadToEnd();
+                        string[] temp = s.Split('.');
+
+                        string path = Path.Combine(GamesDirectory, temp[0]);
+                        string file = temp[1] + ".csv";
+
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        using (StreamWriter writer = new StreamWriter(Path.Combine(path, file), false, Encoding.GetEncoding(1252)))
+                        {
+                            writer.Write(result);
+                        }
+                    }
+                }
+            }
+        }
+
         private string GetResourceName(string resource)
         {
             return "";
@@ -257,9 +274,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
         private IEnumerable<string> GetAvaliableMatters()
         {
-            var files = Directory.GetFiles(
+            IEnumerable<string> files;
+
+            try
+            {
+                files = Directory.GetFiles(
                             Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
                                 .Where((x) => (Path.GetExtension(x) == ".csv"));
+            }
+            catch
+            {
+                return null;
+            }
+            
 
             List<string> fileNamesWithoutExtension = new List<string>();
 
@@ -323,7 +350,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 HasSelectedValidOption = false;
                 DefaultContainerBackground = 1.0;
                 FileContainerBackground = 1.0;
-                IsSelectingFrom = "Iniciar novo jogo";
+                IsSelectingFrom = "Selecione se deseja iniciar o novo jogo a partir de um modelo ou de um arquivo";
             }
         }
     }
