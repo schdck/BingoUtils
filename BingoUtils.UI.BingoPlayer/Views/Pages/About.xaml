@@ -20,6 +20,8 @@
             <FlowDocument>
                 <Paragraph FontSize="36" TextAlignment="Center" Margin="0,15">Sobre este programa</Paragraph>
 
+                <Paragraph TextAlignment="Center" x:Name="Version" />
+
                 <Paragraph TextAlignment="Justify" FontStyle="Italic">
                     Este programa foi desenvolvido por Maurício Vielmo Schmaedeck (github.com/mvschmaedeck) 
                     para o projeto "Que comecem os jogos! Possibilidades didático metodológicas para o ensino

@@ -120,8 +120,31 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public ICommand PlayQuestionTitleCommand { get; private set; }
         public ICommand StopQuestionTitleCommand { get; private set; }
 
-        public Visibility PlayQuestionTitleButtonVisibility { get; private set; }
-        public Visibility StopQuestionTitleCommandVisibility { get; private set; }
+        private Visibility _PlayQuestionTitleButtonViasibility;
+        private Visibility _StopQuestionTitleCommandVisibility;
+
+        public Visibility PlayQuestionTitleButtonVisibility
+        {
+            get
+            {
+                return _PlayQuestionTitleButtonViasibility;
+            }
+            private set
+            {
+                Set(ref _PlayQuestionTitleButtonViasibility, value);
+            }
+        }
+        public Visibility StopQuestionTitleCommandVisibility
+        {
+            get
+            {
+                return _StopQuestionTitleCommandVisibility;
+            }
+            private set
+            {
+                Set(ref _StopQuestionTitleCommandVisibility, value);
+            }
+        }
 
         public GameViewModel()
         {

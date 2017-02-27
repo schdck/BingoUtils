@@ -1,14 +1,19 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Windows.Input;
 
@@ -75,7 +80,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         }
 
         public string IsSelectingFrom
-
         {
             get
             {
@@ -86,6 +90,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _IsSelectingFrom, value);
             }
         }
+
         public string SelectedFilePath
         {
             get
@@ -207,9 +212,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             {
                 AvaliableSubjects = GetAvaliableSubjects();
             });
+            SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
 
             AvaliableSubjects = GetAvaliableSubjects();
-            SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
         }
 
         private IEnumerable<string> GetAvaliableSubjects()
@@ -217,6 +222,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             if(!Directory.Exists(GamesDirectory))
             {
                 Directory.CreateDirectory(GamesDirectory);
+
+                CreateDefaultGamesFiles();
             }
 
             var folders = new List<string>();
@@ -229,14 +236,57 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             return folders;
         }
 
+        private void CreateDefaultGamesFiles()
+        {
+            foreach (string s in ResourceMapper.ResourceFiles)
+            {
+                var resourceName = @"BingoUtils.UI.BingoPlayer.Resources." + s;
+                var assembly = Assembly.GetExecutingAssembly();
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1252)))
+                    {
+                        string result = reader.ReadToEnd();
+                        string[] temp = s.Split('.');
+
+                        string path = Path.Combine(GamesDirectory, temp[0]);
+                        string file = temp[1] + ".csv";
+
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        using (StreamWriter writer = new StreamWriter(Path.Combine(path, file), false, Encoding.GetEncoding(1252)))
+                        {
+                            writer.Write(result);
+                        }
+                    }
+                }
+            }
+        }
+
+        private string GetResourceName(string resource)
+        {
+            return "";
+        }
+
         private IEnumerable<string> GetAvaliableMatters()
         {
-            if (AvaliableSubjects.FirstOrDefault() == null)
-                return null;
+            IEnumerable<string> files;
 
-            var files = Directory.GetFiles(
+            try
+            {
+                files = Directory.GetFiles(
                             Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
                                 .Where((x) => (Path.GetExtension(x) == ".csv"));
+            }
+            catch
+            {
+                return null;
+            }
+            
 
             List<string> fileNamesWithoutExtension = new List<string>();
 
@@ -300,7 +350,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 HasSelectedValidOption = false;
                 DefaultContainerBackground = 1.0;
                 FileContainerBackground = 1.0;
-                IsSelectingFrom = "Iniciar novo jogo";
+                IsSelectingFrom = "Selecione se deseja iniciar o novo jogo a partir de um modelo ou de um arquivo";
             }
         }
     }

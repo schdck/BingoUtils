@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <!-- <Image Source="{StaticResource ImageLogo}" Margin="100,20"/> -->
+        <Image Source="{StaticResource ImageLogo}" Margin="100,20"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
