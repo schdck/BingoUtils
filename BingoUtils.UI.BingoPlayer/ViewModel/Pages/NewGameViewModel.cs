@@ -1,14 +1,19 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Windows.Input;
 
@@ -75,7 +80,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         }
 
         public string IsSelectingFrom
-
         {
             get
             {
@@ -86,6 +90,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _IsSelectingFrom, value);
             }
         }
+
         public string SelectedFilePath
         {
             get
@@ -207,9 +212,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             {
                 AvaliableSubjects = GetAvaliableSubjects();
             });
+            SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
 
             AvaliableSubjects = GetAvaliableSubjects();
-            SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
         }
 
         private IEnumerable<string> GetAvaliableSubjects()
@@ -217,6 +222,22 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             if(!Directory.Exists(GamesDirectory))
             {
                 Directory.CreateDirectory(GamesDirectory);
+
+                foreach(string s in ResourceMapper.ResourceFiles)
+                {
+                    var resourceName = @"BingoUtils.UI.BingoPlayer.Resources." + s;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    
+                    using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                    {
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            string result = reader.ReadToEnd();
+
+                            // Write new file on GameDirectory
+                        }
+                    }
+                }
             }
 
             var folders = new List<string>();
@@ -227,6 +248,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
 
             return folders;
+        }
+
+        private string GetResourceName(string resource)
+        {
+            return "";
         }
 
         private IEnumerable<string> GetAvaliableMatters()
