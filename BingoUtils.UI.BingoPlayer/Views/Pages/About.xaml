@@ -23,7 +23,7 @@
                 <Paragraph TextAlignment="Center" x:Name="Version" />
 
                 <Paragraph TextAlignment="Justify" FontStyle="Italic">
-                    Este programa foi desenvolvido por Maurício Vielmo Schmaedeck (github.com/mvschmaedeck) 
+                    Este programa foi desenvolvido por Maurício Vielmo Schmaedeck (github.com/schdck) 
                     para o projeto "Que comecem os jogos! Possibilidades didático metodológicas para o ensino
                     de História", realizado sob a orientação da Professora Doutora Daniela de Campos pelo 
                     Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul - Campus Farroupilha
@@ -31,7 +31,7 @@
 
                 <Paragraph Margin="0,30,0,15" TextAlignment="Justify" FontStyle="Italic">
                     Este programa foi desenvolvido utilizando Windows Presentation Foundation (WPF), presente no 
-                    .NET Framework a partir da versão 3.0. Seu código fonte está disponível em github.com/mvschmaedeck1/BingoUtils
+                    .NET Framework a partir da versão 3.0. Seu código fonte está disponível em github.com/schdck/BingoUtils
                 </Paragraph>
 
                 <Paragraph FontSize="28" TextAlignment="Center" Margin="0,15">Licença</Paragraph>
