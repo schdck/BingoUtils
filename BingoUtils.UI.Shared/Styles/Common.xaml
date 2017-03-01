@@ -6,6 +6,23 @@
         <Setter Property="Margin" Value="50,5" />
     </Style>
 
+    <Style TargetType="Button" x:Key="MenuButtonStyleSoon">
+        <Setter Property="Margin" Value="50,5" />
+        <Setter Property="IsEnabled" Value="False" />
+
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True">
+                        <TextBlock DockPanel.Dock="Bottom" Text="EM BREVE" TextAlignment="Center" FontSize="8" />
+
+                        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" Text="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                    </DockPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="Page" x:Key="DefaultPageStyle">
         <Setter Property="MinWidth" Value="770" />
         <Setter Property="MinHeight" Value="510" />

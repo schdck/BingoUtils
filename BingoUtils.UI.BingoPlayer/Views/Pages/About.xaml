@@ -38,7 +38,7 @@
             </FlowDocument>
         </RichTextBox>
 
-        <Border BorderThickness="1" BorderBrush="Gray" Margin="25,10">
+        <Border BorderThickness="1" BorderBrush="Gray" Margin="25,10" MaxWidth="704" VerticalAlignment="Top">
             <ScrollViewer>
                 <RichTextBox Margin="10" IsReadOnly="True">
                     <FlowDocument>
