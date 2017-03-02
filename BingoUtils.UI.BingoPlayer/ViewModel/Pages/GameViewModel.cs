@@ -14,6 +14,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
     public class GameViewModel : ViewModelBase
     {
+        private Random RandomGenerator = new Random();
+
         private bool _HasPrevious;
         private bool _HasNext;
 
@@ -224,7 +226,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         {
             if (startNewGameMessage.Target == this)
             {
-                Questions = startNewGameMessage.QuestionList.OrderBy(x => new Random().Next()).ToList();
+                Questions = startNewGameMessage.QuestionList.OrderBy(x => RandomGenerator.Next()).ToList();
                 StartNewGame();
             }
         }
