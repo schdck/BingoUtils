@@ -106,7 +106,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                     LaunchNewGame();
                     break;
                 case Activity.ActivityCreateGame:
-
+                    AddBingoTabControlItem("Criar jogo", new CreateGame(new CreateGameViewModel()), true);
                     break;
                 case Activity.ActivityDistributor:
                     AddBingoTabControlItem("Distribuidor", new Distributor(), true);

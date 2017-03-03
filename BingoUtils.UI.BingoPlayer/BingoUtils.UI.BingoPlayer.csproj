@@ -137,6 +137,7 @@
     <Compile Include="Messages\StartNewGameMessage.cs" />
     <Compile Include="Resources\ResourceMapper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Pages\CreateGameViewModel.cs" />
     <Compile Include="ViewModel\Pages\DistributorResultViewModel.cs" />
     <Compile Include="ViewModel\Pages\DistributorViewModel.cs" />
     <Compile Include="ViewModel\Pages\GameViewModel.cs" />
@@ -144,6 +145,9 @@
     <Compile Include="ViewModel\Pages\NewGameViewModel.cs" />
     <Compile Include="ViewModel\Windows\WindowSharedViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\Pages\CreateGame.xaml.cs">
+      <DependentUpon>CreateGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Distributor.xaml.cs">
       <DependentUpon>Distributor.xaml</DependentUpon>
     </Compile>
@@ -187,6 +191,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="StatusElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\CreateGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

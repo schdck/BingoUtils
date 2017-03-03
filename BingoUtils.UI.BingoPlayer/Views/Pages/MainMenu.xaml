@@ -40,7 +40,7 @@
             </Border>
 
 
-            <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}" Style="{StaticResource MenuButtonStyleSoon}">Criar novo jogo</Button>
+            <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}">Criar novo jogo</Button>
 
             <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" Style="{StaticResource MenuButtonStyleSoon}">Distribuir questões</Button>
 

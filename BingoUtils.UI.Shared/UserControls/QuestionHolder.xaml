@@ -7,7 +7,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              x:Name="_self"
-             d:DesignHeight="22" d:DesignWidth="600">
+             d:DesignHeight="26" d:DesignWidth="600">
     <Grid VerticalAlignment="Top">
         <Grid.Resources>
             <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -20,7 +20,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Text="{Binding Title, ElementName=_self}"  Margin="0, 0, 2.5, 0" Grid.Column="0" Controls:TextBoxHelper.Watermark="Título da questão"  />
-        <TextBox Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 0, 0" Grid.Column="1" Controls:TextBoxHelper.Watermark="Resposta da questão" />
+        <TextBox x:Name="TextBoxTitle"  Text="{Binding Title, ElementName=_self}"  Margin="0, 0, 2.5, 0" Grid.Column="0" Controls:TextBoxHelper.Watermark="Título da questão" GotFocus="TextBoxTitle_GotFocus"  />
+        <TextBox x:Name="TextBoxAnswer" Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 0, 0" Grid.Column="1" Controls:TextBoxHelper.Watermark="Resposta da questão" GotFocus="TextBoxAnswer_GotFocus" />
     </Grid>
 </UserControl>
