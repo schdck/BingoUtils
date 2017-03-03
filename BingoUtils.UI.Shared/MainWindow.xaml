@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <controls:DragAndDrop />
+        <controls:QuestionHolder Title="Teste pergunta" Answer="Teste resposta" />
     </Grid>
 </Window>
