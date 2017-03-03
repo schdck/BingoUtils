@@ -81,6 +81,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             InitializeCommands();
 
             AddedQuestions = new ObservableCollection<QuestionHolder>();
+
+            AddedQuestions.Add(new QuestionHolder());
         }
 
         private void InitializeCommands()

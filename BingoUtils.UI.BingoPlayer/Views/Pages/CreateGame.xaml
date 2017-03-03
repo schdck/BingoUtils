@@ -15,7 +15,7 @@
         <StackPanel DockPanel.Dock="Top">
             <TextBlock DockPanel.Dock="Top" FontSize="24" TextAlignment="Center" Text="Crie seu próprio Bingo" />
 
-            <Grid Margin="5">
+            <Grid Margin="19,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -46,7 +46,7 @@
         <DockPanel LastChildFill="True" VerticalAlignment="Top">
             <TextBlock DockPanel.Dock="Top" FontSize="18" TextAlignment="Center" Text="Questões" />
 
-            <UserControls:QuestionHolder DockPanel.Dock="Bottom" Margin="5,5,19,5" Opacity=".3">
+            <UserControls:QuestionHolder DockPanel.Dock="Bottom" Margin="19,5,19,5" Opacity=".3">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="TitleTextBox_GotFocus" >
                         <i:InvokeCommandAction Command="{Binding LastGotFocusCommand}" CommandParameter="Title" />
@@ -58,7 +58,7 @@
             </UserControls:QuestionHolder>
 
             <ScrollViewer VerticalScrollBarVisibility="Visible">
-                <ItemsControl ItemsSource="{Binding AddedQuestions}" Margin="5,0" />
+                <ItemsControl ItemsSource="{Binding AddedQuestions}" Margin="19,0,5,0" />
             </ScrollViewer>
         </DockPanel>
     </DockPanel>
