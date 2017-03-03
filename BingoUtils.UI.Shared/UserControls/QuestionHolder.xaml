@@ -10,7 +10,7 @@
              d:DesignHeight="22" d:DesignWidth="600">
     <Grid VerticalAlignment="Top">
         <Grid.Resources>
-            <Style TargetType="TextBox">
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                 <Setter Property="Height" Value="22" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
