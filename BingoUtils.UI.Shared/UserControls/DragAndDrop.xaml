@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BingoUtils.UI.Shared.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
-             x:Name="MyPage">
+             x:Name="_self">
 
     <UserControl.Resources>
         <StackPanel x:Key="StackPanel_NoFileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -18,7 +18,7 @@
         <StackPanel x:Key="StackPanel_FileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Image Opacity=".6" Source="pack://application:,,,/BingoUtils.UI.Shared;component/Resources/img/file.png" Width="98" Height="98" />
 
-            <TextBlock Margin="0,5" Text="{Binding FileName, ElementName=MyPage}" />
+            <TextBlock Margin="0,5" Text="{Binding FileName, ElementName=_self}" />
         </StackPanel>
     </UserControl.Resources>
 
