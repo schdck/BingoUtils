@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Languages"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+  <!-- # View Models # -->
+  
+  <!-- NewGameViewModel -->
+  <system:String x:Key="StartFromModel">Iniciar novo jogo a partir do modelo</system:String>
+  <system:String x:Key="StartFromFile">Iniciar novo jogo a partir do arquivo</system:String>
+  <system:String x:Key="StartFromNotSelected">Selecione se deseja iniciar o novo jogo a partir de um modelo ou de um arquivo</system:String>
+  
+</ResourceDictionary>
