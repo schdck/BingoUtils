@@ -19,7 +19,7 @@
             <Setter.Value>
                 <DataTemplate>
                     <DockPanel LastChildFill="True">
-                        <TextBlock DockPanel.Dock="Bottom" Text="EM BREVE" TextAlignment="Center" FontSize="8" />
+                        <TextBlock DockPanel.Dock="Bottom" Text="SOON™" TextAlignment="Center" FontSize="8" />
 
                         <TextBlock DockPanel.Dock="Top" TextAlignment="Center" Text="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
                     </DockPanel>

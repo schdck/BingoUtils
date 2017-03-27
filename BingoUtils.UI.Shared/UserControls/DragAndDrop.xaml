@@ -12,7 +12,7 @@
         <StackPanel x:Key="StackPanel_NoFileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Image Opacity=".6" Source="pack://application:,,,/BingoUtils.UI.Shared;component/Resources/img/drop.png" Width="98" Height="98" />
 
-            <Label>Arraste o arquivo do jogo ou clique aqui para selecioná-lo</Label>
+            <Label Content="{Binding SelectFileText, ElementName=_self}" />
         </StackPanel>
 
         <StackPanel x:Key="StackPanel_FileSelected" VerticalAlignment="Center" HorizontalAlignment="Center">

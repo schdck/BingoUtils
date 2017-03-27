@@ -19,6 +19,9 @@ namespace BingoUtils.UI.Shared.UserControls
         public static readonly DependencyProperty FileNameProperty =
             DependencyProperty.Register("FileName", typeof(string), typeof(DragAndDrop), new UIPropertyMetadata());
 
+        public static readonly DependencyProperty SelectFileTextProperty =
+            DependencyProperty.Register("SelectFileText", typeof(string), typeof(DragAndDrop), new UIPropertyMetadata("Arraste o arquivo ou clique aqui para selecioná-lo"));
+
         public string FilePath
         {
             get
@@ -40,6 +43,18 @@ namespace BingoUtils.UI.Shared.UserControls
             set
             {
                 SetValue(FileNameProperty, value);
+            }
+        }
+
+        public string SelectFileText
+        {
+            get
+            {
+                return (string) GetValue(SelectFileTextProperty);
+            }
+            set
+            {
+                SetValue(SelectFileTextProperty, value);
             }
         }
 

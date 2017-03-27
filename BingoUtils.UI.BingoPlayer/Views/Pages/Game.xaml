@@ -35,11 +35,11 @@
         </Grid>
 
         <Grid Grid.Column="1">
-            <Button ToolTip="Reproduzir enunciado da questão" Content="{iconPacks:PackIconOcticons Kind=Unmute}" Visibility="{Binding PlayQuestionTitleButtonVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding PlayQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
+            <Button ToolTip="{Binding CurrentLanguage.GAME_REPRODUCE_QUESTION_TITLE, Source={StaticResource LanguageLocator}}" Content="{iconPacks:PackIconOcticons Kind=Unmute}" Visibility="{Binding PlayQuestionTitleButtonVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding PlayQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
 
-            <Button ToolTip="Parar reprodução do enunciado da questão" Content="{iconPacks:PackIconOcticons Kind=Mute}" Visibility="{Binding StopQuestionTitleCommandVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding StopQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
+            <Button ToolTip="{Binding CurrentLanguage.GAME_STOP_REPRODUCE_QUESTION_TITLE, Source={StaticResource LanguageLocator}}" Content="{iconPacks:PackIconOcticons Kind=Mute}" Visibility="{Binding StopQuestionTitleCommandVisibility}" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Command="{Binding StopQuestionTitleCommand}" Style="{StaticResource MetroCircleButtonStyle}" />
 
-            <Label Margin="0,5" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding QuestionProgress}" ContentStringFormat="QUESTÃO ATUAL ({0})" MaxHeight="40" FontSize="26" FontFamily="Segoe UI Light" />
+            <Label Margin="0,5" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding QuestionProgress}" MaxHeight="40" FontSize="26" FontFamily="Segoe UI Light" />
 
             <Grid Margin="25,60,25,10">
                 <Grid.RowDefinitions>
@@ -58,7 +58,7 @@
                     </Grid.RowDefinitions>
 
                     <Viewbox  Grid.Row="0">
-                        <TextBlock TextAlignment="Center" Text="QUESTÃO ANTERIOR" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
+                        <TextBlock TextAlignment="Center" Text="{Binding CurrentLanguage.GAME_PREVIOUS_QUESTION, Source={StaticResource LanguageLocator}, Converter={StaticResource ToUpperConverter}}" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
                     </Viewbox>
 
                     <Viewbox Grid.Row="1" Margin="5,0,5,10" VerticalAlignment="Top">

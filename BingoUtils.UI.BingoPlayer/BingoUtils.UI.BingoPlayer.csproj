@@ -132,7 +132,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Languages\LanguageMapper.cs" />
+    <Compile Include="Languages\Dictionaries\EN_US.cs" />
+    <Compile Include="Languages\LanguageLocator.cs" />
     <Compile Include="Messages\LaunchActivityMessage.cs" />
     <Compile Include="Messages\LaunchFinishedDistributionMessage.cs" />
     <Compile Include="Messages\StartNewGameMessage.cs" />
@@ -188,10 +189,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="0 - Resources\IconsNonShared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\Dictionaries\EN-US.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -263,10 +260,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BingoUtils.UI.BingoPlayer_TemporaryKey.pfx" />
-    <Resource Include="Languages\Dictionaries\PT-BR.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -320,6 +313,7 @@
   <ItemGroup>
     <Resource Include="if_ico.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

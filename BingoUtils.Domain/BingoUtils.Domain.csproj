@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,11 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Cartela.cs" />
+    <Compile Include="Entities\LanguageDictionary.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\SimpleDelegateCommand.cs" />
     <Compile Include="Enums\Activity.cs" />
     <Compile Include="Enums\DistributorState.cs" />
     <Compile Include="Event Args\StartNewGameEventArgs.cs" />
+    <Compile Include="Exceptions\InvalidLanguageException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
