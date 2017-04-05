@@ -1,4 +1,5 @@
-﻿using BingoUtils.Domain.Entities;
+﻿using System;
+using BingoUtils.Domain.Entities;
 
 namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {
@@ -44,11 +45,27 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
+        public override string HEADER_CREATE_GAME
+        {
+            get
+            {
+                return "Create game";
+            }
+        }
+
         public override string HEADER_DISTRIBUTOR
         {
             get
             {
                 return "Distributor";
+            }
+        }
+
+        public override string HEADER_DISTRIBUTOR_RESULT
+        {
+            get
+            {
+                return "Distributor result";
             }
         }
 
@@ -129,6 +146,14 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Drag and drop a file or click here to select it";
+            }
+        }
+
+        public override string OTHER_USE_MAIN_WINDOW
+        {
+            get
+            {
+                return "Use the main window to manage this tab";
             }
         }
 

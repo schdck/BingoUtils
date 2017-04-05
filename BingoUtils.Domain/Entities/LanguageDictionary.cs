@@ -12,9 +12,11 @@ namespace BingoUtils.Domain.Entities
     {
         // TAB TITLES (HEADER)
         public abstract string HEADER_MENU { get; }
+        public abstract string HEADER_CREATE_GAME { get; }
         public abstract string HEADER_NEW_GAME { get; }
         public abstract string HEADER_GAME { get; }
         public abstract string HEADER_DISTRIBUTOR { get; }
+        public abstract string HEADER_DISTRIBUTOR_RESULT { get; }
         public abstract string HEADER_HELP { get; }
         public abstract string HEADER_ABOUT { get; }
 
@@ -40,5 +42,6 @@ namespace BingoUtils.Domain.Entities
 
         // Other
         public abstract string OTHER_SELECT_FILE_TEXT { get; }
+        public abstract string OTHER_USE_MAIN_WINDOW { get; }
     }
 }

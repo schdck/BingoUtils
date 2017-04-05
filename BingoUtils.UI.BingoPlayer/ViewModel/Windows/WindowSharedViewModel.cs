@@ -8,6 +8,7 @@ using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.Domain.Enums;
 using System;
 using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
+using BingoUtils.UI.Shared.Languages;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -71,7 +72,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             Games = new List<Game>();
 
-            AddBingoTabControlItem("Menu", new MainMenu(), false);
+            AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_MENU, new MainMenu(), false);
 
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
@@ -83,7 +84,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             var viewModel = new DistributorResultViewModel(message.Cartelas, message.MaxSemelhanca);
             var page = new DistributorResult(viewModel);
 
-            AddBingoTabControlItem("Resultado", page, true);
+            AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_DISTRIBUTOR_RESULT, page, true);
         }
 
         private void LaunchNewGame()
@@ -94,7 +95,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             }
             else
             {
-                AddBingoTabControlItem("Novo jogo", new NewGame(), true, 1);
+                AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_NEW_GAME, new NewGame(), true, 1);
             }            
         }
 
@@ -106,16 +107,16 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                     LaunchNewGame();
                     break;
                 case Activity.ActivityCreateGame:
-                    AddBingoTabControlItem("Criar jogo", new CreateGame(new CreateGameViewModel()), true);
+                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_CREATE_GAME, new CreateGame(new CreateGameViewModel()), true);
                     break;
                 case Activity.ActivityDistributor:
-                    AddBingoTabControlItem("Distribuidor", new Distributor(), true);
+                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_DISTRIBUTOR, new Distributor(), true);
                     break;
                 case Activity.ActivityHelp:
-                    AddBingoTabControlItem("Ajuda", new Help(), true);
+                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_HELP, new Help(), true);
                     break;
                 case Activity.ActivityAbout:
-                    AddBingoTabControlItem("Sobre", new About(), true);
+                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_ABOUT, new About(), true);
                     break;
             }
         }
@@ -148,7 +149,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 {
                     Content = new TextBlock()
                     {
-                        Text = "Use a janela principal para visualizar esta página.",
+                        Text = LanguageLocator.Instance.CurrentLanguage.OTHER_USE_MAIN_WINDOW,
                         IsEnabled = false,
                         VerticalAlignment = System.Windows.VerticalAlignment.Center,
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -202,7 +203,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 {
                     Content = new TextBlock()
                     {
-                        Text = "Use a janela principal para visualizar esta página.",
+                        Text = LanguageLocator.Instance.CurrentLanguage.OTHER_USE_MAIN_WINDOW,
                         IsEnabled = false,
                         VerticalAlignment = System.Windows.VerticalAlignment.Center,
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -230,7 +231,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
         private void AddGame(StartNewGameMessage startNewGameMessage)
         {
-            var header = string.Format("Jogo #{0}", ++LaunchedGames);
+            var header = string.Format("{0} #{1}", LanguageLocator.Instance.CurrentLanguage.HEADER_GAME, ++LaunchedGames);
 
             var itemBingo = new MetroTabItem()
             {
