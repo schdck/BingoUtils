@@ -31,7 +31,7 @@
         
             <BitmapImage x:Key="ImageLogo" UriSource="pack://application:,,,/BingoUtils.UI.Shared;component/Resources/img/logo.png" />
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:BingoUtils.UI.BingoPlayer.ViewModel" />
-            <x:StaticExtension Member="lg:LanguageLocator.Instance" x:Key="LanguageLocator" d:IsDataSource="True" xmlns:lg="clr-namespace:BingoUtils.UI.BingoPlayer.Languages" />
+            <x:StaticExtension Member="lg:LanguageLocator.Instance" x:Key="LanguageLocator" d:IsDataSource="True" xmlns:lg="clr-namespace:BingoUtils.UI.Shared.Languages;assembly=BingoUtils.UI.Shared" />
 
             <Style TargetType="Page" BasedOn="{StaticResource DefaultPageStyle}" />
 

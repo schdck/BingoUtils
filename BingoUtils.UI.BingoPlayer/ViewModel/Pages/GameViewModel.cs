@@ -1,7 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers.BingoUtils.Helpers;
-using BingoUtils.UI.BingoPlayer.Languages;
 using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;

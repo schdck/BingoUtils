@@ -89,6 +89,8 @@
     </ApplicationDefinition>
     <Compile Include="Converters\SliderForegroundConverter.cs" />
     <Compile Include="Converters\UppercaseConverter.cs" />
+    <Compile Include="Languages\Dictionaries\EN_US.cs" />
+    <Compile Include="Languages\LanguageLocator.cs" />
     <Compile Include="UserControls\DragAndDrop.xaml.cs">
       <DependentUpon>DragAndDrop.xaml</DependentUpon>
     </Compile>
@@ -152,6 +154,10 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BingoUtils.Domain\BingoUtils.Domain.csproj">
+      <Project>{3B745CDF-4C13-44E9-88A7-F8E3CE8E29B5}</Project>
+      <Name>BingoUtils.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BingoUtils.Helpers\BingoUtils.Helpers.csproj">
       <Project>{365fe43f-816e-4f34-a331-d04b7c433326}</Project>
       <Name>BingoUtils.Helpers</Name>

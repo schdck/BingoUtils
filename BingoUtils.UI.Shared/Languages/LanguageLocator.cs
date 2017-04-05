@@ -1,14 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
-using BingoUtils.UI.BingoPlayer.Languages.Dictionaries;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using BingoUtils.UI.Shared.Languages.Dictionaries;
 
-namespace BingoUtils.UI.BingoPlayer.Languages
+namespace BingoUtils.UI.Shared.Languages
 {
     public class LanguageLocator
     {
@@ -20,7 +13,7 @@ namespace BingoUtils.UI.BingoPlayer.Languages
         {
             get
             {
-                return _Instance == null ? (_Instance = new LanguageLocator()) : _Instance;    
+                return _Instance == null ? (_Instance = new LanguageLocator()) : _Instance;
             }
         }
 

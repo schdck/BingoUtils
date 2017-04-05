@@ -1,20 +1,17 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
-using BingoUtils.UI.BingoPlayer.Languages;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
+using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.Text;
 using System.Windows.Input;
 

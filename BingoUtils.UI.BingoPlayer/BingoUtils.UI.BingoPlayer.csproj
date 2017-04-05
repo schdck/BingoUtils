@@ -132,8 +132,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Languages\Dictionaries\EN_US.cs" />
-    <Compile Include="Languages\LanguageLocator.cs" />
     <Compile Include="Messages\LaunchActivityMessage.cs" />
     <Compile Include="Messages\LaunchFinishedDistributionMessage.cs" />
     <Compile Include="Messages\StartNewGameMessage.cs" />
