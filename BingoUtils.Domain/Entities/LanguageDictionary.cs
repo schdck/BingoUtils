@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BingoUtils.Domain.Entities
 {
@@ -43,5 +44,9 @@ namespace BingoUtils.Domain.Entities
         // Other
         public abstract string OTHER_SELECT_FILE_TEXT { get; }
         public abstract string OTHER_USE_MAIN_WINDOW { get; }
+        public abstract string OTHER_UNKNOWN_VERSION { get; }
+
+        // Pages
+        public abstract UserControl HELP_INTRO { get; }
     }
 }

@@ -5,13 +5,13 @@ using BingoUtils.UI.Shared.Languages.Help;
 
 namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {
-    public class EN_US : LanguageDictionary
+    public class PT_BR : LanguageDictionary
     {
         public override string GAME_CURRENT_QUESTION
         {
             get
             {
-                return "Current Question";
+                return "Questão atual";
             }
         }
 
@@ -19,7 +19,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Previous Question";
+                return "Questão anterior";
             }
         }
 
@@ -27,7 +27,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Reproduce question title";
+                return "Reproduzir título da questão";
             }
         }
 
@@ -35,7 +35,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Stop question title reproduction";
+                return "Parar reprodução";
             }
         }
 
@@ -43,7 +43,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "About";
+                return "Sobre";
             }
         }
 
@@ -51,7 +51,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Create game";
+                return "Criar um jogo";
             }
         }
 
@@ -59,7 +59,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Distributor";
+                return "Distribuidor";
             }
         }
 
@@ -67,7 +67,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Distributor result";
+                return "Resultado do distribuidor";
             }
         }
 
@@ -75,7 +75,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Game";
+                return "Jogo";
             }
         }
 
@@ -83,7 +83,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Help";
+                return "Ajuda";
             }
         }
 
@@ -99,7 +99,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "New game";
+                return "Novo jogo";
             }
         }
 
@@ -107,7 +107,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return new Intro_EN_US();
+                return new Intro_PT_BR();
             }
         }
 
@@ -115,7 +115,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "About";
+                return "Sobre";
             }
         }
 
@@ -123,7 +123,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Create new game";
+                return "Criar novo jogo";
             }
         }
 
@@ -131,7 +131,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Distribute questions";
+                return "Distribuir questões";
             }
         }
 
@@ -139,7 +139,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Help";
+                return "Ajuda";
             }
         }
 
@@ -147,7 +147,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Start new game";
+                return "Começar novo jogo";
             }
         }
 
@@ -155,7 +155,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Drag and drop a file or click here to select it";
+                return "Arraste um arquivo ou clique aqui para selecioná-lo";
             }
         }
 
@@ -163,7 +163,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Unknown version";
+                return "Versão desconhecida";
             }
         }
 
@@ -171,7 +171,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Use the main window to manage this tab";
+                return "Use a janela principal para gerenciar esta guia";
             }
         }
 
@@ -179,7 +179,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Start new game from file";
+                return "Começar novo jogo a partir do arquivo";
             }
         }
 
@@ -187,7 +187,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Start new game from model";
+                return "Começar novo jogo a partir do modelo";
             }
         }
 
@@ -195,7 +195,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Select wheter you want to start the game from the model or the file";
+                return "Selecione se deseja começar o jogo a partir do modelo ou do arquivo";
             }
         }
 
@@ -203,7 +203,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Select the matter";
+                return "Selecione o assunto";
             }
         }
 
@@ -211,7 +211,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Select the subject";
+                return "Selecione a disciplina";
             }
         }
     }

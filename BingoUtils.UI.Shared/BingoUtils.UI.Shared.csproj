@@ -89,7 +89,14 @@
     </ApplicationDefinition>
     <Compile Include="Converters\SliderForegroundConverter.cs" />
     <Compile Include="Converters\UppercaseConverter.cs" />
+    <Compile Include="Languages\Dictionaries\PT_BR.cs" />
     <Compile Include="Languages\Dictionaries\EN_US.cs" />
+    <Compile Include="Languages\Help\Intro_EN_US.xaml.cs">
+      <DependentUpon>Intro_EN_US.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\Help\Intro_PT_BR.xaml.cs">
+      <DependentUpon>Intro_PT_BR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Languages\LanguageLocator.cs" />
     <Compile Include="UserControls\DragAndDrop.xaml.cs">
       <DependentUpon>DragAndDrop.xaml</DependentUpon>
@@ -97,6 +104,14 @@
     <Compile Include="UserControls\QuestionHolder.xaml.cs">
       <DependentUpon>QuestionHolder.xaml</DependentUpon>
     </Compile>
+    <Page Include="Languages\Help\Intro_EN_US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Languages\Help\Intro_PT_BR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
