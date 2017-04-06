@@ -1,11 +1,4 @@
-﻿using BingoUtils.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace BingoUtils.Domain.Entities
 {
@@ -20,11 +13,13 @@ namespace BingoUtils.Domain.Entities
         public abstract string HEADER_DISTRIBUTOR_RESULT { get; }
         public abstract string HEADER_HELP { get; }
         public abstract string HEADER_ABOUT { get; }
+        public abstract string HEADER_SETTINGS { get; }
 
         // Main menu
         public abstract string MENU_START_NEW_GAME { get; }
         public abstract string MENU_CREATE_NEW_GAME { get; }
         public abstract string MENU_DISTRIBUTE_QUESTIONS { get; }
+        public abstract string MENU_SETTINGS { get; }
         public abstract string MENU_HELP { get; }
         public abstract string MENU_ABOUT { get; }
 

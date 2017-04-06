@@ -29,6 +29,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
             <Viewbox Grid.Row="0">
@@ -44,9 +45,11 @@
 
             <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" Style="{StaticResource MenuButtonStyleSoon}" Content="{Binding CurrentLanguage.MENU_DISTRIBUTE_QUESTIONS, Source={StaticResource LanguageLocator}}" />
 
-            <Button Grid.Row="5" Command="{Binding LaunchHelpCommand}" Content="{Binding CurrentLanguage.MENU_HELP, Source={StaticResource LanguageLocator}}" />
+            <Button Grid.Row="5" Command="{Binding LaunchSettingsCommand}" Content="{Binding CurrentLanguage.MENU_SETTINGS, Source={StaticResource LanguageLocator}}" />
+            
+            <Button Grid.Row="6" Command="{Binding LaunchHelpCommand}" Content="{Binding CurrentLanguage.MENU_HELP, Source={StaticResource LanguageLocator}}" />
 
-            <Button Grid.Row="6" Command="{Binding LaunchAboutCommand}" Content="{Binding CurrentLanguage.MENU_ABOUT, Source={StaticResource LanguageLocator}}" />
+            <Button Grid.Row="7" Command="{Binding LaunchAboutCommand}" Content="{Binding CurrentLanguage.MENU_ABOUT, Source={StaticResource LanguageLocator}}" />
         </Grid>
     </Grid>
 </Page>

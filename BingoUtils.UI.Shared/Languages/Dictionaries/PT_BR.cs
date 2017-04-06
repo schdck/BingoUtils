@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using BingoUtils.Domain.Entities;
 using BingoUtils.UI.Shared.Languages.Help;
 
@@ -103,6 +102,14 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
+        public override string HEADER_SETTINGS
+        {
+            get
+            {
+                return "Configurações";
+            }
+        }
+
         public override UserControl HELP_INTRO
         {
             get
@@ -140,6 +147,14 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Ajuda";
+            }
+        }
+
+        public override string MENU_SETTINGS
+        {
+            get
+            {
+                return "Configurações";
             }
         }
 

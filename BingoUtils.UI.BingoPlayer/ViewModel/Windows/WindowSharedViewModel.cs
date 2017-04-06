@@ -118,6 +118,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 case Activity.ActivityAbout:
                     AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_ABOUT, new About(), true);
                     break;
+                case Activity.ActivitySettings:
+                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_SETTINGS, new Settings(), true);
+                    break;
             }
         }
 

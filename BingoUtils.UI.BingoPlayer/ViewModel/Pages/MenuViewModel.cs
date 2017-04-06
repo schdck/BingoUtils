@@ -11,6 +11,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public ICommand LaunchStartNewGameCommand { get; private set; }
         public ICommand LaunchCreateNewGameCommand { get; private set; }
         public ICommand LaunchDistributorCommand { get; private set; }
+        public ICommand LaunchSettingsCommand { get; private set; }
         public ICommand LaunchHelpCommand { get; private set; }
         public ICommand LaunchAboutCommand { get; private set; }
 
@@ -26,6 +27,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             LaunchCreateNewGameCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityCreateGame));
 
             LaunchDistributorCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityDistributor));
+
+            LaunchSettingsCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivitySettings));
 
             LaunchHelpCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityHelp));
 
