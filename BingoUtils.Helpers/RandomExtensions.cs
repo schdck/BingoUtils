@@ -4,7 +4,7 @@ namespace BingoUtils.Helpers
 {
     public static class RandomExtensions
     {
-        // por: Matt Howells / StackOverflow Community
+        // by: Matt Howells / StackOverflow Community
         // http://stackoverflow.com/a/110570/5686352
         public static void Shuffle<T>(this Random rng, T[] array)
         {

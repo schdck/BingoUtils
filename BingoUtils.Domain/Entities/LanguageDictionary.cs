@@ -37,6 +37,7 @@ namespace BingoUtils.Domain.Entities
         public abstract string GAME_STOP_REPRODUCE_QUESTION_TITLE { get; }
 
         // Other
+        public abstract string OTHER_LANGUAGE { get; }
         public abstract string OTHER_SELECT_FILE_TEXT { get; }
         public abstract string OTHER_USE_MAIN_WINDOW { get; }
         public abstract string OTHER_UNKNOWN_VERSION { get; }

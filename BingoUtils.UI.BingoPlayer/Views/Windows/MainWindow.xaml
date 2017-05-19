@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Windows"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Que Comecem Os Jogos! - Bingo" 
         TitlebarHeight="30" 
@@ -14,6 +15,17 @@
         Height="600" 
         Width="800"
 >
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Translate" />
+                    <TextBlock Margin="4 0 0 0" Text="{Binding CurrentLanguage.OTHER_LANGUAGE, Source={StaticResource LanguageLocator}}" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.TitleTemplate>
         <DataTemplate>

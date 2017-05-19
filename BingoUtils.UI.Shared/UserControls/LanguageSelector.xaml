@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="BingoUtils.UI.Shared.UserControls.LanguageSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BingoUtils.UI.Shared.UserControls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="300">
+    <StackPanel>
+        <ListBox ItemsSource="{Binding AvaliableLanguages, Source={StaticResource LanguageLocator}}" SelectedItem="{Binding CurrentLanguageName, Source={StaticResource LanguageLocator}, Mode=OneWay}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+            <iconPacks:PackIconMaterial Kind="Check" Foreground="Gray" />
+            <TextBlock Margin="5,0" Text="Salvo." Foreground="Gray" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+            <iconPacks:PackIconMaterial Kind="Restart" Foreground="Gray" />
+            <TextBlock Margin="5,0" Text="Salvo. Clique no botão ao lado se deseja reiniciar o programa e aplicar as mudanças." Foreground="Gray" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

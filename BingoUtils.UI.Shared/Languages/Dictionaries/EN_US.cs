@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using BingoUtils.Domain.Entities;
 using BingoUtils.UI.Shared.Languages.Help;
 
@@ -163,6 +164,14 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Start new game";
+            }
+        }
+
+        public override string OTHER_LANGUAGE
+        {
+            get
+            {
+                return "Language";
             }
         }
 
