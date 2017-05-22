@@ -35,6 +35,8 @@
 
             <Style TargetType="Page" BasedOn="{StaticResource DefaultPageStyle}" />
 
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
             <converters:SliderForegroundConverter x:Key="ProgressForegroundConverter"/>
             <converters:UppercaseConverter x:Key="ToUpperConverter" />
         </ResourceDictionary>

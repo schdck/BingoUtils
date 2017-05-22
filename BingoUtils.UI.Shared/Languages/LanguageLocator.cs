@@ -1,5 +1,6 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.UI.Shared.Languages.Dictionaries;
+using BingoUtils.UI.Shared.Settings;
 using System;
 using System.Collections.Generic;
 
@@ -40,7 +41,7 @@ namespace BingoUtils.UI.Shared.Languages
             }
         }
 
-        public LanguageDictionary CurrentLanguage { get; private set; } = new PT_BR();
+        public LanguageDictionary CurrentLanguage { get; private set; }
 
         private LanguageLocator()
         {
@@ -48,6 +49,8 @@ namespace BingoUtils.UI.Shared.Languages
 
             LanguageMapper.Add("English (US)", typeof(EN_US));
             LanguageMapper.Add("Português (BR)", typeof(PT_BR));
+
+            CurrentLanguage = GetLanguageByName(UserSettings.UserLanguage);
         }
 
         public string GetLanguageNameByType(Type t)
@@ -61,6 +64,18 @@ namespace BingoUtils.UI.Shared.Languages
             }
 
             return string.Empty;
+        }
+
+        public LanguageDictionary GetLanguageByName(string name)
+        {
+            foreach(KeyValuePair<string, Type> p in LanguageMapper)
+            {
+                if(p.Key == name)
+                {
+                    return Activator.CreateInstance(p.Value) as LanguageDictionary;
+                }
+            }
+            return new EN_US();
         }
     }
 }

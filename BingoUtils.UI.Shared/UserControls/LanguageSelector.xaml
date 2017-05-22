@@ -6,17 +6,73 @@
              xmlns:local="clr-namespace:BingoUtils.UI.Shared.UserControls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300">
-    <StackPanel>
-        <ListBox ItemsSource="{Binding AvaliableLanguages, Source={StaticResource LanguageLocator}}" SelectedItem="{Binding CurrentLanguageName, Source={StaticResource LanguageLocator}, Mode=OneWay}" />
+             d:DesignHeight="120" d:DesignWidth="300">
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+    <UserControl.Resources>
+        <Style TargetType="ListBoxItem" BasedOn="{StaticResource MetroListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid Background="{TemplateBinding Background}" RenderOptions.ClearTypeHint="{TemplateBinding RenderOptions.ClearTypeHint}">
+                            <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Grid Margin="{TemplateBinding BorderThickness}">
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                <iconPacks:PackIconMaterial Margin="10,2" VerticalAlignment="Center" HorizontalAlignment="Right" Kind="Check" Visibility="{TemplateBinding IsSelected, Converter={StaticResource BoolToVis}}" />
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource AccentSelectedColorBrush}" />
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentColorBrush3}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource GrayBrush7}" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsEnabled" Value="False" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" Value="{DynamicResource AccentSelectedColorBrush}" />
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource GrayBrush7}" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True" />
+                                    <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentColorBrush2}" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ListBox Margin="0,0,0,5" ItemsSource="{Binding AvaliableLanguages, Source={StaticResource LanguageLocator}}" SelectedItem="{Binding SelectedLanguage}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5" Visibility="{Binding SavedVisibility}">
             <iconPacks:PackIconMaterial Kind="Check" Foreground="Gray" />
-            <TextBlock Margin="5,0" Text="Salvo." Foreground="Gray" />
+            <TextBlock Margin="5,0" Text="{Binding CurrentLanguage.OTHER_SAVED, Source={StaticResource LanguageLocator}}" Foreground="Gray" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5" Visibility="{Binding MustRestartVisibility}">
             <iconPacks:PackIconMaterial Kind="Restart" Foreground="Gray" />
-            <TextBlock Margin="5,0" Text="Salvo. Clique no botão ao lado se deseja reiniciar o programa e aplicar as mudanças." Foreground="Gray" />
+            <TextBlock Margin="5,0" Text="{Binding CurrentLanguage.OTHER_RESTART_TO_APPLY, Source={StaticResource LanguageLocator}}" Foreground="Gray" />
         </StackPanel>
     </StackPanel>
 </UserControl>

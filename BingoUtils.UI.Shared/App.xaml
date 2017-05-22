@@ -24,6 +24,8 @@
                 <ResourceDictionary Source="pack://application:,,,/BingoUtils.UI.Shared;component/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            
             <x:StaticExtension Member="lg:LanguageLocator.Instance" x:Key="LanguageLocator" d:IsDataSource="True" xmlns:lg="clr-namespace:BingoUtils.UI.Shared.Languages;assembly=BingoUtils.UI.Shared" />
         </ResourceDictionary>
     </Application.Resources>

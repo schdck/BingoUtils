@@ -1,6 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using MahApps.Metro.Controls;
+using MahApps.Metro.SimpleChildWindow;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -9,6 +10,11 @@ using BingoUtils.Domain.Enums;
 using System;
 using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.Shared.Languages;
+using BingoUtils.UI.BingoPlayer.Views.Windows;
+using BingoUtils.UI.Shared.UserControls;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -19,6 +25,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
         private ObservableCollection<MetroTabItem> _TabControlItemsBingo;
         private ObservableCollection<MetroTabItem> _TabControlItemsAnswer;
         private List<Game> _Games;
+
+        public SimpleDelegateCommand LaunchChangeLanguageWindow { get; private set; }
 
         public ObservableCollection<MetroTabItem> TabControlItemsBingo
         {
@@ -77,7 +85,33 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
             MessengerInstance.Register<LaunchFinishedDistributionMessage>(this, ShowDistributionCompleteTab);
-        }
+
+            LaunchChangeLanguageWindow = new SimpleDelegateCommand(() =>
+            {
+                var content = new StackPanel();
+
+                var child = new ChildWindow()
+                {
+                    Content = content,
+                    ShowTitleBar = false
+                };
+
+                var closeButton = new Button() { Margin = new Thickness(0, 0, 0, 5), Width = 300 };
+
+                var titleBar = new TextBlock() { Height = child.TitleBarHeight, TextAlignment = TextAlignment.Center, FontWeight = FontWeights.Bold, FontSize = 14, Margin = new Thickness(5) };
+
+                content.Children.Add(titleBar);
+                content.Children.Add(new LanguageSelector());
+                content.Children.Add(closeButton);
+
+                closeButton.Click += (s, e) => child.Close();
+
+                BindingOperations.SetBinding(closeButton, ContentControl.ContentProperty, new Binding("CurrentLanguage.GENERIC_CLOSE") { Source = LanguageLocator.Instance, Converter = Application.Current.FindResource("ToUpperConverter") as IValueConverter });
+                BindingOperations.SetBinding(titleBar, TextBlock.TextProperty, new Binding("CurrentLanguage.OTHER_SELECT_LANGUAGE") { Source = LanguageLocator.Instance });
+
+                MainWindow.Instance.ShowChildWindowAsync(child);
+            });
+        }   
 
         private void ShowDistributionCompleteTab(LaunchFinishedDistributionMessage message)
         {

@@ -39,6 +39,14 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
+        public override string GENERIC_CLOSE
+        {
+            get
+            {
+                return "Fechar";
+            }
+        }
+
         public override string HEADER_ABOUT
         {
             get
@@ -175,11 +183,35 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
+        public override string OTHER_RESTART_TO_APPLY
+        {
+            get
+            {
+                return "Reinicie para aplicar as mundaças.";
+            }
+        }
+
+        public override string OTHER_SAVED
+        {
+            get
+            {
+                return "Salvo.";
+            }
+        }
+
         public override string OTHER_SELECT_FILE_TEXT
         {
             get
             {
                 return "Arraste um arquivo ou clique aqui para selecioná-lo";
+            }
+        }
+
+        public override string OTHER_SELECT_LANGUAGE
+        {
+            get
+            {
+                return "SELECIONE SEU IDIOMA";
             }
         }
 

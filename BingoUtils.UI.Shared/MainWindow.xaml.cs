@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingoUtils.UI.Shared.Settings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Shared
         public MainWindow()
         {
             InitializeComponent();
+
+            MessageBox.Show(UserSettings.UserLanguage);
         }
     }
 }
