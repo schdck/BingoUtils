@@ -15,6 +15,8 @@
         Height="600" 
         Width="800"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
+        BorderBrush="Gray"
+        BorderThickness="1"
 >
 
     <Controls:MetroWindow.RightWindowCommands>
