@@ -19,17 +19,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <Viewbox Grid.Row="0">
-            <Label>Começar um novo jogo</Label>
-        </Viewbox>
-
-        <Grid Grid.Row="1" Opacity="{Binding DefaultContainerBackground}" Background="Transparent" Margin="-10,0,-10,0">
+        <Grid Opacity="{Binding DefaultContainerBackground}" Background="Transparent" Margin="-10,0,-10,0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">
                     <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter="Default"/>
@@ -42,7 +37,7 @@
                     <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="0">
-                    <Label>A partir de um modelo</Label>
+                    <Label Content="{Binding CurrentLanguage.START_NEW_GAME_FROM_MODEL, Source={StaticResource LanguageLocator}}" />
                 </Viewbox>
                 <ContentControl Margin="50,0" Template="{StaticResource DottedContainer}" Grid.Row="1">
                     <Grid>
@@ -57,12 +52,12 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="1">
-                            <TextBlock TextAlignment="Center" Margin="2">Selecione a disciplina do jogo</TextBlock>
+                            <TextBlock TextAlignment="Center" Margin="2" Text="{Binding CurrentLanguage.START_NEW_GAME_SELECT_SUBJECT, Source={StaticResource LanguageLocator}}" />
                             <ComboBox ItemsSource="{Binding AvaliableSubjects}" SelectedIndex="{Binding SelectedIndexSubject}" IsSynchronizedWithCurrentItem="True" />
                         </StackPanel>
 
                         <StackPanel Margin="0,10" VerticalAlignment="Center" Grid.Column="3">
-                            <TextBlock TextAlignment="Center" Margin="2">Selecione o assunto do jogo</TextBlock>
+                            <TextBlock TextAlignment="Center" Margin="2" Text="{Binding CurrentLanguage.START_NEW_GAME_SELECT_MATTER, Source={StaticResource LanguageLocator}}" />
                             <ComboBox ItemsSource="{Binding AvaliableMatters}" SelectedIndex="{Binding SelectedIndexMatter}" IsSynchronizedWithCurrentItem="True" />
                         </StackPanel>
 
@@ -75,7 +70,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Opacity="{Binding FileContainerBackground}" Background="Transparent" Margin="-10,0">
+        <Grid Grid.Row="1" Opacity="{Binding FileContainerBackground}" Background="Transparent" Margin="-10,0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">
                     <i:InvokeCommandAction Command="{Binding SetActiveChoice}" CommandParameter="File"/>
@@ -88,13 +83,13 @@
                     <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="0">
-                    <Label>A partir de um arquivo</Label>
+                    <Label Content="{Binding CurrentLanguage.START_NEW_GAME_FROM_FILE, Source={StaticResource LanguageLocator}}"/>
                 </Viewbox>
-                <UserControls:DragAndDrop FilePath="{Binding SelectedFilePath, Mode=TwoWay}" Margin="50,0" Grid.Row="1" />
+                <UserControls:DragAndDrop SelectFileText="{Binding CurrentLanguage.OTHER_SELECT_FILE_TEXT, Source={StaticResource LanguageLocator}}" FilePath="{Binding SelectedFilePath, Mode=TwoWay}" Margin="50,0" Grid.Row="1" />
             </Grid>
 
         </Grid>
 
-        <Button Grid.Row="4" Margin="40,20,40,0" IsEnabled="{Binding HasSelectedValidOption}" Command="{Binding StartNewgameCommand}" Content="{Binding IsSelectingFrom}" />
+        <Button Grid.Row="2" Margin="40,20,40,0" IsEnabled="{Binding HasSelectedValidOption}" Command="{Binding StartNewgameCommand}" Content="{Binding IsSelectingFrom}" />
     </Grid>
 </Page>

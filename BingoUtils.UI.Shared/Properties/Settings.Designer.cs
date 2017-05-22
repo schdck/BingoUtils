@@ -22,5 +22,17 @@ namespace BingoUtils.UI.Shared.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English (US)")]
+        public string UserLanguage {
+            get {
+                return ((string)(this["UserLanguage"]));
+            }
+            set {
+                this["UserLanguage"] = value;
+            }
+        }
     }
 }

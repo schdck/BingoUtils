@@ -6,6 +6,7 @@
         ActivityCreateGame,
         ActivityDistributor,
         ActivityHelp,
-        ActivityAbout
+        ActivityAbout,
+        ActivitySettings
     }
 }

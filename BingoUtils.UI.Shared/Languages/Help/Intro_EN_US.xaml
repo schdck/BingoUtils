@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="BingoUtils.UI.Shared.Languages.Help.Intro_EN_US"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BingoUtils.UI.Shared.Languages.Help"
+             mc:Ignorable="d" 
+             d:DesignWidth="770" d:DesignHeight="510">
+    <RichTextBox DockPanel.Dock="Top" IsReadOnly="True" BorderThickness="0" Background="Transparent">
+        <FlowDocument>
+            <Paragraph FontSize="28" TextAlignment="Center" Margin="0,15">About this software</Paragraph>
+
+            <Paragraph TextAlignment="Justify" FontStyle="Italic">
+                This software was developed by Maurício Vielmo Schmaedeck (github.com/schdck) 
+                as part of the project "Que comecem os jogos! Possibilidades didático metodológicas para o ensino
+                de História" The project was held at the Federal Institute of Education, Science and Technology of 
+                Rio Grande do Sul (Farroupilha, RS - Brazil) and coordineted by Prof. Daniela de Campos, Ph.D..
+            </Paragraph>
+
+            <Paragraph Margin="0,30,0,15" TextAlignment="Justify" FontStyle="Italic">
+                This software was developed using Windows Presentation Foundation (WPF), present on .NET Framework 
+                since version 3.0. It's source code is avaliable at github.com/schdck/BingoUtils
+            </Paragraph>
+
+            <Paragraph FontSize="28" TextAlignment="Center" Margin="0,15">License</Paragraph>
+        </FlowDocument>
+    </RichTextBox>
+</UserControl>

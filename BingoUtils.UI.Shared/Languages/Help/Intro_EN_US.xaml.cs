@@ -1,5 +1,4 @@
-﻿using BingoUtils.UI.Shared.Settings;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shared
+namespace BingoUtils.UI.Shared.Languages.Help
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Intro_EN_US.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Intro_EN_US : UserControl
     {
-        public MainWindow()
+        public Intro_EN_US()
         {
             InitializeComponent();
-
-            MessageBox.Show(UserSettings.UserLanguage);
         }
     }
 }

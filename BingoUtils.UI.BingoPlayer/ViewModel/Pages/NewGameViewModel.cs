@@ -3,17 +3,15 @@ using BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Resources;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
+using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.Text;
 using System.Windows.Input;
 
@@ -330,27 +328,29 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         {
             if (choice == "Default")
             {
+                IsSelectingFrom = LanguageLocator.Instance.CurrentLanguage.START_NEW_GAME_FROM_MODEL;
+
                 HasSelectedValidOption = SelectedIndexSubject >= 0 && AvaliableSubjects.FirstOrDefault() != null && SelectedIndexMatter >= 0 && AvaliableMatters.FirstOrDefault() != null;
 
                 DefaultContainerBackground = 1.0;
                 FileContainerBackground = 0.5;
-
-                IsSelectingFrom = "Iniciar novo jogo a partir dos modelos";
             }
             else if (choice == "File")
             {
+                IsSelectingFrom = LanguageLocator.Instance.CurrentLanguage.START_NEW_GAME_FROM_FILE;
+
                 HasSelectedValidOption = File.Exists(SelectedFilePath);
 
-                IsSelectingFrom = "Iniciar novo jogo a partir do arquivo";
                 DefaultContainerBackground = 0.5;
                 FileContainerBackground = 1.0;
             }
             else
             {
+                IsSelectingFrom = LanguageLocator.Instance.CurrentLanguage.START_NEW_GAME_NOT_SELECTED;
+
                 HasSelectedValidOption = false;
                 DefaultContainerBackground = 1.0;
                 FileContainerBackground = 1.0;
-                IsSelectingFrom = "Selecione se deseja iniciar o novo jogo a partir de um modelo ou de um arquivo";
             }
         }
     }

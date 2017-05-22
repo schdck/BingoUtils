@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Windows"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Que Comecem Os Jogos! - Bingo" 
         TitlebarHeight="30" 
@@ -13,7 +14,19 @@
         MinWidth="800"
         Height="600" 
         Width="800"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
 >
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Command="{Binding LaunchChangeLanguageWindow}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Translate" />
+                    <TextBlock Margin="4 0 0 0" Text="{Binding CurrentLanguage.OTHER_LANGUAGE, Source={StaticResource LanguageLocator}}" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.TitleTemplate>
         <DataTemplate>
@@ -28,7 +41,7 @@
         </DataTemplate>
     </Controls:MetroWindow.TitleTemplate>
 
-    <Grid DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid>
         <Controls:MetroAnimatedSingleRowTabControl Margin="10" ItemsSource="{Binding TabControlItemsBingo}" SelectedIndex="{Binding TabControlSelectedIndex}" />
     </Grid>
 </Controls:MetroWindow>

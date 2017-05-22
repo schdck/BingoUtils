@@ -8,46 +8,29 @@
       Title="About" MinWidth="770" MinHeight="510"
       d:DesignWidth="770" d:DesignHeight="510">
 
+    <Page.Resources>
+        <Style TargetType="RichTextBox">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </Page.Resources>
+    
     <DockPanel LastChildFill="True">
-        <DockPanel.Resources>
-            <Style TargetType="RichTextBox">
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Background" Value="Transparent" />
-            </Style>
-        </DockPanel.Resources>
-
-        <RichTextBox DockPanel.Dock="Top" Margin="25,0" IsReadOnly="True">
+        <RichTextBox DockPanel.Dock="Top" Margin="0,10">
             <FlowDocument>
-                <Paragraph FontSize="36" TextAlignment="Center" Margin="0,15">Sobre este programa</Paragraph>
+                <Paragraph FontSize="36" TextAlignment="Center" Margin="0">BingoUtils</Paragraph>
 
-                <Paragraph TextAlignment="Center" x:Name="Version" />
-
-                <Paragraph TextAlignment="Justify" FontStyle="Italic">
-                    Este programa foi desenvolvido por Maurício Vielmo Schmaedeck (github.com/schdck) 
-                    para o projeto "Que comecem os jogos! Possibilidades didático metodológicas para o ensino
-                    de História", realizado sob a orientação da Professora Doutora Daniela de Campos pelo 
-                    Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul - Campus Farroupilha
-                </Paragraph>
-
-                <Paragraph Margin="0,30,0,15" TextAlignment="Justify" FontStyle="Italic">
-                    Este programa foi desenvolvido utilizando Windows Presentation Foundation (WPF), presente no 
-                    .NET Framework a partir da versão 3.0. Seu código fonte está disponível em github.com/schdck/BingoUtils
-                </Paragraph>
-
-                <Paragraph FontSize="28" TextAlignment="Center" Margin="0,15">Licença</Paragraph>
+                <Paragraph TextAlignment="Center" x:Name="Version" Margin="0" />
             </FlowDocument>
         </RichTextBox>
+
+        <ContentControl DockPanel.Dock="Top" Margin="25,0" Content="{Binding CurrentLanguage.HELP_INTRO, Source={StaticResource LanguageLocator}}" />
 
         <Border BorderThickness="1" BorderBrush="Gray" Margin="25,10" MaxWidth="704" VerticalAlignment="Top">
             <ScrollViewer>
                 <RichTextBox Margin="10" IsReadOnly="True">
                     <FlowDocument>
-                        <Paragraph TextAlignment="Justify" FontStyle="Italic">
-                            Este programa está sob uma licença MIT, também conhecida como licença X ou licença X11. Isto garante
-                            a qualquer portador deste software e sua documentação o direito de lidar com eles sem restrição, 
-                            incluindo sem limitação os direitos de usar, copiar, modificar, mesclar, publicar, distribuir e/ou 
-                            vender cópias do software. Todas as cópias deste software deverão conter a licença abaixo.
-                        </Paragraph>
                         <Paragraph FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,5">The MIT License (MIT)</Paragraph>
                         <Paragraph TextAlignment="Center" Margin="0" FontStyle="Italic">Copyright (c) 2017 Maurício Vielmo Schmaedeck</Paragraph>
                         <Paragraph TextAlignment="Justify" Margin="25,15">

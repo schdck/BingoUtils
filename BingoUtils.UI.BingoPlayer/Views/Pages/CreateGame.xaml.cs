@@ -1,4 +1,4 @@
-﻿using BingoUtils.UI.Shared.Settings;
+﻿using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shared
+namespace BingoUtils.UI.BingoPlayer.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CreateGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateGame : Page
     {
-        public MainWindow()
+        public CreateGame(CreateGameViewModel dataContext)
         {
+            DataContext = dataContext;
             InitializeComponent();
-
-            MessageBox.Show(UserSettings.UserLanguage);
         }
     }
 }

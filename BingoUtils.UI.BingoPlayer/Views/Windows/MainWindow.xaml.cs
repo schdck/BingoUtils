@@ -7,10 +7,14 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public static MainWindow Instance { get; private set; }
+
         private AnswerWindow AnswerWindow;
 
         public MainWindow()
         {
+            Instance = this;
+
             InitializeComponent();
 
             AnswerWindow = new AnswerWindow();

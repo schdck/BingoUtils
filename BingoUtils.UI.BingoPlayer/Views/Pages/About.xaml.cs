@@ -1,4 +1,5 @@
-﻿using System.Deployment.Application;
+﻿using BingoUtils.UI.Shared.Languages;
+using System.Deployment.Application;
 using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -16,11 +17,11 @@ namespace BingoUtils.UI.BingoPlayer.Views.Pages
 
             try
             {
-                version = string.Format("BingoUtils - v{0}", ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+                version = string.Format("v{0}", ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
             }
             catch (InvalidDeploymentException)
             {
-                version = "BingoUtils - Versão Desconhecida";
+                version = LanguageLocator.Instance.CurrentLanguage.OTHER_UNKNOWN_VERSION;
             }
 
             InitializeComponent();

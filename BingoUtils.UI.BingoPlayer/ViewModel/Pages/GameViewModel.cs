@@ -1,6 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
@@ -206,7 +207,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 HasPrevious = false;
             }
             HasNext = CurrentQuestion + 1 < Questions.Count;
-            QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Count;
+
+            UpdateQuestionProgress();
         }
 
         private void NextQuestion()
@@ -219,7 +221,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             HasNext = CurrentQuestion + 1 < Questions.Count;
             HasPrevious = CurrentQuestion > 0;
 
-            QuestionProgress = (CurrentQuestion + 1) + "/" + Questions.Count;
+            UpdateQuestionProgress();
+        }
+
+        private void UpdateQuestionProgress()
+        {
+            QuestionProgress = string.Format("{0} ({1}/{2})", LanguageLocator.Instance.CurrentLanguage.GAME_CURRENT_QUESTION.ToUpper(), CurrentQuestion + 1, Questions.Count);
         }
 
         private void GetGameData(StartNewGameMessage startNewGameMessage)
