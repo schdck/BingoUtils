@@ -7,6 +7,38 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {
     public class EN_US : LanguageDictionary
     {
+        public override string CREATE_TITLE
+        {
+            get
+            {
+                return "Create your own bingo";
+            }
+        }
+
+        public override string CREATE_SUBJECT_REQUIRED
+        {
+            get
+            {
+                return "Subject (required)";
+            }
+        }
+
+        public override string CREATE_TOPIC_REQUIRED
+        {
+            get
+            {
+                return "Topic (required)";
+            }
+        }
+
+        public override string CREATE_SAVE_GAME_AT_DEFAULTS
+        {
+            get
+            {
+                return "Also save this game at my games";
+            }
+        }
+
         public override string GAME_CURRENT_QUESTION
         {
             get
@@ -44,6 +76,22 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Close";
+            }
+        }
+
+        public override string GENERIC_QUESTIONS
+        {
+            get
+            {
+                return "Questions";
+            }
+        }
+
+        public override string GENERIC_SAVE
+        {
+            get
+            {
+                return "Save";
             }
         }
 
@@ -255,11 +303,11 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
-        public override string START_NEW_GAME_SELECT_MATTER
+        public override string START_NEW_GAME_SELECT_TOPIC
         {
             get
             {
-                return "Select the matter";
+                return "Select the topic";
             }
         }
 
@@ -268,6 +316,22 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Select the subject";
+            }
+        }
+
+        public override string QUESTION_HOLDER_QUESTION_TITLE
+        {
+            get
+            {
+                return "Question title";
+            }
+        }
+
+        public override string QUESTION_HOLDER_QUESTION_ANSWER
+        {
+            get
+            {
+                return "Question answer";
             }
         }
     }

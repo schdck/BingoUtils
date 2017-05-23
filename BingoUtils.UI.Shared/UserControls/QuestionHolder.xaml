@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="TextBoxTitle"  Text="{Binding Title, ElementName=_self}"  Margin="0, 0, 2.5, 0" Grid.Column="0" Controls:TextBoxHelper.Watermark="Título da questão" GotFocus="TextBoxTitle_GotFocus" VerticalAlignment="Top" />
-        <TextBox x:Name="TextBoxAnswer" Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 0, 0" Grid.Column="1" Controls:TextBoxHelper.Watermark="Resposta da questão" GotFocus="TextBoxAnswer_GotFocus" VerticalAlignment="Top" />
+        <TextBox x:Name="TextBoxTitle"  Text="{Binding Title, ElementName=_self}"  Margin="0, 0, 2.5, 0" Grid.Column="0" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.QUESTION_HOLDER_QUESTION_TITLE, Source={StaticResource LanguageLocator}}" GotFocus="TextBoxTitle_GotFocus" VerticalAlignment="Top" />
+        <TextBox x:Name="TextBoxAnswer" Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 0, 0" Grid.Column="1" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.QUESTION_HOLDER_QUESTION_ANSWER, Source={StaticResource LanguageLocator}}" GotFocus="TextBoxAnswer_GotFocus" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

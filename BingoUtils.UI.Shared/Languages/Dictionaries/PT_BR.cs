@@ -7,6 +7,38 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {
     public class PT_BR : LanguageDictionary
     {
+        public override string CREATE_TITLE
+        {
+            get
+            {
+                return "Crie seu próprio bingo";
+            }
+        }
+
+        public override string CREATE_SUBJECT_REQUIRED
+        {
+            get
+            {
+                return "Disciplina (obrigatório)";
+            }
+        }
+
+        public override string CREATE_TOPIC_REQUIRED
+        {
+            get
+            {
+                return "Assunto (obrigatório)";
+            }
+        }
+
+        public override string CREATE_SAVE_GAME_AT_DEFAULTS
+        {
+            get
+            {
+                return "Também salve este jogo em meus jogos";
+            }
+        }
+
         public override string GAME_CURRENT_QUESTION
         {
             get
@@ -44,6 +76,22 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Fechar";
+            }
+        }
+
+        public override string GENERIC_QUESTIONS
+        {
+            get
+            {
+                return "Questões";
+            }
+        }
+
+        public override string GENERIC_SAVE
+        {
+            get
+            {
+                return "Salvar";
             }
         }
 
@@ -255,7 +303,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
-        public override string START_NEW_GAME_SELECT_MATTER
+        public override string START_NEW_GAME_SELECT_TOPIC
         {
             get
             {
@@ -268,6 +316,22 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Selecione a disciplina";
+            }
+        }
+
+        public override string QUESTION_HOLDER_QUESTION_TITLE
+        {
+            get
+            {
+                return "Título da questão";
+            }
+        }
+
+        public override string QUESTION_HOLDER_QUESTION_ANSWER
+        {
+            get
+            {
+                return "Resposta da questão";
             }
         }
     }

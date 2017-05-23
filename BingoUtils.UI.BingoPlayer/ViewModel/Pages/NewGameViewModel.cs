@@ -24,7 +24,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private bool _HasSelectedOption;
 
         private int _SelectedIndexSubject;
-        private int _SelectedIndexMatter;
+        private int _SelectedIndexTopic;
 
         private string _IsSelectingFrom;
         private string _FilePath;
@@ -33,7 +33,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private double _FileContainerBackground;
 
         private IEnumerable<string> _AvaliableSubjects;
-        private IEnumerable<string> _AvaliableMatters;
+        private IEnumerable<string> _AvaliableTopics;
 
         public ICommand StartNewgameCommand { get; private set; }
         public ICommand SetActiveChoice { get; private set; }
@@ -60,19 +60,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             set
             {
                 Set(ref _SelectedIndexSubject, value);
-                AvaliableMatters = GetAvaliableMatters();
+                AvaliableTopics = GetAvaliableTopics();
                 ChangeActiveChoice("Default");
             }
         }
-        public int SelectedIndexMatter
+        public int SelectedIndexTopic
         {
             get
             {
-                return _SelectedIndexMatter;
+                return _SelectedIndexTopic;
             }
             set
             {
-                Set(ref _SelectedIndexMatter, value);
+                Set(ref _SelectedIndexTopic, value);
                 ChangeActiveChoice("Default");
             }
         }
@@ -134,18 +134,18 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             set
             {
                 Set(ref _AvaliableSubjects, value);
-                AvaliableMatters = GetAvaliableMatters();
+                AvaliableTopics = GetAvaliableTopics();
             }
         }
-        public IEnumerable<string> AvaliableMatters
+        public IEnumerable<string> AvaliableTopics
         {
             get
             {
-                return _AvaliableMatters;
+                return _AvaliableTopics;
             }
             set
             {
-                Set(ref _AvaliableMatters, value);
+                Set(ref _AvaliableTopics, value);
             }
         }
 
@@ -171,7 +171,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 }
                 else // Carregar jogo da ComboBox
                 {
-                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.csv", AvaliableMatters.ElementAt(SelectedIndexMatter)));
+                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.csv", AvaliableTopics.ElementAt(SelectedIndexTopic)));
                 }
 
 
@@ -270,7 +270,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             return "";
         }
 
-        private IEnumerable<string> GetAvaliableMatters()
+        private IEnumerable<string> GetAvaliableTopics()
         {
             IEnumerable<string> files;
 
@@ -330,7 +330,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             {
                 IsSelectingFrom = LanguageLocator.Instance.CurrentLanguage.START_NEW_GAME_FROM_MODEL;
 
-                HasSelectedValidOption = SelectedIndexSubject >= 0 && AvaliableSubjects.FirstOrDefault() != null && SelectedIndexMatter >= 0 && AvaliableMatters.FirstOrDefault() != null;
+                HasSelectedValidOption = SelectedIndexSubject >= 0 && AvaliableSubjects.FirstOrDefault() != null && SelectedIndexTopic >= 0 && AvaliableTopics.FirstOrDefault() != null;
 
                 DefaultContainerBackground = 1.0;
                 FileContainerBackground = 0.5;

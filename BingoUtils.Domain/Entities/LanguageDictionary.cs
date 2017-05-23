@@ -28,7 +28,13 @@ namespace BingoUtils.Domain.Entities
         public abstract string START_NEW_GAME_FROM_FILE { get; }
         public abstract string START_NEW_GAME_NOT_SELECTED { get; }
         public abstract string START_NEW_GAME_SELECT_SUBJECT { get; }
-        public abstract string START_NEW_GAME_SELECT_MATTER { get; }
+        public abstract string START_NEW_GAME_SELECT_TOPIC { get; }
+
+        // Create Game
+        public abstract string CREATE_TITLE { get; }
+        public abstract string CREATE_SUBJECT_REQUIRED { get; }
+        public abstract string CREATE_TOPIC_REQUIRED { get; }
+        public abstract string CREATE_SAVE_GAME_AT_DEFAULTS { get; }
 
         // Game
         public abstract string GAME_CURRENT_QUESTION { get; }
@@ -38,6 +44,8 @@ namespace BingoUtils.Domain.Entities
 
         // Generic
         public abstract string GENERIC_CLOSE { get; }
+        public abstract string GENERIC_QUESTIONS { get; }
+        public abstract string GENERIC_SAVE { get; }
 
         // Other
         public abstract string OTHER_LANGUAGE { get; }
@@ -47,6 +55,11 @@ namespace BingoUtils.Domain.Entities
         public abstract string OTHER_SELECT_LANGUAGE { get; }
         public abstract string OTHER_USE_MAIN_WINDOW { get; }
         public abstract string OTHER_UNKNOWN_VERSION { get; }
+
+        // UserControls
+        // QuestionHolder
+        public abstract string QUESTION_HOLDER_QUESTION_TITLE { get; }
+        public abstract string QUESTION_HOLDER_QUESTION_ANSWER { get; }
 
         // Pages
         public abstract UserControl HELP_INTRO { get; }

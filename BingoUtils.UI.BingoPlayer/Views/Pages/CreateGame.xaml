@@ -13,7 +13,7 @@
 
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top">
-            <TextBlock DockPanel.Dock="Top" FontSize="24" TextAlignment="Center" Text="Crie seu próprio Bingo" />
+            <TextBlock DockPanel.Dock="Top" FontSize="24" TextAlignment="Center" Text="{Binding CurrentLanguage.CREATE_TITLE, Source={StaticResource LanguageLocator}}" />
 
             <Grid Margin="19,5">
                 <Grid.ColumnDefinitions>
@@ -21,14 +21,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Text="{Binding Disciplina, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding DisciplinaBorderBrush}" Margin="0,5,2.5,5" VerticalAlignment="Top" Grid.Column="0" Controls:TextBoxHelper.Watermark="Disciplina (obrigatório)">
+                <TextBox Text="{Binding Disciplina, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding DisciplinaBorderBrush}" Margin="0,5,2.5,5" VerticalAlignment="Top" Grid.Column="0" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_SUBJECT_REQUIRED, Source={StaticResource LanguageLocator}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus" >
                             <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Disciplina" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
-                <TextBox Text="{Binding Assunto, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding AssuntoBorderBrush}" Margin="2.5,5,0,5" VerticalAlignment="Top" Grid.Column="1" Controls:TextBoxHelper.Watermark="Assunto (obrigatório)">
+                <TextBox Text="{Binding Assunto, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding AssuntoBorderBrush}" Margin="2.5,5,0,5" VerticalAlignment="Top" Grid.Column="1" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_TOPIC_REQUIRED, Source={StaticResource LanguageLocator}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus" >
                             <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Assunto" />
@@ -39,12 +39,12 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Bottom" Margin="0,30,0,0">
-            <CheckBox IsChecked="{Binding SaveOnDefaults}" Margin="5,10" HorizontalAlignment="Center" Content="Desejo salvar este jogo em meus jogos padrão" />
-            <Button Content="Salvar" Padding="50,5" HorizontalAlignment="Center" Command="{Binding SaveGameCommand}" />
+            <CheckBox IsChecked="{Binding SaveOnDefaults}" Margin="5,10" HorizontalAlignment="Center" Content="{Binding CurrentLanguage.CREATE_SAVE_GAME_AT_DEFAULTS, Source={StaticResource LanguageLocator}}" />
+            <Button Content="{Binding CurrentLanguage.GENERIC_SAVE, Source={StaticResource LanguageLocator}}" Padding="50,5" HorizontalAlignment="Center" Command="{Binding SaveGameCommand}" />
         </StackPanel>
 
         <DockPanel LastChildFill="True" VerticalAlignment="Top">
-            <TextBlock DockPanel.Dock="Top" FontSize="18" TextAlignment="Center" Text="Questões" />
+            <TextBlock DockPanel.Dock="Top" FontSize="18" TextAlignment="Center" Text="{Binding CurrentLanguage.GENERIC_QUESTIONS, Source={StaticResource LanguageLocator}}" />
 
             <UserControls:QuestionHolder DockPanel.Dock="Bottom" Margin="19,5,19,5" Opacity=".3">
                 <i:Interaction.Triggers>
