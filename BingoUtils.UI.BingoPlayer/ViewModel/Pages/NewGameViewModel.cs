@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,6 +21,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
     public class NewGameViewModel : ViewModelBase
     {
         private readonly string GamesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos");
+        private readonly string ExtractedFilesDirectory = Path.Combine(Path.GetTempPath(), "BingoTemp");
 
         private bool _HasSelectedOption;
 
@@ -171,7 +173,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 }
                 else // Carregar jogo da ComboBox
                 {
-                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.csv", AvaliableTopics.ElementAt(SelectedIndexTopic)));
+                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.zip", AvaliableTopics.ElementAt(SelectedIndexTopic)));
                 }
 
 
@@ -180,7 +182,15 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     throw (new Exception("Erro ao abrir arquivo"));
                 }
 
-                using (StreamReader reader = new StreamReader(path, Encoding.GetEncoding("WINDOWS-1252")))
+                if (Directory.Exists(ExtractedFilesDirectory))
+                {
+                    Directory.Delete(ExtractedFilesDirectory, true);
+                }
+
+                ZipFile.ExtractToDirectory(path, ExtractedFilesDirectory);
+                
+
+                using (StreamReader reader = new StreamReader(Path.Combine(ExtractedFilesDirectory, "Game.csv"), Encoding.GetEncoding("WINDOWS-1252")))
                 {
                     try
                     {
@@ -249,7 +259,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                         string[] temp = s.Split('.');
 
                         string path = Path.Combine(GamesDirectory, temp[0]);
-                        string file = temp[1] + ".csv";
+                        string file = temp[1] + ".zip";
 
                         if (!Directory.Exists(path))
                         {
@@ -272,13 +282,13 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
         private IEnumerable<string> GetAvaliableTopics()
         {
-            IEnumerable<string> files;
+            IEnumerable<string> files; 
 
             try
             {
                 files = Directory.GetFiles(
                             Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
-                                .Where((x) => (Path.GetExtension(x) == ".csv"));
+                                .Where((x) => (Path.GetExtension(x) == ".zip"));
             }
             catch
             {
@@ -306,7 +316,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
 
             string newFileFolder = Path.Combine(GamesDirectory, gameInfo[0]);
-            string newFilePath = Path.Combine(newFileFolder, string.Format("{0}.csv", gameInfo[1]));
+            string newFilePath = Path.Combine(newFileFolder, string.Format("{0}.zip", gameInfo[1]));
 
             if(!Directory.Exists(newFileFolder))
             {
