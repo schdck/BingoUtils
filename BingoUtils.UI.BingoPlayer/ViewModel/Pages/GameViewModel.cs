@@ -23,6 +23,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private int _CurrentQuestion;
 
         private string _CurrentQuestionTitle;
+        private string _CurrentQuestionImagePath;
         private string _PreviousQuestionTitle;
         private string _QuestionProgress;
 
@@ -39,6 +40,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _HasPrevious, value);
             }
         }
+
         public bool HasNext
         {
             get
@@ -58,6 +60,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 return Questions.Count;
             }
         }
+
         public int CurrentQuestion
         {
             get
@@ -81,6 +84,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _CurrentQuestionTitle, value);
             }
         }
+        
+        public string CurrentQuestionImagePath
+        {
+            get
+            {
+                return _CurrentQuestionImagePath;
+            }
+            private set
+            {
+                Set(ref _CurrentQuestionImagePath, value);
+            }
+        }
+
         public string PreviousQuestionTitle
         {
             get
@@ -92,6 +108,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _PreviousQuestionTitle, value);
             }
         }
+
         public string QuestionProgress
         {
             get
@@ -137,6 +154,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 Set(ref _PlayQuestionTitleButtonViasibility, value);
             }
         }
+
         public Visibility StopQuestionTitleCommandVisibility
         {
             get
@@ -193,8 +211,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private void PreviousQuestion()
         {
             StopQuestionTitleCommand.Execute(null);
-
-            CurrentQuestionTitle = Questions[--CurrentQuestion].Title;
+            CurrentQuestion--;
+            CurrentQuestionTitle = Questions[CurrentQuestion].Title;
+            CurrentQuestionImagePath = Questions[CurrentQuestion].TitleImagePath;
 
             if (CurrentQuestion - 1 >= 0)
             {
@@ -216,7 +235,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             StopQuestionTitleCommand.Execute(null);
 
             PreviousQuestionTitle = CurrentQuestionTitle;
-            CurrentQuestionTitle = Questions[++CurrentQuestion].Title;
+            CurrentQuestion++;
+            CurrentQuestionTitle = Questions[CurrentQuestion].Title;
+            CurrentQuestionImagePath = Questions[CurrentQuestion].TitleImagePath;
 
             HasNext = CurrentQuestion + 1 < Questions.Count;
             HasPrevious = CurrentQuestion > 0;

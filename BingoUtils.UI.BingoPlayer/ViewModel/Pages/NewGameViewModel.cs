@@ -205,7 +205,20 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                                 break;
                             }
 
-                            questionList.Add(new Question(values[0], values[1]));
+                            string titleImagePath = null, 
+                                   answerImagePath = null;
+
+                            if (!string.IsNullOrEmpty(values[2]))
+                            {
+                                titleImagePath = Path.Combine(ExtractedFilesDirectory, "img", values[2]);
+                            }
+
+                            if (!string.IsNullOrEmpty(values[3]))
+                            {
+                                answerImagePath = Path.Combine(ExtractedFilesDirectory, "img", values[3]);
+                            }
+
+                            questionList.Add(new Question(values[0], values[1], titleImagePath, answerImagePath));
                         }
                     }
                     catch

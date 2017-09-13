@@ -47,9 +47,22 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <Viewbox Grid.Row="0" VerticalAlignment="Top">
-                    <TextBlock MaxWidth="300" TextAlignment="Center" Text="{Binding CurrentQuestionTitle}" HorizontalAlignment="Stretch" FontFamily="Segoe UI Semibold" TextWrapping="Wrap"  />
-                </Viewbox>
+                <Grid Grid.Row="0" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="0">
+                        <TextBlock MaxWidth="300" TextAlignment="Center" Text="{Binding CurrentQuestionTitle}" HorizontalAlignment="Stretch" FontFamily="Segoe UI Semibold" TextWrapping="Wrap"/>
+                    </Viewbox>
+                    
+                    <Viewbox Grid.Row="2">
+                        <Image Source="{Binding CurrentQuestionImagePath, TargetNullValue={x:Null}}" />
+                    </Viewbox>
+
+                </Grid>
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
