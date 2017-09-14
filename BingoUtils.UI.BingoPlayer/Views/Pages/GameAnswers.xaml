@@ -16,7 +16,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <Button DockPanel.Dock="Left" Command="{Binding DataContext.ShowTitleImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconFontAwesome Kind=PictureOutline}"/>
+                                <Button DockPanel.Dock="Left" IsEnabled="{Binding TitleImagePath, Converter={StaticResource NullToBooleanConverter}}" Command="{Binding DataContext.ShowTitleImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconMaterial Kind=FileImage}"/>
                                 <TextBlock DockPanel.Dock="Left" Margin="10 0 10 0" VerticalAlignment="Center" Text="{Binding Title}"/>
                             </DockPanel>
                         </DataTemplate>
@@ -26,7 +26,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <Button DockPanel.Dock="Left" Command="{Binding DataContext.ShowAnswerImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconFontAwesome Kind=PictureOutline}"/>
+                                <Button DockPanel.Dock="Left" IsEnabled="{Binding AnswerImagePath, Converter={StaticResource NullToBooleanConverter}}" Command="{Binding DataContext.ShowAnswerImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconMaterial Kind=FileImage}"/>
                                 <TextBlock DockPanel.Dock="Left" Margin="10 0 10 0" VerticalAlignment="Center" Text="{Binding Answer}"/>
                             </DockPanel>
                         </DataTemplate>

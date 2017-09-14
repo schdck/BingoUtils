@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\SliderForegroundConverter.cs" />
     <Compile Include="Converters\UppercaseConverter.cs" />
     <Compile Include="Languages\Dictionaries\PT_BR.cs" />

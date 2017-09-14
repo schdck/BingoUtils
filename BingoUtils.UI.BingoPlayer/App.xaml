@@ -39,6 +39,7 @@
 
             <converters:SliderForegroundConverter x:Key="ProgressForegroundConverter"/>
             <converters:UppercaseConverter x:Key="ToUpperConverter" />
+            <converters:NullToBooleanConverter x:Key="NullToBooleanConverter" />
         </ResourceDictionary>
   </Application.Resources>
 </Application>
