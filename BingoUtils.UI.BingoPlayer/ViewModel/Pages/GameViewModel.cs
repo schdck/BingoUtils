@@ -1,6 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.BingoPlayer.Views.Windows;
 using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -139,7 +140,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public ICommand NextQuestionCommand { get; private set; }
         public ICommand PlayQuestionTitleCommand { get; private set; }
         public ICommand StopQuestionTitleCommand { get; private set; }
-
+        public ICommand ShowTitleImageCommand { get; private set; }
+        public ICommand ShowAnswerImageCommand { get; private set; }
+                        
         private Visibility _PlayQuestionTitleButtonViasibility;
         private Visibility _StopQuestionTitleCommandVisibility;
 
@@ -198,6 +201,22 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
                 AudioPlayer.StopSpeach();
             });
+
+            ShowTitleImageCommand = new RelayCommand<Question>((x) => 
+            {
+                DisplayImage(x.TitleImagePath);
+            });
+
+            ShowAnswerImageCommand = new RelayCommand<Question>((x) =>
+            {
+                DisplayImage(x.AnswerImagePath);
+            });
+        }
+
+        private void DisplayImage(string path)
+        {
+            DisplayImageWindow imageDisplayer = new DisplayImageWindow(path);
+            imageDisplayer.Show();
         }
 
         private void StartNewGame()

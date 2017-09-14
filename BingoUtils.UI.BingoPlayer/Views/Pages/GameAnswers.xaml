@@ -3,28 +3,36 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
       mc:Ignorable="d" 
       Title="GameAnswers" MinWidth="770" MinHeight="510"
       d:DesignWidth="770" d:DesignHeight="510">
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Questions}" SelectedIndex="{Binding CurrentQuestion, Mode=OneWay}" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid x:Name="Root" ItemsSource="{Binding Questions}" SelectedIndex="{Binding CurrentQuestion, Mode=OneWay}" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Questão" Width="*" Binding="{Binding Title}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Padding" Value="10,0" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Resposta" Width="*" Binding="{Binding Answer}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Padding" Value="10,0" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Questão" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Button DockPanel.Dock="Left" Command="{Binding DataContext.ShowTitleImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconFontAwesome Kind=PictureOutline}"/>
+                                <TextBlock DockPanel.Dock="Left" Margin="10 0 10 0" VerticalAlignment="Center" Text="{Binding Title}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Resposta" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Button DockPanel.Dock="Left" Command="{Binding DataContext.ShowAnswerImageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="{iconPacks:PackIconFontAwesome Kind=PictureOutline}"/>
+                                <TextBlock DockPanel.Dock="Left" Margin="10 0 10 0" VerticalAlignment="Center" Text="{Binding Answer}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
