@@ -5,16 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BingoUtils.UI.Shared.UserControls"
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              x:Name="_self"
              d:DesignHeight="25.6" d:DesignWidth="600">
     <Grid VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <TextBox x:Name="TextBoxTitle"  Text="{Binding Title, ElementName=_self}"  Margin="0, 0, 2.5, 0" Grid.Column="0" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.QUESTION_HOLDER_QUESTION_TITLE, Source={StaticResource LanguageLocator}}" GotFocus="TextBoxTitle_GotFocus" VerticalAlignment="Top" />
-        <TextBox x:Name="TextBoxAnswer" Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 0, 0" Grid.Column="1" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.QUESTION_HOLDER_QUESTION_ANSWER, Source={StaticResource LanguageLocator}}" GotFocus="TextBoxAnswer_GotFocus" VerticalAlignment="Top" />
+        <Button x:Name="ButtonAddTitleImage" Padding="0" Grid.Column="1" Content="{iconPacks:PackIconFontAwesome Kind=FileImageOutline}" Click="ButtonAddTitleImage_Click"/>
+        <TextBox x:Name="TextBoxAnswer" Text="{Binding Answer, ElementName=_self}" Margin="2.5, 0, 2.5, 0" Grid.Column="2" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.QUESTION_HOLDER_QUESTION_ANSWER, Source={StaticResource LanguageLocator}}" GotFocus="TextBoxAnswer_GotFocus" VerticalAlignment="Top" />
+        <Button x:Name="ButtonAddAnswerImage" Padding="0" Grid.Column="3" Content="{iconPacks:PackIconFontAwesome Kind=FileImageOutline}" Click="ButtonAddAnswerImage_Click"/>
     </Grid>
 </UserControl>

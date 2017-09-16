@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,7 +122,17 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 }
             });
 
-            SaveGameCommand = new RelayCommand(SaveGame);
+            SaveGameCommand = new RelayCommand(() =>
+            {
+                try
+                {
+                    SaveGame();
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(string.Format("Falha ao criar arquivo do jogo.\n\nErro: {0}", e.Message), "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
         }
 
         private void SaveGame()
@@ -133,7 +144,18 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
 
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos", Disciplina);
-            string file = Path.Combine(path, string.Format("{0}.csv", Assunto));
+            string tempPath = Path.Combine(Path.GetTempPath(), "BingoTemp", "CreatedGame");
+            string imgsPath = Path.Combine(tempPath, "img");
+
+            if (Directory.Exists(tempPath))
+            {
+                Directory.Delete(tempPath, true);
+            }
+
+            Directory.CreateDirectory(tempPath);
+            Directory.CreateDirectory(imgsPath);
+
+            string file = Path.Combine(tempPath, "Game.csv");
             string fileContent;
 
             StringBuilder builder = new StringBuilder();
@@ -142,34 +164,72 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             foreach(QuestionHolder holder in AddedQuestions)
             {
-                builder.AppendLine(string.Format("{0};{1}", holder.Title, holder.Answer));
+                string TitleImageName = string.Empty; 
+                string AnswerImageName = string.Empty;
+
+                if(!string.IsNullOrEmpty(holder.TitleImagePath))
+                {
+                    if (File.Exists(holder.TitleImagePath))
+                    {
+                        TitleImageName = Path.GetFileName(holder.TitleImagePath);
+                        File.Copy(holder.TitleImagePath, Path.Combine(imgsPath, TitleImageName));
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("A seguinte imagem não foi encontrada:\n\n{0}\n\nA imagem não foi adicionada ao jogo.", TitleImageName), "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(holder.AnswerImagePath))
+                {
+                    if (File.Exists(holder.AnswerImagePath))
+                    {
+                        AnswerImageName = Path.GetFileName(holder.AnswerImagePath);
+                        File.Copy(holder.AnswerImagePath, Path.Combine(imgsPath, AnswerImageName));
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("A seguinte imagem não foi encontrada:\n\n{0}\n\nA imagem não foi adicionada ao jogo.", TitleImageName), "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
+                builder.AppendLine(string.Format("{0};{1};{2};{3}", holder.Title, holder.Answer, TitleImageName, AnswerImageName));
             }
 
             fileContent = builder.ToString();
 
-            if(!Directory.Exists(path))
+            using (StreamWriter writer = new StreamWriter(file, false, Encoding.GetEncoding("WINDOWS-1252")))
             {
-                Directory.CreateDirectory(path);
+                writer.Write(fileContent);
             }
 
-            SaveFileDialog SaveFileDialog = new SaveFileDialog()
-            {
-                AddExtension = true,
-                DefaultExt = "csv",
-                FileName = Assunto,
-            };
+            string zipPath = Path.Combine(tempPath, string.Format("{0}.zip", Assunto));
 
-            if(SaveFileDialog.ShowDialog() == true)
+            if(File.Exists(zipPath))
             {
-                using (StreamWriter writer = new StreamWriter(SaveFileDialog.FileName, false, Encoding.GetEncoding("WINDOWS-1252")))
+                File.Delete(zipPath);
+            }
+
+            using (ZipArchive newFile = ZipFile.Open(zipPath, ZipArchiveMode.Create))
+            {
+                newFile.CreateEntryFromFile(file, "Game.csv");
+
+                foreach (string imgName in Directory.GetFiles(imgsPath))
                 {
-                    writer.Write(fileContent);
+                    newFile.CreateEntryFromFile(imgName, Path.Combine("img", Path.GetFileName(imgName)));
                 }
             }
 
-            if(SaveOnDefaults)
+            if (SaveOnDefaults)
             {
-                if (File.Exists(file))
+                string formattedZipName = Path.Combine(path, string.Format("{0}.zip", Assunto));
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                if (File.Exists(formattedZipName))
                 {
                     var result = MessageBox.Show("Já existe um jogo com este nome nos seus jogos padrão, deseja sobrescrevê-lo?", "ATENÇÃO", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
 
@@ -179,10 +239,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     }
                 }
 
-                using (StreamWriter writer = new StreamWriter(file, false, Encoding.GetEncoding("WINDOWS-1252")))
-                {
-                    writer.Write(fileContent);
-                }
+                File.Copy(zipPath, formattedZipName, true);
+            }
+
+            SaveFileDialog SaveFileDialog = new SaveFileDialog()
+            {
+                AddExtension = true,
+                DefaultExt = "zip",
+                FileName = Assunto,
+            };
+
+            if (SaveFileDialog.ShowDialog() == true)
+            {
+                File.Copy(zipPath, SaveFileDialog.FileName, true);
             }
         }
     }

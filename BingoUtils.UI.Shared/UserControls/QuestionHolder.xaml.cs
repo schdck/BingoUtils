@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,37 +11,13 @@ namespace BingoUtils.UI.Shared.UserControls
     /// </summary>
     public partial class QuestionHolder : UserControl
     {
-        public static readonly DependencyProperty TitleProperty =
-           DependencyProperty.Register("Title", typeof(string), typeof(QuestionHolder), new UIPropertyMetadata());
-
-        public static readonly DependencyProperty AnswerProperty =
-            DependencyProperty.Register("Answer", typeof(string), typeof(QuestionHolder), new UIPropertyMetadata());
-
         public event EventHandler TitleTextBox_GotFocus;
         public event EventHandler AnswerTextBox_GotFocus;
 
-        public string Title
-        {
-            get
-            {
-                return (string)GetValue(TitleProperty);
-            }
-            set
-            {
-                SetValue(TitleProperty, value);
-            }
-        }
-        public string Answer
-        {
-            get
-            {
-                return (string) GetValue(AnswerProperty);
-            }
-            set
-            {
-                SetValue(AnswerProperty, value);
-            }
-        }
+        public string Title { get; set; }
+        public string Answer { get; set; }
+        public string TitleImagePath { get; set; }
+        public string AnswerImagePath { get; set; }
 
         public QuestionHolder()
         {
@@ -66,5 +43,33 @@ namespace BingoUtils.UI.Shared.UserControls
         {
             Keyboard.Focus(TextBoxAnswer);
         }
+
+        private void ButtonAddAnswerImage_Click(object sender, RoutedEventArgs e)
+        {
+            AnswerImagePath = GetImageLocation();
+        }
+
+        private void ButtonAddTitleImage_Click(object sender, RoutedEventArgs e)
+        {
+            TitleImagePath = GetImageLocation();
+        }
+
+        private string GetImageLocation()
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png",
+                Multiselect = false,
+                CheckFileExists = true
+            };
+           
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.FileName;
+            }
+
+            return null;
+        }
+
     }
 }
