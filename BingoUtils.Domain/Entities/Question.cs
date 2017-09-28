@@ -6,12 +6,14 @@
         public string Answer { get; private set; }
         public string TitleImagePath { get; private set; }
         public string AnswerImagePath { get; private set; }
+        public bool IsTitleImageImportant { get; private set; }
 
-        public Question(string title, string answer, string titleImagePath, string answerImagePath)
+        public Question(string title, string answer, string titleImagePath, bool isTitleImageImportant, string answerImagePath)
         {
             Title = title;
             Answer = answer;
             TitleImagePath = titleImagePath;
+            IsTitleImageImportant = isTitleImageImportant;
             AnswerImagePath = answerImagePath;
         }
     }

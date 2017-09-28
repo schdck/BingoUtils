@@ -20,7 +20,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
     public class WindowSharedViewModel : BaseViewModel
     {
-        private int LaunchedGames;
+        public static int LaunchedGames;
+
         private int _TabControlSelectedIndex;
         private ObservableCollection<MetroTabItem> _TabControlItemsBingo;
         private ObservableCollection<MetroTabItem> _TabControlItemsAnswer;

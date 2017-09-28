@@ -2,6 +2,7 @@
 using BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Resources;
+using BingoUtils.UI.BingoPlayer.ViewModel.Windows;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using BingoUtils.UI.Shared.Languages;
 using GalaSoft.MvvmLight;
@@ -182,43 +183,40 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     throw (new Exception("Erro ao abrir arquivo"));
                 }
 
-                if (Directory.Exists(ExtractedFilesDirectory))
+                string currentGameExtractedFilesDirectory = Path.Combine(ExtractedFilesDirectory, WindowSharedViewModel.LaunchedGames.ToString());
+
+                if (Directory.Exists(currentGameExtractedFilesDirectory))
                 {
-                    Directory.Delete(ExtractedFilesDirectory, true);
+                    Directory.Delete(currentGameExtractedFilesDirectory, true);
                 }
 
-                ZipFile.ExtractToDirectory(path, ExtractedFilesDirectory);
+                ZipFile.ExtractToDirectory(path, currentGameExtractedFilesDirectory);
                 
 
-                using (StreamReader reader = new StreamReader(Path.Combine(ExtractedFilesDirectory, "Game.csv"), Encoding.GetEncoding("WINDOWS-1252")))
+                using (StreamReader reader = new StreamReader(Path.Combine(currentGameExtractedFilesDirectory, "Game.csv"), Encoding.GetEncoding("WINDOWS-1252")))
                 {
                     try
                     {
                         string line = reader.ReadLine(); // Pular a linha de cabeçalho
 
-                        while ((line = reader.ReadLine()) != null)
+                        while ((line = reader.ReadLine()) != null && !string.IsNullOrEmpty(line))
                         {
                             string[] values = line.Split(';');
 
-                            if (string.IsNullOrWhiteSpace(values[0]) || string.IsNullOrWhiteSpace(values[1]))
-                            {
-                                break;
-                            }
-
-                            string titleImagePath = null, 
+                            string titleImagePath = null,
                                    answerImagePath = null;
 
                             if (!string.IsNullOrEmpty(values[2]))
                             {
-                                titleImagePath = Path.Combine(ExtractedFilesDirectory, "img", values[2]);
+                                titleImagePath = Path.Combine(currentGameExtractedFilesDirectory, "img", values[2]);
                             }
 
-                            if (!string.IsNullOrEmpty(values[3]))
+                            if (!string.IsNullOrEmpty(values[4]))
                             {
-                                answerImagePath = Path.Combine(ExtractedFilesDirectory, "img", values[3]);
+                                answerImagePath = Path.Combine(currentGameExtractedFilesDirectory, "img", values[4]);
                             }
 
-                            questionList.Add(new Question(values[0], values[1], titleImagePath, answerImagePath));
+                            questionList.Add(new Question(values[0], values[1], titleImagePath, bool.Parse(values[3]), answerImagePath));
                         }
                     }
                     catch
