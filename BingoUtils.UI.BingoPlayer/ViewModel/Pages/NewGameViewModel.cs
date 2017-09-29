@@ -203,7 +203,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                         {
                             string[] values = line.Split(';');
 
-                            string titleImagePath = null,
+                            string questionTitle = values[0],
+                                   questionAnswer = values[1],
+                                   titleImagePath = null,
                                    answerImagePath = null;
 
                             if (!string.IsNullOrEmpty(values[2]))
@@ -216,7 +218,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                                 answerImagePath = Path.Combine(currentGameExtractedFilesDirectory, "img", values[4]);
                             }
 
-                            questionList.Add(new Question(values[0], values[1], titleImagePath, bool.Parse(values[3]), answerImagePath));
+                            questionList.Add(new Question(questionTitle, questionAnswer, titleImagePath, values[3] == "true", answerImagePath));
                         }
                     }
                     catch

@@ -193,7 +193,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                     }
                 }
 
-                builder.AppendLine(string.Format("{0};{1};{2};{3}", holder.Title, holder.Answer, TitleImageName, AnswerImageName));
+                builder.AppendLine(string.Format("{0};{1};{2};{3};{4}", holder.Title, holder.Answer, TitleImageName, holder.IsImageImportant, AnswerImageName));
             }
 
             fileContent = builder.ToString();

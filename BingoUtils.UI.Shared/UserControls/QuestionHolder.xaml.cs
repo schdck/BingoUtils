@@ -18,6 +18,7 @@ namespace BingoUtils.UI.Shared.UserControls
         public string Answer { get; set; }
         public string TitleImagePath { get; set; }
         public string AnswerImagePath { get; set; }
+        public bool IsImageImportant { get; set; }
 
         public QuestionHolder()
         {
