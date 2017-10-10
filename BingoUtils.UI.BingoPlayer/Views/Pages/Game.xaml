@@ -48,7 +48,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <userControls:QuestionDisplayer Grid.Row="0" DataContext="{Binding CurrentQuestionDataContext}" VerticalAlignment="Top" />
+                <userControls:QuestionDisplayer Grid.Row="0" DataContext="{Binding CurrentQuestionDataContext}" VerticalAlignment="Stretch" />
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                         <TextBlock TextAlignment="Center" Text="{Binding CurrentLanguage.GAME_PREVIOUS_QUESTION, Source={StaticResource LanguageLocator}, Converter={StaticResource ToUpperConverter}}" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
                     </Viewbox>
 
-                    <userControls:QuestionDisplayer Grid.Row="2" DataContext="{Binding PreviousQuestionDataContext}" VerticalAlignment="Top" />
+                    <userControls:QuestionDisplayer Grid.Row="2" DataContext="{Binding PreviousQuestionDataContext}" VerticalAlignment="Stretch" />
                 </Grid>
             </Grid>
         </Grid>
