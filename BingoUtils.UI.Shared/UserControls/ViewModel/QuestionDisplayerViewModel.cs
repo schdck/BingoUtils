@@ -10,18 +10,14 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
 {
     public class QuestionDisplayerViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private bool _IsCurrentQuestion;
-
         public string QuestionTitle { get; set; }
 
         public string QuestionImagePath { get; set; }
 
         public FrameworkElement DisplayedElement { get; private set; }
 
-        public QuestionDisplayerViewModel(bool isCurrentQuestion)
+        public QuestionDisplayerViewModel()
         {
-            _IsCurrentQuestion = isCurrentQuestion;
-
             DisplayedElement = new Grid();
 
             PropertyChanged += (s, e) =>
@@ -43,15 +39,8 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
             {
                 ImageSource source = null;
 
-                if (_IsCurrentQuestion)
-                {
-                    source = new BitmapImage(new Uri(QuestionImagePath));
-                }
-                else
-                {
-                    source = new FormatConvertedBitmap(new BitmapImage(new Uri(QuestionImagePath)), PixelFormats.Gray32Float, null, 0);
-                }
-
+                source = new BitmapImage(new Uri(QuestionImagePath));
+                
                 DisplayedElement = new Viewbox()
                 {
                     Child = new Image()
@@ -73,16 +62,9 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
             else
             {
                 ImageSource source = null;
-
-                if (_IsCurrentQuestion)
-                {
-                    source = new BitmapImage(new Uri(QuestionImagePath));
-                }
-                else
-                {
-                    source = new FormatConvertedBitmap(new BitmapImage(new Uri(QuestionImagePath)), PixelFormats.Gray32Float, null, 0);
-                }
-
+                
+                source = new BitmapImage(new Uri(QuestionImagePath));
+                
                 var viewboxImage = new Viewbox()
                 {
                     Child = new Image()

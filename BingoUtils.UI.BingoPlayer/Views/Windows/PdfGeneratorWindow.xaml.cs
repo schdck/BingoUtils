@@ -57,7 +57,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
                         uGrid.Children.Add(new QuestionDisplayer()
                         {
                             // Adiciona ao UniformGrid
-                            DataContext = new QuestionDisplayerViewModel(true)
+                            DataContext = new QuestionDisplayerViewModel()
                             {
                                 QuestionImagePath = q.AnswerImagePath,
                                 QuestionTitle = q.Answer

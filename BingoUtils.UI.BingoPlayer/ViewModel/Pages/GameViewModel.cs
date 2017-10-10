@@ -298,12 +298,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
             HasNext = CurrentQuestion + 1 < Questions.Count;
 
-            PreviousQuestionDataContext = new QuestionDisplayerViewModel(false)
+            PreviousQuestionDataContext = new QuestionDisplayerViewModel()
             {
                 QuestionTitle = PreviousQuestionTitle,
                 QuestionImagePath = PreviousQuestionImagePath
             };
-            CurrentQuestionDataContext = new QuestionDisplayerViewModel(true)
+            CurrentQuestionDataContext = new QuestionDisplayerViewModel()
             {
                 QuestionTitle = CurrentQuestionTitle,
                 QuestionImagePath = CurrentQuestionImagePath
@@ -334,12 +334,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             HasNext = CurrentQuestion + 1 < Questions.Count;
             HasPrevious = CurrentQuestion > 0;
 
-            PreviousQuestionDataContext = new QuestionDisplayerViewModel(false)
+            PreviousQuestionDataContext = new QuestionDisplayerViewModel()
             {
                 QuestionTitle = PreviousQuestionTitle,
                 QuestionImagePath = PreviousQuestionImagePath
             };
-            CurrentQuestionDataContext = new QuestionDisplayerViewModel(true)
+            CurrentQuestionDataContext = new QuestionDisplayerViewModel()
             {
                 QuestionTitle = CurrentQuestionTitle,
                 QuestionImagePath = CurrentQuestionImagePath
