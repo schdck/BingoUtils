@@ -15,6 +15,7 @@ using BingoUtils.UI.Shared.UserControls;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Command;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -85,7 +86,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
-            MessengerInstance.Register<LaunchFinishedDistributionMessage>(this, ShowDistributionCompleteTab);
 
             LaunchChangeLanguageWindow = new SimpleDelegateCommand(() =>
             {
@@ -114,14 +114,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             });
         }   
 
-        private void ShowDistributionCompleteTab(LaunchFinishedDistributionMessage message)
-        {
-            var viewModel = new DistributorResultViewModel(message.Cartelas, message.MaxSemelhanca);
-            var page = new DistributorResult(viewModel);
-
-            AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_DISTRIBUTOR_RESULT, page, true);
-        }
-
         private void LaunchNewGame()
         {
             if(TabControlItemsBingo.Count > 1 && (TabControlItemsBingo[1].Content as Frame).Content is NewGame)
@@ -145,7 +137,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                     AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_CREATE_GAME, new CreateGame(new CreateGameViewModel()), true);
                     break;
                 case Activity.ActivityDistributor:
-                    AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_DISTRIBUTOR, new Distributor(), true);
+                    var dataContext = new CardGeneratorViewModel();
+
+                    var window = new CardGeneratorWindow()
+                    {
+                        DataContext = dataContext
+                    };
+
+                    dataContext.GeneratedCardsCommand = new RelayCommand(() =>
+                    {
+                        MessageBox.Show("Cartelas geradas com sucesso");
+                    });
+
+                    MainWindow.Instance.ShowChildWindowAsync(window);
                     break;
                 case Activity.ActivityHelp:
                     AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_HELP, new Help(), true);

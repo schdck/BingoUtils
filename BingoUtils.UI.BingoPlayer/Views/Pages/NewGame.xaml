@@ -19,8 +19,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
@@ -67,7 +67,6 @@
                     </Grid>
                 </ContentControl>
             </Grid>
-
         </Grid>
 
         <Grid Grid.Row="1" Opacity="{Binding FileContainerBackground}" Background="Transparent" Margin="-10,0">

@@ -1,0 +1,43 @@
+﻿<ChildWindow:ChildWindow x:Class="BingoUtils.UI.BingoPlayer.Views.Windows.CardGeneratorWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:ChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+                         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                         mc:Ignorable="d"
+                         BorderBrush="{DynamicResource AccentBaseColorBrush}"
+                         GlowBrush="{DynamicResource AccentColorBrush}"
+                         BorderThickness="1"
+                         ChildWindowWidth="300"
+                         CloseOnOverlay="False"
+                         ShowCloseButton="True"
+                         Title="GERADOR DE CARTELAS">
+
+    <ChildWindow:ChildWindow.OverlayBrush>
+        <SolidColorBrush Opacity=".8" Color="Gray" />
+    </ChildWindow:ChildWindow.OverlayBrush>
+
+    <ChildWindow:ChildWindow.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource MetroTextBlock}">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,2"/>
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource MetroComboBox}">
+            <Setter Property="IsSynchronizedWithCurrentItem" Value="True"/>
+            <Setter Property="Margin" Value="5,2"/>
+        </Style>
+    </ChildWindow:ChildWindow.Resources>
+    
+    <StackPanel>
+        <TextBlock Text="{Binding CurrentLanguage.START_NEW_GAME_SELECT_SUBJECT, Source={StaticResource LanguageLocator}}" />
+        <ComboBox ItemsSource="{Binding AvaliableSubjects}" SelectedIndex="{Binding SelectedIndexSubject}" />
+        <TextBlock Text="{Binding CurrentLanguage.START_NEW_GAME_SELECT_TOPIC, Source={StaticResource LanguageLocator}}" />
+        <ComboBox ItemsSource="{Binding AvaliableTopics}" SelectedIndex="{Binding SelectedIndexTopic}"/>
+        <TextBlock Text="Quantidade de cartelas"/>
+        <Controls:NumericUpDown Value="{Binding AmountOfCards}" Margin="5,2" HasDecimals="False"/>
+        <TextBlock Text="Quantidade de questões por cartela"/>
+        <Controls:NumericUpDown Value="{Binding AmountOfQuestionsPerCard}" Margin="5,2" HasDecimals="False"/>
+        <Button Content="Gerar cartelas" Command="{Binding DistributeQuestionsCommand}" Margin="5"/>
+    </StackPanel>
+</ChildWindow:ChildWindow>

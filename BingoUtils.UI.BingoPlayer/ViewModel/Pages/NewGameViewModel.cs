@@ -21,9 +21,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
     public class NewGameViewModel : ViewModelBase
     {
-        private readonly string GamesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos");
-        private readonly string ExtractedFilesDirectory = Path.Combine(Path.GetTempPath(), "BingoTemp");
-
         private bool _HasSelectedOption;
 
         private int _SelectedIndexSubject;
@@ -63,7 +60,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             set
             {
                 Set(ref _SelectedIndexSubject, value);
-                AvaliableTopics = GetAvaliableTopics();
+                AvaliableTopics = GameHelper.GetAvaliableTopicsForSubject(AvaliableSubjects.ElementAt(SelectedIndexSubject));
                 ChangeActiveChoice("Default");
             }
         }
@@ -137,7 +134,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             set
             {
                 Set(ref _AvaliableSubjects, value);
-                AvaliableTopics = GetAvaliableTopics();
+                AvaliableTopics = GameHelper.GetAvaliableTopicsForSubject(AvaliableSubjects.ElementAt(SelectedIndexSubject));
             }
         }
         public IEnumerable<string> AvaliableTopics
@@ -163,100 +160,34 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 var newGame = new Game(viewModel);
                 var newGameAnswers = new GameAnswers(viewModel);
                 var questionList = new List<Question>();
-
-                string path;
-
+                
                 if(_FileContainerBackground == 1) // Carregar jogo do arquivo do usuário
                 {
-                    path = SelectedFilePath;
-
-                    CopyFileIfNew(SelectedFilePath);
+                    questionList = GameHelper.LoadGame(SelectedFilePath, WindowSharedViewModel.LaunchedGames.ToString());
                 }
                 else // Carregar jogo da ComboBox
                 {
-                    path = Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject), string.Format("{0}.zip", AvaliableTopics.ElementAt(SelectedIndexTopic)));
+                    questionList = GameHelper.LoadGame(AvaliableSubjects.ElementAt(SelectedIndexSubject), AvaliableTopics.ElementAt(SelectedIndexTopic), WindowSharedViewModel.LaunchedGames.ToString());
                 }
-
-
-                if (!File.Exists(path))
-                {
-                    throw (new Exception("Erro ao abrir arquivo"));
-                }
-
-                string currentGameExtractedFilesDirectory = Path.Combine(ExtractedFilesDirectory, WindowSharedViewModel.LaunchedGames.ToString());
-
-                if (Directory.Exists(currentGameExtractedFilesDirectory))
-                {
-                    Directory.Delete(currentGameExtractedFilesDirectory, true);
-                }
-
-                ZipFile.ExtractToDirectory(path, currentGameExtractedFilesDirectory);
-                
-
-                using (StreamReader reader = new StreamReader(Path.Combine(currentGameExtractedFilesDirectory, "Game.csv"), Encoding.GetEncoding("WINDOWS-1252")))
-                {
-                    try
-                    {
-                        string line = reader.ReadLine(); // Pular a linha de cabeçalho
-
-                        while ((line = reader.ReadLine()) != null && !string.IsNullOrEmpty(line))
-                        {
-                            string[] values = line.Split(';');
-
-                            string questionTitle = values[0],
-                                   questionAnswer = values[1],
-                                   titleImagePath = null,
-                                   answerImagePath = null;
-
-                            if (!string.IsNullOrEmpty(values[2]))
-                            {
-                                titleImagePath = Path.Combine(currentGameExtractedFilesDirectory, "img", values[2]);
-                            }
-
-                            if (!string.IsNullOrEmpty(values[4]))
-                            {
-                                answerImagePath = Path.Combine(currentGameExtractedFilesDirectory, "img", values[4]);
-                            }
-
-                            questionList.Add(new Question(questionTitle, questionAnswer, titleImagePath, values[3] == "true", answerImagePath));
-                        }
-                    }
-                    catch
-                    {
-                        throw (new Exception("Erro ao abrir arquivo"));
-                    }
-                }
-
+               
                 MessengerInstance.Send(new StartNewGameMessage(viewModel, newGame, newGameAnswers, questionList));
             });
             RefreshAvaliableBingos = new RelayCommand(() =>
             {
-                AvaliableSubjects = GetAvaliableSubjects();
+                if (!Directory.Exists(GameHelper.GamesDirectory))
+                {
+                    Directory.CreateDirectory(GameHelper.GamesDirectory);
+
+                    CreateDefaultGamesFiles();
+                }
+
+                AvaliableSubjects = GameHelper.GetAvaliableSubjects();
             });
             SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
 
-            AvaliableSubjects = GetAvaliableSubjects();
+            AvaliableSubjects = GameHelper.GetAvaliableSubjects();
         }
-
-        private IEnumerable<string> GetAvaliableSubjects()
-        {
-            if(!Directory.Exists(GamesDirectory))
-            {
-                Directory.CreateDirectory(GamesDirectory);
-
-                CreateDefaultGamesFiles();
-            }
-
-            var folders = new List<string>();
-
-            foreach(string dir in Directory.GetDirectories(GamesDirectory))
-            {
-                folders.Add(new DirectoryInfo(dir).Name);
-            }
-
-            return folders;
-        }
-
+        
         private void CreateDefaultGamesFiles()
         {
             foreach (string s in ResourceMapper.ResourceFiles)
@@ -271,7 +202,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                         string result = reader.ReadToEnd();
                         string[] temp = s.Split('.');
 
-                        string path = Path.Combine(GamesDirectory, temp[0]);
+                        string path = Path.Combine(GameHelper.GamesDirectory, temp[0]);
                         string file = temp[1] + ".zip";
 
                         if (!Directory.Exists(path))
@@ -291,60 +222,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private string GetResourceName(string resource)
         {
             return "";
-        }
-
-        private IEnumerable<string> GetAvaliableTopics()
-        {
-            IEnumerable<string> files; 
-
-            try
-            {
-                files = Directory.GetFiles(
-                            Path.Combine(GamesDirectory, AvaliableSubjects.ElementAt(SelectedIndexSubject)))
-                                .Where((x) => (Path.GetExtension(x) == ".zip"));
-            }
-            catch
-            {
-                return null;
-            }
-            
-
-            List<string> fileNamesWithoutExtension = new List<string>();
-
-            foreach(string s in files)
-            {
-                fileNamesWithoutExtension.Add(Path.GetFileNameWithoutExtension(s));
-            }
-
-            return fileNamesWithoutExtension;
-        }
-
-        private void CopyFileIfNew(string selectedFilePath)
-        {
-            string[] gameInfo;
-
-            using (StreamReader reader = new StreamReader(selectedFilePath))
-            {
-                gameInfo = reader.ReadLine().Split(';'); // Linha de cabeçalho
-            }
-
-            string newFileFolder = Path.Combine(GamesDirectory, gameInfo[0]);
-            string newFilePath = Path.Combine(newFileFolder, string.Format("{0}.zip", gameInfo[1]));
-
-            if(!Directory.Exists(newFileFolder))
-            {
-                Directory.CreateDirectory(newFileFolder);
-            }
-
-            if (File.Exists(newFilePath))
-            {
-                if (FileHelper.FileCompare(selectedFilePath, newFilePath))
-                {
-                    return;
-                }
-                newFilePath += "(2)";
-            }
-            File.Copy(selectedFilePath, newFilePath);
         }
 
         private void ChangeActiveChoice(string choice)

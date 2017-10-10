@@ -43,7 +43,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<DistributorViewModel>();
+            SimpleIoc.Default.Register<CardGeneratorViewModel>();
             SimpleIoc.Default.Register<GameViewModel>();
             SimpleIoc.Default.Register<NewGameViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
@@ -82,11 +82,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel
             }
         }
 
-        public DistributorViewModel Distributor
+        public CardGeneratorViewModel Distributor
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<DistributorViewModel>();
+                return ServiceLocator.Current.GetInstance<CardGeneratorViewModel>();
             }
         }
 

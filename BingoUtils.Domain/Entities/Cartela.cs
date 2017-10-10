@@ -63,5 +63,10 @@ namespace BingoUtils.Domain.Entities
         {
             return string.Join(separator, Questions);
         }
+
+        public IEnumerable<int> GetIds()
+        {
+            return Questions.AsEnumerable();
+        }
     }
 }

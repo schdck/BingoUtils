@@ -43,7 +43,7 @@
 
             <Button Grid.Row="3" Command="{Binding LaunchCreateNewGameCommand}" Content="{Binding CurrentLanguage.MENU_CREATE_NEW_GAME, Source={StaticResource LanguageLocator}}" />
 
-            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" Style="{StaticResource MenuButtonStyleSoon}" Content="{Binding CurrentLanguage.MENU_DISTRIBUTE_QUESTIONS, Source={StaticResource LanguageLocator}}" />
+            <Button Grid.Row="4" Command="{Binding LaunchDistributorCommand}" Content="{Binding CurrentLanguage.MENU_DISTRIBUTE_QUESTIONS, Source={StaticResource LanguageLocator}}" />
 
             <Button Grid.Row="5" Command="{Binding LaunchSettingsCommand}" Style="{StaticResource MenuButtonStyleSoon}"  Content="{Binding CurrentLanguage.MENU_SETTINGS, Source={StaticResource LanguageLocator}}" />
             
