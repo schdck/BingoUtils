@@ -129,8 +129,6 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
         public CardGeneratorViewModel()
         {
-            _WorkerToDistribute = new BackgroundWorker();
-
             InitializeCommands();
             AvaliableSubjects = GameHelper.GetAvaliableSubjects();
         }
@@ -169,6 +167,8 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         {
             bool succeeded = false;
             Cartela[] cartelas = null;
+
+            _WorkerToDistribute = new BackgroundWorker();
 
             _WorkerToDistribute.DoWork += (s, e) =>
             {

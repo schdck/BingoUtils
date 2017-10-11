@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BingoUtils.Helpers;
+using GalaSoft.MvvmLight;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -37,15 +38,11 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
             }
             else if (string.IsNullOrEmpty(QuestionTitle))
             {
-                ImageSource source = null;
-
-                source = new BitmapImage(new Uri(QuestionImagePath));
-                
                 DisplayedElement = new Viewbox()
                 {
                     Child = new Image()
                     {
-                        Source = source
+                        Source = BitmapImageHelper.BitmapFromUri(new Uri(QuestionImagePath))
                     }
                 };
             }
@@ -61,15 +58,11 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
             }
             else
             {
-                ImageSource source = null;
-                
-                source = new BitmapImage(new Uri(QuestionImagePath));
-                
                 var viewboxImage = new Viewbox()
                 {
                     Child = new Image()
                     {
-                        Source = source
+                        Source = BitmapImageHelper.BitmapFromUri(new Uri(QuestionImagePath))
                     }
                 };
 
