@@ -185,7 +185,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             });
             SetActiveChoice = new RelayCommand<string>((x) => ChangeActiveChoice(x));
 
-            AvaliableSubjects = GameHelper.GetAvaliableSubjects();
+            RefreshAvaliableBingos.Execute(null);
         }
         
         private void CreateDefaultGamesFiles()
