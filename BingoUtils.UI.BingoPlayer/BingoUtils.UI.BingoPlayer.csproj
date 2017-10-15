@@ -292,6 +292,7 @@
     <EmbeddedResource Include="Resources\História\Brasil Pós-Independência.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Química\Química Orgânica.zip" />
     <Resource Include="0 - Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
