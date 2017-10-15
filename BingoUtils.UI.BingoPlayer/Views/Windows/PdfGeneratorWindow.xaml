@@ -7,8 +7,14 @@
                          mc:Ignorable="d"
                          Width="1058" 
                          Height="705">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+    </Window.Resources>
     
     <Border BorderThickness="0 0 1 1" BorderBrush="Black">
-        <UniformGrid x:Name="uGrid" Background="Black" Columns="{Binding AmountOfColumns}" />
+        <UniformGrid x:Name="uGrid" Columns="{Binding AmountOfColumns}" />
     </Border>
 </Window>

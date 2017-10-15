@@ -66,39 +66,91 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
 
         private void PdfGeneratorWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Documento PDF
             PdfDocument document = new PdfDocument();
 
             foreach(Cartela c in _Cartelas)
             {
-                // Diz para o Thread da tela fazer...
                 Dispatcher.Invoke(() =>
                 {
-                    // Limpa os elementos da tela
                     uGrid.Children.Clear();
 
-                    // Desenhar n questões na tela
                     foreach (int id in c.GetIds())
                     {
-                        // Pega a questão a ser desenhada
                         Question q = _GameQuestions[id - 1];
 
-                        uGrid.Children.Add(new QuestionDisplayer()
+                        FrameworkElement displayedElement;
+
+                        if (string.IsNullOrEmpty(q.Answer))
                         {
-                            // Adiciona ao UniformGrid
-                            DataContext = new QuestionDisplayerViewModel()
+                            displayedElement = new Viewbox()
                             {
-                                QuestionImagePath = q.AnswerImagePath,
-                                QuestionTitle = q.Answer
-                            },
-                            Margin = new Thickness(0.5),
-                            Padding = new Thickness(2),
-                            Background = Brushes.White
-                        });
+                                Child = new Image()
+                                {
+                                    Source = BitmapImageHelper.BitmapFromUri(new Uri(q.AnswerImagePath))
+                                }
+                            };
+                        }
+                        else if (string.IsNullOrEmpty(q.AnswerImagePath))
+                        {
+                            displayedElement = new Viewbox()
+                            {
+                                Child = new TextBlock()
+                                {
+                                    Text = q.Answer,
+                                },
+                                StretchDirection = StretchDirection.DownOnly
+                            };
+                        }
+                        else
+                        {
+                            var viewboxImage = new Viewbox()
+                            {
+                                Child = new Image()
+                                {
+                                    Source = BitmapImageHelper.BitmapFromUri(new Uri(q.AnswerImagePath))
+                                }
+                            };
+
+                            var viewboxText = new Viewbox()
+                            {
+                                Child = new TextBlock()
+                                {
+                                    Text = q.Answer,
+                                },
+                                StretchDirection = StretchDirection.DownOnly
+                            };
+
+                            var grid = new Grid()
+                            {
+                                Background = Brushes.White
+                            };
+
+                            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+                            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(5) });
+                            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+
+                            Grid.SetRow(viewboxText, 0);
+                            Grid.SetRow(viewboxImage, 2);
+
+                            grid.Children.Add(viewboxText);
+                            grid.Children.Add(viewboxImage);
+
+                            displayedElement = grid;
+                        }
+
+                        var child = new Border()
+                        {
+                            Padding = new Thickness(5),
+                            Background = Brushes.White,
+                            BorderBrush = Brushes.Black,
+                            BorderThickness = new Thickness(1),
+                            Child = displayedElement
+                        };
+
+                        uGrid.Children.Add(child);
                     }
                 });
 
-                // Diz para o Thread da tela fazer [com baixa prioridade - para esperar a tela atualizar]...
                 Dispatcher.Invoke(new Action(() =>
                 {
                     PdfHelper.DrawPictureOfControlToPdf(document, this);
