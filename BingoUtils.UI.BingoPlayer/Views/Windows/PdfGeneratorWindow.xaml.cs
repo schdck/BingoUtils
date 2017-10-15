@@ -24,15 +24,44 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
         private Cartela[] _Cartelas;
         private string _DocumentPath;
 
+        public int AmountOfColumns { get; private set; }
+
         public PdfGeneratorWindow(List<Question> gameQuestions, Cartela[] cartelas, string documentPath)
         {
+            DataContext = this;
+
             _GameQuestions = gameQuestions;
             _Cartelas = cartelas;
             _DocumentPath = documentPath;
 
+            CalculateAmountOfColumns();
+
             InitializeComponent();
 
             Loaded += PdfGeneratorWindow_Loaded;
+        }
+
+        private void CalculateAmountOfColumns()
+        {
+            if(_Cartelas[0] == null)
+            {
+                return;
+            }
+
+            int count = _Cartelas[0].QuestionsCount; 
+
+            if(count % 3 == 0)
+            {
+                AmountOfColumns = 3;
+            }
+            else if (count % 5 == 0)
+            {
+                AmountOfColumns = 5;
+            }
+            else
+            {
+                AmountOfColumns = 4;
+            }
         }
 
         private void PdfGeneratorWindow_Loaded(object sender, RoutedEventArgs e)

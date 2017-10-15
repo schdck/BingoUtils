@@ -9,6 +9,6 @@
                          Height="705">
     
     <Border BorderThickness="0 0 1 1" BorderBrush="Black">
-        <UniformGrid x:Name="uGrid" Background="Black" Columns="3" />
+        <UniformGrid x:Name="uGrid" Background="Black" Columns="{Binding AmountOfColumns}" />
     </Border>
 </Window>
