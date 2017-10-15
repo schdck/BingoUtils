@@ -195,7 +195,7 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
         {
             get
             {
-                return "Distribuir questões";
+                return "Gerar cartelas";
             }
         }
 
