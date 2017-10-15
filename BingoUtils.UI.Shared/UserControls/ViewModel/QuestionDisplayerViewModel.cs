@@ -42,7 +42,8 @@ namespace BingoUtils.UI.Shared.UserControls.ViewModel
                 {
                     Child = new Image()
                     {
-                        Source = BitmapImageHelper.BitmapFromUri(new Uri(QuestionImagePath))
+                        Source = BitmapImageHelper.BitmapFromUri(new Uri(QuestionImagePath)),
+                        Margin = new Thickness(50)
                     }
                 };
             }

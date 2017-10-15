@@ -140,7 +140,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
 
                         var child = new Border()
                         {
-                            Padding = new Thickness(5),
+                            Padding = new Thickness(10),
                             Background = Brushes.White,
                             BorderBrush = Brushes.Black,
                             BorderThickness = new Thickness(1),
