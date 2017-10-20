@@ -23,57 +23,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public RelayCommand<string> ValidateTextCommand { get; private set; }
         public RelayCommand SaveGameCommand { get; private set; }
 
-        private Brush _DisciplinaBorderBrush = Brushes.LightGray;
-        private Brush _AssuntoBorderBrush = Brushes.LightGray;
+        public Brush DisciplinaBorderBrush { get; set; } = Brushes.LightGray;
+        public Brush AssuntoBorderBrush { get; set; } = Brushes.LightGray;
 
-        public Brush DisciplinaBorderBrush
-        {
-            get
-            {
-                return _DisciplinaBorderBrush;
-            }
-            set
-            {
-                Set(ref _DisciplinaBorderBrush, value);
-            }
-        }
-        public Brush AssuntoBorderBrush
-        {
-            get
-            {
-                return _AssuntoBorderBrush;
-            }
-            set
-            {
-                Set(ref _AssuntoBorderBrush, value);
-            }
-        }
-
-        private string _Disciplina;
-        private string _Assunto;
-
-        public string Disciplina
-        {
-            get
-            {
-                return _Disciplina;
-            }
-            set
-            {
-                Set(ref _Disciplina, value);
-            }
-        }
-        public string Assunto
-        {
-            get
-            {
-                return _Assunto;
-            }
-            set
-            {
-                Set(ref _Assunto, value);
-            }
-        }
+        public string Disciplina { get; set; }
+        public string Assunto { get; set; }
 
         public bool SaveOnDefaults { get; set; }
 

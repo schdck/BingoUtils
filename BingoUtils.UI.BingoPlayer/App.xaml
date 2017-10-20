@@ -1,32 +1,23 @@
-﻿<Application x:Class="BingoUtils.UI.BingoPlayer.App" 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-             xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer" 
+﻿<Application x:Class="BingoUtils.UI.BingoPlayer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:BingoUtils.UI.Shared.Converters;assembly=BingoUtils.UI.Shared"
-             xmlns:vm="clr-namespace:BingoUtils.UI.BingoPlayer.ViewModel" 
              StartupUri="Views\Windows\MainWindow.xaml"
              ShutdownMode="OnMainWindowClose"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             d1p1:Ignorable="d" 
-             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+             d1p1:Ignorable="d">
     
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/BingoUtils.UI.Shared;component/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
         

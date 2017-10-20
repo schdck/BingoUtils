@@ -19,13 +19,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private const double MAX_SIMILARITY = 75;
 
         private int _SelectedIndexSubject;
-        private int _SelectedIndexTopic;
-        private double? _AmountOfCards;
-        private double? _AmountOfQuestionsPerCard;
-        private string _ErrorText;
         private IEnumerable<string> _AvaliableSubjects;
-        private IEnumerable<string> _AvaliableTopics;
-        private DistributorState _CurrentDistributorStatus;
         private List<Question> _GameQuestions;
         private BackgroundWorker _WorkerToDistribute;
         
@@ -42,51 +36,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 
             }
         }
-        public int SelectedIndexTopic
-        {
-            get
-            {
-                return _SelectedIndexTopic;
-            }
-            set
-            {
-                Set(ref _SelectedIndexTopic, value);
-            }
-        }
-        public double? AmountOfCards
-        {
-            get
-            {
-                return _AmountOfCards;
-            }
-            set
-            {
-                Set(ref _AmountOfCards, value);
-            }
-        }
-        public double? AmountOfQuestionsPerCard
-        {
-            get
-            {
-                return _AmountOfQuestionsPerCard;
-            }
-            set
-            {
-                Set(ref _AmountOfQuestionsPerCard, value);
-            }
-        }
-        public string ErrorText
-        {
-            get
-            {
-                return _ErrorText;
-            }
-            set
-            {
-                Set(ref _ErrorText, value);
-            }
-        }
-        
+        public int SelectedIndexTopic { get; set; }
+        public double? AmountOfCards { get; set; }
+        public double? AmountOfQuestionsPerCard { get; set; }
+        public string ErrorText { get; set; }
+
         public IEnumerable<string> AvaliableSubjects
         {
             get
@@ -99,29 +53,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 AvaliableTopics = GameHelper.GetAvaliableTopicsForSubject(AvaliableSubjects.ElementAt(SelectedIndexSubject));
             }
         }
-        public IEnumerable<string> AvaliableTopics
-        {
-            get
-            {
-                return _AvaliableTopics;
-            }
-            set
-            {
-                Set(ref _AvaliableTopics, value);
-            }
-        }
-        
-        public DistributorState CurrentDistributorStatus
-        {
-            get
-            {
-                return _CurrentDistributorStatus;
-            }
-            set
-            {
-                Set(ref _CurrentDistributorStatus, value);
-            }
-        }
+        public IEnumerable<string> AvaliableTopics { get; set; }
+
+        public DistributorState CurrentDistributorStatus { get; set; }
 
         public ICommand DistributeQuestionsCommand { get; private set; }
         public ICommand GenerateCardsCommand { get; private set; }

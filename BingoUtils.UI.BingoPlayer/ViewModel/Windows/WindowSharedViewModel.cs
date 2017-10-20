@@ -23,57 +23,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
     {
         public static int LaunchedGames;
 
-        private int _TabControlSelectedIndex;
-        private ObservableCollection<MetroTabItem> _TabControlItemsBingo;
-        private ObservableCollection<MetroTabItem> _TabControlItemsAnswer;
-        private List<Game> _Games;
-
         public SimpleDelegateCommand LaunchChangeLanguageWindow { get; private set; }
 
-        public ObservableCollection<MetroTabItem> TabControlItemsBingo
-        {
-            get
-            {
-                return _TabControlItemsBingo;
-            }
-            private set
-            {
-                Set(ref _TabControlItemsBingo, value);
-            }
-        }
-        public ObservableCollection<MetroTabItem> TabControlItemsAnswer
-        {
-            get
-            {
-                return _TabControlItemsAnswer;
-            }
-            private set
-            {
-                Set(ref _TabControlItemsAnswer, value);
-            }
-        }
-        public List<Game> Games
-        {
-            get
-            {
-                return _Games;
-            }
-            set
-            {
-                Set(ref _Games, value);
-            }
-        }
-        public int TabControlSelectedIndex
-        {
-            get
-            {
-                return _TabControlSelectedIndex;
-            }
-            set
-            {
-                Set(ref _TabControlSelectedIndex, value);
-            }
-        }
+        public ObservableCollection<MetroTabItem> TabControlItemsBingo { get; private set; }
+        public ObservableCollection<MetroTabItem> TabControlItemsAnswer { get; private set; }
+        public List<Game> Games { get; set; }
+        public int TabControlSelectedIndex { get; set; }
 
         public WindowSharedViewModel()
         {
