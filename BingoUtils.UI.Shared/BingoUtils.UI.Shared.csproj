@@ -103,7 +103,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\NullToBooleanConverter.cs" />
-    <Compile Include="Converters\SliderForegroundConverter.cs" />
     <Compile Include="Converters\UppercaseConverter.cs" />
     <Compile Include="Languages\Dictionaries\PT_BR.cs" />
     <Compile Include="Languages\Dictionaries\EN_US.cs" />
@@ -128,7 +127,6 @@
     </Compile>
     <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\ViewModel\QuestionDisplayerViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Languages\Help\Intro_EN_US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

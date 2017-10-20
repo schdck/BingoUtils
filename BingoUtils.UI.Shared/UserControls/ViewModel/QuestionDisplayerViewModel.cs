@@ -4,8 +4,6 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace BingoUtils.UI.Shared.UserControls.ViewModel
 {

@@ -3,14 +3,12 @@ using BingoUtils.Domain.Enums;
 using BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Views.Windows;
 using GalaSoft.MvvmLight.Command;
-using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {

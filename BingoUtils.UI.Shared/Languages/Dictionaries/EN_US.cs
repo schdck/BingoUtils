@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Controls;
-using BingoUtils.Domain.Entities;
+﻿using BingoUtils.Domain.Entities;
 using BingoUtils.UI.Shared.Languages.Help;
+using System.Windows.Controls;
 
 namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {

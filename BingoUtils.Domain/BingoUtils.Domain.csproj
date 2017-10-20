@@ -46,15 +46,9 @@
     <Compile Include="Entities\Cartela.cs" />
     <Compile Include="Entities\LanguageDictionary.cs" />
     <Compile Include="Entities\Question.cs" />
-    <Compile Include="Entities\SimpleDelegateCommand.cs" />
     <Compile Include="Enums\Activity.cs" />
     <Compile Include="Enums\DistributorState.cs" />
-    <Compile Include="Event Args\StartNewGameEventArgs.cs" />
-    <Compile Include="Exceptions\InvalidLanguageException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

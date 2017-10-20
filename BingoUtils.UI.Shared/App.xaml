@@ -10,9 +10,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/BingoUtils.UI.Shared;component/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="BoolToVis" />
-            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:BingoUtils.UI.Shared.ViewModel" />
-            <x:StaticExtension Member="lg:LanguageLocator.Instance" x:Key="LanguageLocator" d:IsDataSource="True" xmlns:lg="clr-namespace:BingoUtils.UI.Shared.Languages;assembly=BingoUtils.UI.Shared" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,21 +1,19 @@
-﻿using BingoUtils.Domain.Entities;
+﻿using BingoUtils.Domain.Enums;
+using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
+using BingoUtils.UI.BingoPlayer.Views.Windows;
+using BingoUtils.UI.Shared.Languages;
+using BingoUtils.UI.Shared.UserControls;
+using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using BingoUtils.UI.BingoPlayer.Messages;
-using BingoUtils.Domain.Enums;
-using System;
-using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
-using BingoUtils.UI.Shared.Languages;
-using BingoUtils.UI.BingoPlayer.Views.Windows;
-using BingoUtils.UI.Shared.UserControls;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -23,7 +21,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
     {
         public static int LaunchedGames;
 
-        public SimpleDelegateCommand LaunchChangeLanguageWindow { get; private set; }
+        public ICommand LaunchChangeLanguageWindow { get; private set; }
 
         public ObservableCollection<MetroTabItem> TabControlItemsBingo { get; private set; }
         public ObservableCollection<MetroTabItem> TabControlItemsAnswer { get; private set; }
@@ -42,7 +40,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
 
-            LaunchChangeLanguageWindow = new SimpleDelegateCommand(() =>
+            LaunchChangeLanguageWindow = new RelayCommand(() =>
             {
                 var content = new StackPanel();
 
@@ -157,7 +155,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             if (canClose)
             {
-                var command = new SimpleDelegateCommand(() =>
+                var command = new RelayCommand(() =>
                 {
                     TabControlItemsBingo.Remove(itemBingo);
                     TabControlItemsAnswer.Remove(itemAnswers);
@@ -211,7 +209,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             if (canClose)
             {
-                var command = new SimpleDelegateCommand(() =>
+                var command = new RelayCommand(() =>
                 {
                     TabControlItemsBingo.Remove(itemBingo);
                     TabControlItemsAnswer.Remove(itemAnswers);
@@ -250,7 +248,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 }
             };
 
-            var command = new SimpleDelegateCommand(() =>
+            var command = new RelayCommand(() =>
             {
                 TabControlItemsBingo.Remove(itemBingo);
                 TabControlItemsAnswer.Remove(itemAnswers);
