@@ -21,12 +21,12 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
     public partial class PdfGeneratorWindow : Window
     {
         private List<Question> _GameQuestions;
-        private Cartela[] _Cartelas;
+        private Card[] _Cartelas;
         private string _DocumentPath;
 
         public int AmountOfColumns { get; private set; }
 
-        public PdfGeneratorWindow(List<Question> gameQuestions, Cartela[] cartelas, string documentPath)
+        public PdfGeneratorWindow(List<Question> gameQuestions, Card[] cartelas, string documentPath)
         {
             DataContext = this;
 
@@ -68,7 +68,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
         {
             PdfDocument document = new PdfDocument();
 
-            foreach(Cartela c in _Cartelas)
+            foreach(Card c in _Cartelas)
             {
                 Dispatcher.Invoke(() =>
                 {

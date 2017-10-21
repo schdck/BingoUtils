@@ -53,7 +53,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         }
         public IEnumerable<string> AvaliableTopics { get; set; }
 
-        public DistributorState CurrentDistributorStatus { get; set; }
+        public CardGeneratorStatus CurrentDistributorStatus { get; set; }
 
         public ICommand DistributeQuestionsCommand { get; private set; }
         public ICommand GenerateCardsCommand { get; private set; }
@@ -74,19 +74,19 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 switch (ValidateInputs())
                 {
                     case 1:
-                        CurrentDistributorStatus = DistributorState.Waiting;
+                        CurrentDistributorStatus = CardGeneratorStatus.Waiting;
                         ErrorText = "A quantidade de questões não pode ser zero.";
                         return;
                     case 2:
-                        CurrentDistributorStatus = DistributorState.Waiting;
+                        CurrentDistributorStatus = CardGeneratorStatus.Waiting;
                         ErrorText = "A quantidade de cartelas não pode ser zero.";
                         return;
                     case 3:
-                        CurrentDistributorStatus = DistributorState.Waiting;
+                        CurrentDistributorStatus = CardGeneratorStatus.Waiting;
                         ErrorText = "A quantidade de questões por cartela não pode ser zero.";
                         return;
                     case 4:
-                        CurrentDistributorStatus = DistributorState.Waiting;
+                        CurrentDistributorStatus = CardGeneratorStatus.Waiting;
                         ErrorText = "A quantidade de questões por cartela não pode ser maior que a quantidade de questões.";
                         return;
                 }
@@ -98,7 +98,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private void DistributeQuestions()
         {
             bool succeeded = false;
-            Cartela[] cartelas = null;
+            Card[] cartelas = null;
 
             _WorkerToDistribute = new BackgroundWorker();
 
@@ -109,7 +109,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             _WorkerToDistribute.RunWorkerCompleted += (s, e) =>
             {
-                CurrentDistributorStatus = succeeded ? DistributorState.Success : DistributorState.Error;
+                CurrentDistributorStatus = succeeded ? CardGeneratorStatus.Success : CardGeneratorStatus.Error;
 
                 SaveFileDialog dialog = new SaveFileDialog()
                 {
@@ -132,7 +132,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 
             };
 
-            CurrentDistributorStatus = DistributorState.Working;
+            CurrentDistributorStatus = CardGeneratorStatus.Working;
 
             _WorkerToDistribute.RunWorkerAsync();
         }
@@ -141,15 +141,15 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
          * TODO
          * - Implement a logic to distribute the questions using all of them and using them in a similar amount of times
         */
-        private bool DistributeQuestions(out Cartela[] cartelas)
+        private bool DistributeQuestions(out Card[] cartelas)
         {
             Random r = new Random();
-            cartelas = new Cartela[(int) AmountOfCards];
+            cartelas = new Card[(int) AmountOfCards];
             int i = 0;
 
             do
             {
-                cartelas[i] = new Cartela(i, (int) AmountOfQuestionsPerCard);
+                cartelas[i] = new Card(i, (int) AmountOfQuestionsPerCard);
 
                 while(!cartelas[i].IsFull)
                 {
@@ -161,7 +161,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
                 for(int j = i - 1; j >= 0; j--)
                 {
-                    double temp = cartelas[i].GetSemelhanca(cartelas[j]);
+                    double temp = cartelas[i].GetSimilarity(cartelas[j]);
 
                     if(temp > maxSemelhanca)
                     {

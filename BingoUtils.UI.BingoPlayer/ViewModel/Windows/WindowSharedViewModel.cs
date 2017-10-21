@@ -89,7 +89,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 case Activity.ActivityCreateGame:
                     AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_CREATE_GAME, new CreateGame(new CreateGameViewModel()), true);
                     break;
-                case Activity.ActivityDistributor:
+                case Activity.ActivityCardGenerator:
                     var dataContext = new CardGeneratorViewModel();
 
                     var window = new CardGeneratorWindow()
