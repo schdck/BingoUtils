@@ -1,7 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
-using BingoUtils.UI.Shared.UserControls;
-using BingoUtils.UI.Shared.UserControls.ViewModel;
+using BingoUtils.UI.Shared.Views.UserControls;
+using BingoUtils.UI.Shared.ViewModels.UserControls;
 using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Win32;
 using PdfSharp.Pdf;

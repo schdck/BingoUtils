@@ -5,12 +5,12 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BingoUtils.UI.Shared.UserControls.ViewModel
+namespace BingoUtils.UI.Shared.ViewModels.UserControls
 {
     public class QuestionDisplayerViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public string QuestionTitle { get; set; }
-
+ 
         public string QuestionImagePath { get; set; }
 
         public FrameworkElement DisplayedElement { get; private set; }

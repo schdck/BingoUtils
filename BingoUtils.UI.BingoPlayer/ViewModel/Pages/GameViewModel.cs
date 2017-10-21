@@ -3,7 +3,7 @@ using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Views.Windows;
 using BingoUtils.UI.Shared.Languages;
-using BingoUtils.UI.Shared.UserControls.ViewModel;
+using BingoUtils.UI.Shared.ViewModels.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;

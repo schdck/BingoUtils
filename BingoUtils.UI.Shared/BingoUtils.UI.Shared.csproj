@@ -113,20 +113,24 @@
       <DependentUpon>Intro_PT_BR.xaml</DependentUpon>
     </Compile>
     <Compile Include="Languages\LanguageLocator.cs" />
-    <Compile Include="UserControls\DragAndDrop.xaml.cs">
+    <Compile Include="Views\UserControls\DragAndDrop.xaml.cs">
       <DependentUpon>DragAndDrop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\LanguageSelector.xaml.cs">
+    <Compile Include="Views\UserControls\LanguageSelector.xaml.cs">
       <DependentUpon>LanguageSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\QuestionDisplayer.xaml.cs">
+    <Compile Include="Views\UserControls\QuestionDisplayer.xaml.cs">
       <DependentUpon>QuestionDisplayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\QuestionHolder.xaml.cs">
+    <Compile Include="Views\UserControls\QuestionHolder.xaml.cs">
       <DependentUpon>QuestionHolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\UserSettings.cs" />
-    <Compile Include="UserControls\ViewModel\QuestionDisplayerViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\QuestionDisplayerViewModel.cs" />
+    <Page Include="Converters\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Languages\Help\Intro_EN_US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,19 +155,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\DragAndDrop.xaml">
+    <Page Include="Views\UserControls\DragAndDrop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\LanguageSelector.xaml">
+    <Page Include="Views\UserControls\LanguageSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\QuestionDisplayer.xaml">
+    <Page Include="Views\UserControls\QuestionDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\QuestionHolder.xaml">
+    <Page Include="Views\UserControls\QuestionHolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BingoUtils.UI.Shared.UserControls
+namespace BingoUtils.UI.Shared.Views.UserControls
 {
     /// <summary>
     /// Interação lógica para QuestionDisplayer.xam

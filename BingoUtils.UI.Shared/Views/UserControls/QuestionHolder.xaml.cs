@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace BingoUtils.UI.Shared.UserControls
+namespace BingoUtils.UI.Shared.Views.UserControls
 {
     /// <summary>
     /// Interaction logic for QuestionHolder.xaml

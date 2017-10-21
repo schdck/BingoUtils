@@ -1,4 +1,4 @@
-﻿using BingoUtils.UI.Shared.UserControls;
+﻿using BingoUtils.UI.Shared.Views.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;

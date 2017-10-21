@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BingoUtils.UI.Shared.UserControls
+namespace BingoUtils.UI.Shared.Views.UserControls
 {
     /// <summary>
     /// Interaction logic for LanguageSelector.xaml

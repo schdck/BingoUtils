@@ -4,7 +4,7 @@ using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
 using BingoUtils.UI.BingoPlayer.Views.Windows;
 using BingoUtils.UI.Shared.Languages;
-using BingoUtils.UI.Shared.UserControls;
+using BingoUtils.UI.Shared.Views.UserControls;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow;
