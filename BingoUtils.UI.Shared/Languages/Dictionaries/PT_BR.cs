@@ -110,22 +110,6 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             }
         }
 
-        public override string HEADER_DISTRIBUTOR
-        {
-            get
-            {
-                return "Distribuidor";
-            }
-        }
-
-        public override string HEADER_DISTRIBUTOR_RESULT
-        {
-            get
-            {
-                return "Resultado do distribuidor";
-            }
-        }
-
         public override string HEADER_GAME
         {
             get

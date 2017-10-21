@@ -9,8 +9,6 @@ namespace BingoUtils.Domain.Entities
         public abstract string HEADER_CREATE_GAME { get; }
         public abstract string HEADER_NEW_GAME { get; }
         public abstract string HEADER_GAME { get; }
-        public abstract string HEADER_DISTRIBUTOR { get; }
-        public abstract string HEADER_DISTRIBUTOR_RESULT { get; }
         public abstract string HEADER_HELP { get; }
         public abstract string HEADER_ABOUT { get; }
         public abstract string HEADER_SETTINGS { get; }
