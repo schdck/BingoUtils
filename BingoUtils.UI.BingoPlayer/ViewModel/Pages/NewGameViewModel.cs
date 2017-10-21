@@ -90,11 +90,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 var newGameAnswers = new GameAnswers(viewModel);
                 var questionList = new List<Question>();
                 
-                if(FileContainerBackground == 1) // Carregar jogo do arquivo do usuário
+                if(FileContainerBackground == 1) // Load the file that the user chose
                 {
                     questionList = GameHelper.LoadGame(SelectedFilePath, WindowSharedViewModel.LaunchedGames.ToString());
                 }
-                else // Carregar jogo da ComboBox
+                else // Load the game selected in the comboboxes
                 {
                     questionList = GameHelper.LoadGame(AvaliableSubjects.ElementAt(SelectedIndexSubject), AvaliableTopics.ElementAt(SelectedIndexTopic), WindowSharedViewModel.LaunchedGames.ToString());
                 }

@@ -21,17 +21,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Text="{Binding Disciplina, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding DisciplinaBorderBrush}" Margin="0,5,2.5,5" VerticalAlignment="Top" Grid.Column="0" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_SUBJECT_REQUIRED, Source={StaticResource LanguageLocator}}">
+                <TextBox Text="{Binding Subject, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding SubjectBorderBrush}" Margin="0,5,2.5,5" VerticalAlignment="Top" Grid.Column="0" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_SUBJECT_REQUIRED, Source={StaticResource LanguageLocator}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus" >
-                            <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Disciplina" />
+                            <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Subject" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
-                <TextBox Text="{Binding Assunto, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding AssuntoBorderBrush}" Margin="2.5,5,0,5" VerticalAlignment="Top" Grid.Column="1" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_TOPIC_REQUIRED, Source={StaticResource LanguageLocator}}">
+                <TextBox Text="{Binding Topic, UpdateSourceTrigger=LostFocus}" BorderBrush="{Binding TopicBorderBrush}" Margin="2.5,5,0,5" VerticalAlignment="Top" Grid.Column="1" Controls:TextBoxHelper.Watermark="{Binding CurrentLanguage.CREATE_TOPIC_REQUIRED, Source={StaticResource LanguageLocator}}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus" >
-                            <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Assunto" />
+                            <i:InvokeCommandAction Command="{Binding ValidateTextCommand}" CommandParameter="Topic" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>

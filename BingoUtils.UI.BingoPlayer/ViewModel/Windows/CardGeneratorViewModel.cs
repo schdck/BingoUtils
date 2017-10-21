@@ -69,7 +69,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         {
             DistributeQuestionsCommand = new RelayCommand(() =>
             {
-                _GameQuestions = GameHelper.LoadGame(AvaliableSubjects.ElementAt(SelectedIndexSubject), AvaliableTopics.ElementAt(SelectedIndexTopic), "Cartela");
+                _GameQuestions = GameHelper.LoadGame(AvaliableSubjects.ElementAt(SelectedIndexSubject), AvaliableTopics.ElementAt(SelectedIndexTopic), "Card");
 
                 switch (ValidateInputs())
                 {
@@ -98,13 +98,13 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         private void DistributeQuestions()
         {
             bool succeeded = false;
-            Card[] cartelas = null;
+            Card[] cards = null;
 
             _WorkerToDistribute = new BackgroundWorker();
 
             _WorkerToDistribute.DoWork += (s, e) =>
             {
-                succeeded = DistributeQuestions(out cartelas);
+                succeeded = DistributeQuestions(out cards);
             };
 
             _WorkerToDistribute.RunWorkerCompleted += (s, e) =>
@@ -120,7 +120,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
                 if (dialog.ShowDialog() == true)
                 {
-                    var window = new PdfGeneratorWindow(_GameQuestions, cartelas, dialog.FileName);
+                    var window = new PdfGeneratorWindow(_GameQuestions, cards, dialog.FileName);
 
                     window.Closed += (sender, eargs) =>
                     {
@@ -141,35 +141,35 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
          * TODO
          * - Implement a logic to distribute the questions using all of them and using them in a similar amount of times
         */
-        private bool DistributeQuestions(out Card[] cartelas)
+        private bool DistributeQuestions(out Card[] cards)
         {
             Random r = new Random();
-            cartelas = new Card[(int) AmountOfCards];
+            cards = new Card[(int) AmountOfCards];
             int i = 0;
 
             do
             {
-                cartelas[i] = new Card(i, (int) AmountOfQuestionsPerCard);
+                cards[i] = new Card(i, (int) AmountOfQuestionsPerCard);
 
-                while(!cartelas[i].IsFull)
+                while(!cards[i].IsFull)
                 {
                     int val = r.Next(Convert.ToInt32(_GameQuestions.Count)) + 1;
-                    cartelas[i].AddQuestion(val);
+                    cards[i].AddQuestion(val);
                 }
 
-                double maxSemelhanca = 0;
+                double maxSimilarity = 0;
 
                 for(int j = i - 1; j >= 0; j--)
                 {
-                    double temp = cartelas[i].GetSimilarity(cartelas[j]);
+                    double comparedCardSimilarity = cards[i].GetSimilarity(cards[j]);
 
-                    if(temp > maxSemelhanca)
+                    if(comparedCardSimilarity > maxSimilarity)
                     {
-                        maxSemelhanca = temp;
+                        maxSimilarity = comparedCardSimilarity;
                     }
                 }
 
-                if(maxSemelhanca <= MAX_SIMILARITY)
+                if(maxSimilarity <= MAX_SIMILARITY)
                 {
                     i++;
                 }

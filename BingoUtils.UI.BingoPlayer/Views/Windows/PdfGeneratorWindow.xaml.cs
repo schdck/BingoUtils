@@ -21,7 +21,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
     public partial class PdfGeneratorWindow : Window
     {
         private List<Question> _GameQuestions;
-        private Card[] _Cartelas;
+        private Card[] _Cards;
         private string _DocumentPath;
 
         public int AmountOfColumns { get; private set; }
@@ -31,7 +31,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
             DataContext = this;
 
             _GameQuestions = gameQuestions;
-            _Cartelas = cartelas;
+            _Cards = cartelas;
             _DocumentPath = documentPath;
 
             CalculateAmountOfColumns();
@@ -43,12 +43,12 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
 
         private void CalculateAmountOfColumns()
         {
-            if(_Cartelas[0] == null)
+            if(_Cards[0] == null)
             {
                 return;
             }
 
-            int count = _Cartelas[0].QuestionsCount; 
+            int count = _Cards[0].QuestionsCount; 
 
             if(count % 3 == 0)
             {
@@ -68,7 +68,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
         {
             PdfDocument document = new PdfDocument();
 
-            foreach(Card c in _Cartelas)
+            foreach(Card c in _Cards)
             {
                 Dispatcher.Invoke(() =>
                 {
