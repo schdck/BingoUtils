@@ -4,8 +4,16 @@ namespace BingoUtils.Helpers
 {
     public static class RandomExtensions
     {
-        // by: Matt Howells / StackOverflow Community
-        // http://stackoverflow.com/a/110570/5686352
+        // By: Matt Howells / StackOverflow Community
+        // At: http://stackoverflow.com/a/110570/5686352
+        /// <summary>
+        /// Shuffles and array
+        /// </summary>
+        /// <typeparam name="T">The type of data into the array</typeparam>
+        /// <param name="rng">The random object to be used</param>
+        /// <param name="array">The array to be shuffled</param>
+        /// <exception cref="OverflowException" />
+        /// <exception cref="ArgumentOutOfRangeException" />
         public static void Shuffle<T>(this Random rng, T[] array)
         {
             int n = array.Length;
