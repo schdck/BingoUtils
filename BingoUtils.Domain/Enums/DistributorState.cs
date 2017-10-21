@@ -1,6 +1,9 @@
 ﻿namespace BingoUtils.Domain.Enums
 {
-    public enum DistributorState
+    /// <summary>
+    /// Represents the possible status of the card generator
+    /// </summary>
+    public enum CardGeneratorStatus
     {
         Waiting,
         Working,
