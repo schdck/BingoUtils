@@ -183,7 +183,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 {
                     AddExtension = true,
                     DefaultExt = ".pdf",
-                    Filter = "PDF|.pdf"
+                    Filter = "PDF|*.pdf"
                 };
 
                 if (dialog.ShowDialog() == true)
