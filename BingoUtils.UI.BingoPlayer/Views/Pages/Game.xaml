@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BingoUtils.UI.BingoPlayer.Views.Pages"
-      xmlns:userControls="clr-namespace:BingoUtils.UI.Shared.UserControls;assembly=BingoUtils.UI.Shared"
+      xmlns:UserControls="clr-namespace:BingoUtils.UI.Shared.Views.UserControls;assembly=BingoUtils.UI.Shared"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       Title="Game" MinWidth="770" MinHeight="510"
@@ -48,7 +48,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <userControls:QuestionDisplayer Grid.Row="0" DataContext="{Binding CurrentQuestionDataContext}" VerticalAlignment="Stretch" />
+                <UserControls:QuestionDisplayer Grid.Row="0" DataContext="{Binding CurrentQuestionDataContext}" VerticalAlignment="Stretch" />
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                         <TextBlock TextAlignment="Center" Text="{Binding CurrentLanguage.GAME_PREVIOUS_QUESTION, Source={StaticResource LanguageLocator}, Converter={StaticResource ToUpperConverter}}" FontFamily="Segoe UI Light" Width="550" Foreground="Gray" />
                     </Viewbox>
 
-                    <userControls:QuestionDisplayer Grid.Row="2" DataContext="{Binding PreviousQuestionDataContext}" VerticalAlignment="Stretch" />
+                    <UserControls:QuestionDisplayer Grid.Row="2" DataContext="{Binding PreviousQuestionDataContext}" VerticalAlignment="Stretch" />
                 </Grid>
             </Grid>
         </Grid>

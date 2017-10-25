@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BingoUtils.Domain.Enums
+﻿namespace BingoUtils.Domain.Enums
 {
-    public enum DistributorState
+    /// <summary>
+    /// Represents the possible status of the card generator
+    /// </summary>
+    public enum CardGeneratorStatus
     {
         Waiting,
         Working,

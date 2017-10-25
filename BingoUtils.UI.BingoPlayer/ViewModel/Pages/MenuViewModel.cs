@@ -26,7 +26,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             LaunchCreateNewGameCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityCreateGame));
 
-            LaunchDistributorCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityDistributor));
+            LaunchDistributorCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivityCardGenerator));
 
             LaunchSettingsCommand = new RelayCommand(() => BroadcastLaunchMessage(Activity.ActivitySettings));
 

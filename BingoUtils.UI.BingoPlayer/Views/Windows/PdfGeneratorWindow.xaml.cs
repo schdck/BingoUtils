@@ -1,7 +1,7 @@
 ﻿using BingoUtils.Domain.Entities;
 using BingoUtils.Helpers;
-using BingoUtils.UI.Shared.UserControls;
-using BingoUtils.UI.Shared.UserControls.ViewModel;
+using BingoUtils.UI.Shared.Views.UserControls;
+using BingoUtils.UI.Shared.ViewModels.UserControls;
 using MahApps.Metro.SimpleChildWindow;
 using Microsoft.Win32;
 using PdfSharp.Pdf;
@@ -21,17 +21,17 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
     public partial class PdfGeneratorWindow : Window
     {
         private List<Question> _GameQuestions;
-        private Cartela[] _Cartelas;
+        private Card[] _Cards;
         private string _DocumentPath;
 
         public int AmountOfColumns { get; private set; }
 
-        public PdfGeneratorWindow(List<Question> gameQuestions, Cartela[] cartelas, string documentPath)
+        public PdfGeneratorWindow(List<Question> gameQuestions, Card[] cartelas, string documentPath)
         {
             DataContext = this;
 
             _GameQuestions = gameQuestions;
-            _Cartelas = cartelas;
+            _Cards = cartelas;
             _DocumentPath = documentPath;
 
             CalculateAmountOfColumns();
@@ -43,12 +43,12 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
 
         private void CalculateAmountOfColumns()
         {
-            if(_Cartelas[0] == null)
+            if(_Cards[0] == null)
             {
                 return;
             }
 
-            int count = _Cartelas[0].QuestionsCount; 
+            int count = _Cards[0].QuestionsCount; 
 
             if(count % 3 == 0)
             {
@@ -68,7 +68,7 @@ namespace BingoUtils.UI.BingoPlayer.Views.Windows
         {
             PdfDocument document = new PdfDocument();
 
-            foreach(Cartela c in _Cartelas)
+            foreach(Card c in _Cards)
             {
                 Dispatcher.Invoke(() =>
                 {

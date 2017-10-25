@@ -1,15 +1,13 @@
-﻿using BingoUtils.UI.Shared.UserControls;
+﻿using BingoUtils.UI.Shared.Views.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -23,57 +21,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
         public RelayCommand<string> ValidateTextCommand { get; private set; }
         public RelayCommand SaveGameCommand { get; private set; }
 
-        private Brush _DisciplinaBorderBrush = Brushes.LightGray;
-        private Brush _AssuntoBorderBrush = Brushes.LightGray;
+        public Brush SubjectBorderBrush { get; set; } = Brushes.LightGray;
+        public Brush TopicBorderBrush { get; set; } = Brushes.LightGray;
 
-        public Brush DisciplinaBorderBrush
-        {
-            get
-            {
-                return _DisciplinaBorderBrush;
-            }
-            set
-            {
-                Set(ref _DisciplinaBorderBrush, value);
-            }
-        }
-        public Brush AssuntoBorderBrush
-        {
-            get
-            {
-                return _AssuntoBorderBrush;
-            }
-            set
-            {
-                Set(ref _AssuntoBorderBrush, value);
-            }
-        }
-
-        private string _Disciplina;
-        private string _Assunto;
-
-        public string Disciplina
-        {
-            get
-            {
-                return _Disciplina;
-            }
-            set
-            {
-                Set(ref _Disciplina, value);
-            }
-        }
-        public string Assunto
-        {
-            get
-            {
-                return _Assunto;
-            }
-            set
-            {
-                Set(ref _Assunto, value);
-            }
-        }
+        public string Subject { get; set; }
+        public string Topic { get; set; }
 
         public bool SaveOnDefaults { get; set; }
 
@@ -112,13 +64,13 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             ValidateTextCommand = new RelayCommand<string>((x) =>
             {
-                if(x == "Disciplina")
+                if(x == "Subject")
                 {
-                    DisciplinaBorderBrush = (string.IsNullOrWhiteSpace(Disciplina) ? Brushes.Red : Brushes.LightGray);
+                    SubjectBorderBrush = (string.IsNullOrWhiteSpace(Subject) ? Brushes.Red : Brushes.LightGray);
                 }
-                else if(x == "Assunto")
+                else if(x == "Topic")
                 {
-                    AssuntoBorderBrush = (string.IsNullOrWhiteSpace(Assunto) ? Brushes.Red : Brushes.LightGray);
+                    TopicBorderBrush = (string.IsNullOrWhiteSpace(Topic) ? Brushes.Red : Brushes.LightGray);
                 }
             });
 
@@ -137,13 +89,13 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
         private void SaveGame()
         {
-            if(string.IsNullOrWhiteSpace(Disciplina) || string.IsNullOrWhiteSpace(Assunto))
+            if(string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(Topic))
             {
                 MessageBox.Show("Preencha todos os campos obrigatórios antes de continuar", "ERRO:", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos", Disciplina);
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Bingo", "Jogos", Subject);
             string tempPath = Path.Combine(Path.GetTempPath(), "BingoTemp", "CreatedGame");
             string imgsPath = Path.Combine(tempPath, "img");
 
@@ -160,7 +112,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine(string.Format("{0};{1}", Disciplina, Assunto));
+            builder.AppendLine(string.Format("{0};{1}", Subject, Topic));
 
             foreach(QuestionHolder holder in AddedQuestions)
             {
@@ -203,7 +155,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 writer.Write(fileContent);
             }
 
-            string zipPath = Path.Combine(tempPath, string.Format("{0}.zip", Assunto));
+            string zipPath = Path.Combine(tempPath, string.Format("{0}.zip", Topic));
 
             if(File.Exists(zipPath))
             {
@@ -222,7 +174,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 
             if (SaveOnDefaults)
             {
-                string formattedZipName = Path.Combine(path, string.Format("{0}.zip", Assunto));
+                string formattedZipName = Path.Combine(path, string.Format("{0}.zip", Topic));
 
                 if (!Directory.Exists(path))
                 {
@@ -246,7 +198,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             {
                 AddExtension = true,
                 DefaultExt = "zip",
-                FileName = Assunto,
+                FileName = Topic,
             };
 
             if (SaveFileDialog.ShowDialog() == true)

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{1FC97DE9-367D-43A3-AB11-66A772E0A697}"
 EndProject
@@ -13,15 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{EAD4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.Helpers", "BingoUtils.Helpers\BingoUtils.Helpers.csproj", "{365FE43F-816E-4F34-A331-D04B7C433326}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_License", "_License", "{E83AC5A5-9275-4CED-B424-1C44B6BC90E6}"
-	ProjectSection(SolutionItems) = preProject
-		LICENCSE_MAHAPPS.txt = LICENCSE_MAHAPPS.txt
-		LICENSE.txt = LICENSE.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.UI.Shared", "BingoUtils.UI.Shared\BingoUtils.UI.Shared.csproj", "{387F68E6-9D2D-4043-8CAC-C03BF904F49E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingoUtils.UI.BingoPlayer", "BingoUtils.UI.BingoPlayer\BingoUtils.UI.BingoPlayer.csproj", "{C6C712F5-21C0-4F10-ACC9-C2D2009CDC04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Licenses", "_Licenses", "{836905CB-0555-4F29-862A-3AE5D373AF3D}"
+	ProjectSection(SolutionItems) = preProject
+		Licenses\LICENSE.TXT = Licenses\LICENSE.TXT
+		Licenses\LICENSE_FODY.PROPERTYCHANGED.TXT = Licenses\LICENSE_FODY.PROPERTYCHANGED.TXT
+		Licenses\LICENSE_FODY.TXT = Licenses\LICENSE_FODY.TXT
+		Licenses\LICENSE_MAHAPPS.METRO.ICONPACKS.TXT = Licenses\LICENSE_MAHAPPS.METRO.ICONPACKS.TXT
+		Licenses\LICENSE_MAHAPPS.METRO.SIMPLECHILDWINDOW.TXT = Licenses\LICENSE_MAHAPPS.METRO.SIMPLECHILDWINDOW.TXT
+		Licenses\LICENSE_MAHAPPS.METRO.TXT = Licenses\LICENSE_MAHAPPS.METRO.TXT
+		Licenses\LICENSE_MVVM_LIGHT.TXT = Licenses\LICENSE_MVVM_LIGHT.TXT
+		Licenses\LICENSE_PDFSHARP.TXT = Licenses\LICENSE_PDFSHARP.TXT
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,5 +87,8 @@ Global
 		{365FE43F-816E-4F34-A331-D04B7C433326} = {EAD493C3-CBD4-4BE3-BE10-5B67AFAAFE73}
 		{387F68E6-9D2D-4043-8CAC-C03BF904F49E} = {1FC97DE9-367D-43A3-AB11-66A772E0A697}
 		{C6C712F5-21C0-4F10-ACC9-C2D2009CDC04} = {1FC97DE9-367D-43A3-AB11-66A772E0A697}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4743E2FA-7C7F-4727-A468-997D78F3DCDD}
 	EndGlobalSection
 EndGlobal

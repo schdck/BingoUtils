@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Controls;
-using BingoUtils.Domain.Entities;
+﻿using BingoUtils.Domain.Entities;
 using BingoUtils.UI.Shared.Languages.Help;
+using System.Windows.Controls;
 
 namespace BingoUtils.UI.Shared.Languages.Dictionaries
 {
@@ -108,22 +107,6 @@ namespace BingoUtils.UI.Shared.Languages.Dictionaries
             get
             {
                 return "Criar um jogo";
-            }
-        }
-
-        public override string HEADER_DISTRIBUTOR
-        {
-            get
-            {
-                return "Distribuidor";
-            }
-        }
-
-        public override string HEADER_DISTRIBUTOR_RESULT
-        {
-            get
-            {
-                return "Resultado do distribuidor";
             }
         }
 

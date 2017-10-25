@@ -3,7 +3,7 @@ using BingoUtils.Helpers.BingoUtils.Helpers;
 using BingoUtils.UI.BingoPlayer.Messages;
 using BingoUtils.UI.BingoPlayer.Views.Windows;
 using BingoUtils.UI.Shared.Languages;
-using BingoUtils.UI.Shared.UserControls.ViewModel;
+using BingoUtils.UI.Shared.ViewModels.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
@@ -19,45 +19,9 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
     {
         private Random RandomGenerator = new Random();
 
-        private bool _HasPrevious;
-        private bool _HasNext;
-        
-        private int _CurrentQuestion;
+        public bool HasPrevious { get; private set; }
 
-        private string _CurrentQuestionTitle;
-        private string _CurrentQuestionImagePath;
-        private string _PreviousQuestionTitle;
-        private string _PreviousQuestionImagePath;
-        private string _QuestionProgress;
-
-        private QuestionDisplayerViewModel _PreviousQuestionDataContext;
-        private QuestionDisplayerViewModel _CurrentQuestionDataContext;
-
-        private List<Question> _Questions;
-
-        public bool HasPrevious
-        {
-            get
-            {
-                return _HasPrevious;
-            }
-            private set
-            {
-                Set(ref _HasPrevious, value);
-            }
-        }
-
-        public bool HasNext
-        {
-            get
-            {
-                return _HasNext;
-            }
-            private set
-            {
-                Set(ref _HasNext, value);
-            }
-        }
+        public bool HasNext { get; private set; }
 
         public int QuestionsCount
         {
@@ -67,113 +31,22 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
         }
 
-        public int CurrentQuestion
-        {
-            get
-            {
-                return _CurrentQuestion;
-            }
-            set
-            {
-                Set(ref _CurrentQuestion, value);
-            }
-        }
+        public int CurrentQuestion { get; set; }
 
-        public string CurrentQuestionTitle
-        {
-            get
-            {
-                return _CurrentQuestionTitle;
-            }
-            private set
-            {
-                Set(ref _CurrentQuestionTitle, value);
-            }
-        }
-        
-        public string CurrentQuestionImagePath
-        {
-            get
-            {
-                return _CurrentQuestionImagePath;
-            }
-            private set
-            {
-                Set(ref _CurrentQuestionImagePath, value);
-            }
-        }
+        public string CurrentQuestionTitle { get; private set; }
 
-        public string PreviousQuestionTitle
-        {
-            get
-            {
-                return _PreviousQuestionTitle;
-            }
-            private set
-            {
-                Set(ref _PreviousQuestionTitle, value);
-            }
-        }
+        public string CurrentQuestionImagePath { get; private set; }
 
-        public string PreviousQuestionImagePath
-        {
-            get
-            {
-                return _PreviousQuestionImagePath;
-            }
-            private set
-            {
-                Set(ref _PreviousQuestionImagePath, value);
-            }
+        public string PreviousQuestionTitle { get; private set; }
 
-        }
+        public string PreviousQuestionImagePath { get; private set; }
 
-        public QuestionDisplayerViewModel PreviousQuestionDataContext
-        {
-            get
-            {
-                return _PreviousQuestionDataContext;
-            }
-            set
-            {
-                Set(ref _PreviousQuestionDataContext, value);
-            }
-        }
-        public QuestionDisplayerViewModel CurrentQuestionDataContext
-        {
-            get
-            {
-                return _CurrentQuestionDataContext;
-            }
-            set
-            {
-                Set(ref _CurrentQuestionDataContext, value);
-            }
-        }
+        public QuestionDisplayerViewModel PreviousQuestionDataContext { get; private set; }
+        public QuestionDisplayerViewModel CurrentQuestionDataContext { get; private set; }
 
-        public string QuestionProgress
-        {
-            get
-            {
-                return _QuestionProgress;
-            }
-            private set
-            {
-                Set(ref _QuestionProgress, value);
-            }
-        }
+        public string QuestionProgress { get; private set; }
 
-        public List<Question> Questions
-        {
-            get
-            {
-                return _Questions;
-            }
-            private set
-            {
-                Set(ref _Questions, value);
-            }
-        }
+        public List<Question> Questions { get; private set; }
 
         public TransitionType AnimationToBeUsed { get; private set; }
 

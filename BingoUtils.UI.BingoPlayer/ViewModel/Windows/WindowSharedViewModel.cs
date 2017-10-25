@@ -1,21 +1,19 @@
-﻿using BingoUtils.Domain.Entities;
+﻿using BingoUtils.Domain.Enums;
+using BingoUtils.UI.BingoPlayer.Messages;
+using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
 using BingoUtils.UI.BingoPlayer.Views.Pages;
+using BingoUtils.UI.BingoPlayer.Views.Windows;
+using BingoUtils.UI.Shared.Languages;
+using BingoUtils.UI.Shared.Views.UserControls;
+using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using BingoUtils.UI.BingoPlayer.Messages;
-using BingoUtils.Domain.Enums;
-using System;
-using BingoUtils.UI.BingoPlayer.ViewModel.Pages;
-using BingoUtils.UI.Shared.Languages;
-using BingoUtils.UI.BingoPlayer.Views.Windows;
-using BingoUtils.UI.Shared.UserControls;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 {
@@ -23,57 +21,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
     {
         public static int LaunchedGames;
 
-        private int _TabControlSelectedIndex;
-        private ObservableCollection<MetroTabItem> _TabControlItemsBingo;
-        private ObservableCollection<MetroTabItem> _TabControlItemsAnswer;
-        private List<Game> _Games;
+        public ICommand LaunchChangeLanguageWindow { get; private set; }
 
-        public SimpleDelegateCommand LaunchChangeLanguageWindow { get; private set; }
-
-        public ObservableCollection<MetroTabItem> TabControlItemsBingo
-        {
-            get
-            {
-                return _TabControlItemsBingo;
-            }
-            private set
-            {
-                Set(ref _TabControlItemsBingo, value);
-            }
-        }
-        public ObservableCollection<MetroTabItem> TabControlItemsAnswer
-        {
-            get
-            {
-                return _TabControlItemsAnswer;
-            }
-            private set
-            {
-                Set(ref _TabControlItemsAnswer, value);
-            }
-        }
-        public List<Game> Games
-        {
-            get
-            {
-                return _Games;
-            }
-            set
-            {
-                Set(ref _Games, value);
-            }
-        }
-        public int TabControlSelectedIndex
-        {
-            get
-            {
-                return _TabControlSelectedIndex;
-            }
-            set
-            {
-                Set(ref _TabControlSelectedIndex, value);
-            }
-        }
+        public ObservableCollection<MetroTabItem> TabControlItemsBingo { get; private set; }
+        public ObservableCollection<MetroTabItem> TabControlItemsAnswer { get; private set; }
+        public List<Game> Games { get; set; }
+        public int TabControlSelectedIndex { get; set; }
 
         public WindowSharedViewModel()
         {
@@ -87,7 +40,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
             MessengerInstance.Register<LaunchActivityMessage>(this, LaunchActivity);
             MessengerInstance.Register<StartNewGameMessage>(this, AddGame);
 
-            LaunchChangeLanguageWindow = new SimpleDelegateCommand(() =>
+            LaunchChangeLanguageWindow = new RelayCommand(() =>
             {
                 var content = new StackPanel();
 
@@ -136,7 +89,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 case Activity.ActivityCreateGame:
                     AddBingoTabControlItem(LanguageLocator.Instance.CurrentLanguage.HEADER_CREATE_GAME, new CreateGame(new CreateGameViewModel()), true);
                     break;
-                case Activity.ActivityDistributor:
+                case Activity.ActivityCardGenerator:
                     var dataContext = new CardGeneratorViewModel();
 
                     var window = new CardGeneratorWindow()
@@ -202,7 +155,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             if (canClose)
             {
-                var command = new SimpleDelegateCommand(() =>
+                var command = new RelayCommand(() =>
                 {
                     TabControlItemsBingo.Remove(itemBingo);
                     TabControlItemsAnswer.Remove(itemAnswers);
@@ -256,7 +209,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
 
             if (canClose)
             {
-                var command = new SimpleDelegateCommand(() =>
+                var command = new RelayCommand(() =>
                 {
                     TabControlItemsBingo.Remove(itemBingo);
                     TabControlItemsAnswer.Remove(itemAnswers);
@@ -295,7 +248,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Windows
                 }
             };
 
-            var command = new SimpleDelegateCommand(() =>
+            var command = new RelayCommand(() =>
             {
                 TabControlItemsBingo.Remove(itemBingo);
                 TabControlItemsAnswer.Remove(itemAnswers);

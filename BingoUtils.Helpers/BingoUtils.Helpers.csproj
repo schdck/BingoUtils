@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="AudioPlayer.cs" />
     <Compile Include="BitmapImageHelper.cs" />
-    <Compile Include="FileHelper.cs" />
     <Compile Include="GameHelper.cs" />
     <Compile Include="PdfHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

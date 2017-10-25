@@ -11,7 +11,6 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,35 +20,16 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
 {
     public class NewGameViewModel : ViewModelBase
     {
-        private bool _HasSelectedOption;
-
         private int _SelectedIndexSubject;
         private int _SelectedIndexTopic;
 
-        private string _IsSelectingFrom;
-        private string _FilePath;
-
-        private double _DefaultContainerBackground;
-        private double _FileContainerBackground;
-
         private IEnumerable<string> _AvaliableSubjects;
-        private IEnumerable<string> _AvaliableTopics;
 
         public ICommand StartNewgameCommand { get; private set; }
         public ICommand SetActiveChoice { get; private set; }
         public ICommand RefreshAvaliableBingos { get; private set; }
 
-        public bool HasSelectedValidOption
-        {
-            get
-            {
-                return _HasSelectedOption;
-            }
-            set
-            {
-                Set(ref _HasSelectedOption, value);
-            }
-        }
+        public bool HasSelectedValidOption { get; set; }
 
         public int SelectedIndexSubject
         {
@@ -77,53 +57,12 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
             }
         }
 
-        public string IsSelectingFrom
-        {
-            get
-            {
-                return _IsSelectingFrom;
-            }
-            set
-            {
-                Set(ref _IsSelectingFrom, value);
-            }
-        }
+        public string IsSelectingFrom { get; set; }
 
-        public string SelectedFilePath
-        {
-            get
-            {
-                return _FilePath;
-            }
-            set
-            {
-                Set(ref _FilePath, value);
-                ChangeActiveChoice("File");
-            }
-        }
+        public string SelectedFilePath { get; set; }
 
-        public double DefaultContainerBackground
-        {
-            get
-            {
-                return _DefaultContainerBackground;
-            }
-            set
-            {
-                Set(ref _DefaultContainerBackground, value);
-            }
-        }
-        public double FileContainerBackground
-        {
-            get
-            {
-                return _FileContainerBackground;
-            }
-            set
-            {
-                Set(ref _FileContainerBackground, value);
-            }
-        }
+        public double DefaultContainerBackground { get; set; }
+        public double FileContainerBackground { get; set; }
 
         public IEnumerable<string> AvaliableSubjects
         {
@@ -137,17 +76,7 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 AvaliableTopics = GameHelper.GetAvaliableTopicsForSubject(AvaliableSubjects.ElementAt(SelectedIndexSubject));
             }
         }
-        public IEnumerable<string> AvaliableTopics
-        {
-            get
-            {
-                return _AvaliableTopics;
-            }
-            set
-            {
-                Set(ref _AvaliableTopics, value);
-            }
-        }
+        public IEnumerable<string> AvaliableTopics { get; set; }
 
         public NewGameViewModel()
         {
@@ -161,11 +90,11 @@ namespace BingoUtils.UI.BingoPlayer.ViewModel.Pages
                 var newGameAnswers = new GameAnswers(viewModel);
                 var questionList = new List<Question>();
                 
-                if(_FileContainerBackground == 1) // Carregar jogo do arquivo do usuário
+                if(FileContainerBackground == 1) // Load the file that the user chose
                 {
                     questionList = GameHelper.LoadGame(SelectedFilePath, WindowSharedViewModel.LaunchedGames.ToString());
                 }
-                else // Carregar jogo da ComboBox
+                else // Load the game selected in the comboboxes
                 {
                     questionList = GameHelper.LoadGame(AvaliableSubjects.ElementAt(SelectedIndexSubject), AvaliableTopics.ElementAt(SelectedIndexTopic), WindowSharedViewModel.LaunchedGames.ToString());
                 }
