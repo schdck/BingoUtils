@@ -1,3 +1,5 @@
+#### :warning: This repository will no longer be updated. A new application is being developed [here](https://github.com/schdck/VirtualBingo)
+
 # BingoUtils
 This app is a bingo sorter. You can create games specifying questions and answers, and this software will sort them (like bingo). It was created under the idea that the teacher was going to sort the quesions and the students who had the answer on their cards shoud mark them. The first one to mark all answers on the card wins (just like bingo).
 
